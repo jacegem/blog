@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>[OpenCV-Python Tutorials] 09 성능 측정 및 개선 기법 | Momentous for the future</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="[OpenCV-Python Tutorials] 09 성능 측정 및 개선 기법목표이미지 처리에서는 초당 많은 작업을 처리하기 때문에 코드가 올바른 솔루션을 제공 할 뿐만 아니라 가장 빠른 방식으로 제공되어야 합니다. 따라서 이 장에서는 다음과 같은 내용을 배울 수 있습니다.   코드의 성능을 측정합니다. 코드의 성능을 향상시키기 위한 몇 가지 팁. cv2.g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[OpenCV-Python Tutorials] 09 성능 측정 및 개선 기법">
+<meta property="og:url" content="http://jacegem.github.io/blog/2018/OpenCV-Python-Tutorials-09-성능-측정-및-개선-기법/index.html">
+<meta property="og:site_name" content="Momentous for the future">
+<meta property="og:description" content="[OpenCV-Python Tutorials] 09 성능 측정 및 개선 기법목표이미지 처리에서는 초당 많은 작업을 처리하기 때문에 코드가 올바른 솔루션을 제공 할 뿐만 아니라 가장 빠른 방식으로 제공되어야 합니다. 따라서 이 장에서는 다음과 같은 내용을 배울 수 있습니다.   코드의 성능을 측정합니다. 코드의 성능을 향상시키기 위한 몇 가지 팁. cv2.g">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://goo.gl/HiuJ4e">
+<meta property="og:updated_time" content="2018-01-05T10:14:33.360Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[OpenCV-Python Tutorials] 09 성능 측정 및 개선 기법">
+<meta name="twitter:description" content="[OpenCV-Python Tutorials] 09 성능 측정 및 개선 기법목표이미지 처리에서는 초당 많은 작업을 처리하기 때문에 코드가 올바른 솔루션을 제공 할 뿐만 아니라 가장 빠른 방식으로 제공되어야 합니다. 따라서 이 장에서는 다음과 같은 내용을 배울 수 있습니다.   코드의 성능을 측정합니다. 코드의 성능을 향상시키기 위한 몇 가지 팁. cv2.g">
+<meta name="twitter:image" content="https://goo.gl/HiuJ4e">
+    
+
+    
+        <link rel="alternate" href="/" title="Momentous for the future" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="https://image.flaticon.com/icons/png/512/557/557050.png" />
+    
+
+    <link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/blog/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/blog/css/style.css">
+
+    <script src="/blog/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/blog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/blog/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Momentous for the future</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/blog/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Programming/">Programming</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Programming/Python/">Python</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Shopping/">Shopping</a></li></ul>
+                                    
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/blog/',
+        CONTENT_URL: '/blog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/blog/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    uncategorized
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 반응형 -->
+<div style="text-align:center;margin-top:20px">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9184373525576918"
+     data-ad-slot="1959714988"
+     data-ad-format="auto"></ins></div>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article id="post-2018/OpenCV-Python-Tutorials-09-성능-측정-및-개선-기법" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        [OpenCV-Python Tutorials] 09 성능 측정 및 개선 기법
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/blog/2018/OpenCV-Python-Tutorials-09-성능-측정-및-개선-기법/" class="article-date">
+            <time datetime="2018-01-09T10:14:25.000Z" itemprop="datePublished">2018-01-09</time>
+        </a>
+    </div>
+
+                
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">            
+            <h1 id="OpenCV-Python-Tutorials-09-성능-측정-및-개선-기법"><a href="#OpenCV-Python-Tutorials-09-성능-측정-및-개선-기법" class="headerlink" title="[OpenCV-Python Tutorials] 09 성능 측정 및 개선 기법"></a>[OpenCV-Python Tutorials] 09 성능 측정 및 개선 기법</h1><h2 id="목표"><a href="#목표" class="headerlink" title="목표"></a>목표</h2><p>이미지 처리에서는 초당 많은 작업을 처리하기 때문에 코드가 올바른 솔루션을 제공 할 뿐만 아니라 <code>가장 빠른 방식</code>으로 제공되어야 합니다. 따라서 이 장에서는 다음과 같은 내용을 배울 수 있습니다. </p>
+<ul>
+<li>코드의 성능을 측정합니다.</li>
+<li>코드의 성능을 향상시키기 위한 몇 가지 팁.</li>
+<li><code>cv2.getTickCount</code>, <code>cv2.getTickFrequency</code> 등의 함수를 확인합니다.</li>
+</ul>
+<p>OpenCV 외에도 Python은 실행 시간을 측정하는 데 유용한 모듈 시간을 제공합니다. 다른 모듈 프로파일은 코드의 각 함수가 얼마나 많은 시간을 사용하는지, 얼마나 많은 시간이 함수가 호출되었는지 등과 같은 코드에 대한 자세한 보고서를 얻는 데 도움이 됩니다. </p>
+<p>IPython을 사용하는 경우 이러한 모든 기능이 사용자 친화적 방법으로 포함되어 있습니다. 우리는 몇 가지 중요한 것들을 보게 될 것이며, 자세한 내용은 Additional Resouces 섹션의 링크를 확인하십시오.</p>
+<h2 id="OpenCV로-성능-측정"><a href="#OpenCV로-성능-측정" class="headerlink" title="OpenCV로 성능 측정"></a>OpenCV로 성능 측정</h2><p><code>cv2.getTickCount</code> 함수는 이 함수가 호출되는 순간까지 참조 이벤트 (순간 기계가 켜졌을 때처럼) 이후의 클럭 사이클 수를 반환합니다. 따라서 함수를 실행하기 전후에 함수를 호출하면 함수를 실행하는데 사용되는 클럭 사이클 수를 얻게 됩니다.</p>
+<p><code>cv2.getTickFrequency</code> 함수는 클럭 사이클의 빈도 또는 초당 클럭 사이클 수를 반환합니다. 따라서 실행 시간을 초 단위로 확인하려면 다음을 수행 할 수 있습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">e1 = cv2.getTickCount()</span><br><span class="line"><span class="comment"># your code execution</span></span><br><span class="line">e2 = cv2.getTickCount()</span><br><span class="line">time = (e2 - e1)/ cv2.getTickFrequency()</span><br></pre></td></tr></table></figure>
+<p>우리는 다음 예제를 통해 설명 할 것입니다. 다음 예제는 5부터 49까지의 홀수 크기의 커널을 사용하여 중간 필터링을 적용합니다. (결과가 어떻게 보이는지 걱정하지 마십시오. 이것은 우리의 목표가 아닙니다.)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">img1 = cv2.imread(<span class="string">'model.jpg'</span>)</span><br><span class="line"></span><br><span class="line">e1 = cv2.getTickCount()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>, <span class="number">49</span>, <span class="number">2</span>):</span><br><span class="line">    img2 = cv2.medianBlur(img1, i)</span><br><span class="line">e2 = cv2.getTickCount()</span><br><span class="line">t = (e2 - e1) / cv2.getTickFrequency()</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">'Original'</span>, img1)</span><br><span class="line">cv2.imshow(<span class="string">'Blur'</span>, img2)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line">print(t)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 결과: 2.5564403101561437</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://goo.gl/HiuJ4e" alt="원본"></p>
+<p><img src="https://goo.gl/D84KTf" alt="medianBlur"></p>
+<blockquote>
+<p>당신은 <code>time</code> 모듈을 사용할 수도 있습니다. <code>cv2.getTickCount</code> 대신 <code>time.time()</code> 함수를 사용하십시오. 그런 다음 두 시각의 차이를 사용하면 됩니다.</p>
+</blockquote>
+<h2 id="OpenCV의-기본-최적화"><a href="#OpenCV의-기본-최적화" class="headerlink" title="OpenCV의 기본 최적화"></a>OpenCV의 기본 최적화</h2><p>많은 OpenCV 기능은 SSE2, AVX 등을 사용하여 최적화됩니다. 최적화되지 않은 코드도 포함되어 있습니다. 따라서 우리 시스템이 이러한 기능을 지원한다면, 우리는 이를 이용해야합니다 (거의 모든 현대 프로세서가 이를 지원합니다). </p>
+<p>컴파일하는 동안 기본적으로 활성화됩니다. 따라서 OpenCV는 최적화 된 코드를 실행하면 활성화되고 그렇지 않으면 최적화되지 않은 코드가 실행됩니다. </p>
+<p><code>cv2.useOptimized()</code>를 사용하여 활성화 / 비활성화되어 있는지 확인하고 <code>cv2.setUseOptimized()</code>를 사용하여 활성화 / 비활성화 할 수 있습니다. 간단한 예를 봅시다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># check if optimization is enabled</span></span><br><span class="line">In [<span class="number">5</span>]: cv2.useOptimized()</span><br><span class="line">Out[<span class="number">5</span>]: <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">6</span>]: %timeit res = cv2.medianBlur(img,<span class="number">49</span>)</span><br><span class="line"><span class="number">10</span> loops, best of <span class="number">3</span>: <span class="number">34.9</span> ms per loop</span><br><span class="line"></span><br><span class="line"><span class="comment"># Disable it</span></span><br><span class="line">In [<span class="number">7</span>]: cv2.setUseOptimized(<span class="keyword">False</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">8</span>]: cv2.useOptimized()</span><br><span class="line">Out[<span class="number">8</span>]: <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">9</span>]: %timeit res = cv2.medianBlur(img,<span class="number">49</span>)</span><br><span class="line"><span class="number">10</span> loops, best of <span class="number">3</span>: <span class="number">64.1</span> ms per loop</span><br></pre></td></tr></table></figure>
+<p>최적화 된 중앙 필터링은 최적화되지 않은 버전보다 ~2 배 빠릅니다. 소스를 확인하면 중간 필터링이 SIMD에 최적화 된 것을 볼 수 있습니다. 따라서 이것을 사용하여 코드 상단에서 최적화를 활성화 할 수 있습니다 (기본적으로 활성화되어 있음을 기억하십시오).</p>
+<h2 id="IPython에서-성능-측정"><a href="#IPython에서-성능-측정" class="headerlink" title="IPython에서 성능 측정"></a>IPython에서 성능 측정</h2><p>때로는 두 가지 유사한 작업의 성능을 비교해야 할 수도 있습니다. IPython은 이것을 수행하는 마법 명령 <code>%timeit</code> 제공합니다. 더 정확한 결과를 얻기 위해 코드를 여러 번 실행합니다. 다시 한번 말하지만, 단일 라인 코드를 측정하는 데 적합합니다.</p>
+<p>예를 들어, 다음 중 더 나은 연산이 어떤것인지 알 수 있습니까? </p>
+<ul>
+<li>x = 5; y = x ** 2</li>
+<li>x = 5; y = x * x</li>
+<li>x = np.uint8([5]); y = x * x 또는 y = np.square(x)? </li>
+</ul>
+<p>우리는 IPython 셸에서 <code>%timeit</code>을 사용하여 찾아보겠습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">10</span>]: x = <span class="number">5</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">11</span>]: %timeit y=x**<span class="number">2</span></span><br><span class="line"><span class="number">10000000</span> loops, best of <span class="number">3</span>: <span class="number">73</span> ns per loop</span><br><span class="line"></span><br><span class="line">In [<span class="number">12</span>]: %timeit y=x*x</span><br><span class="line"><span class="number">10000000</span> loops, best of <span class="number">3</span>: <span class="number">58.3</span> ns per loop</span><br><span class="line"></span><br><span class="line">In [<span class="number">15</span>]: z = np.uint8([<span class="number">5</span>])</span><br><span class="line"></span><br><span class="line">In [<span class="number">17</span>]: %timeit y=z*z</span><br><span class="line"><span class="number">1000000</span> loops, best of <span class="number">3</span>: <span class="number">1.25</span> us per loop</span><br><span class="line"></span><br><span class="line">In [<span class="number">19</span>]: %timeit y=np.square(z)</span><br><span class="line"><span class="number">1000000</span> loops, best of <span class="number">3</span>: <span class="number">1.16</span> us per loop</span><br></pre></td></tr></table></figure>
+<p>x = 5; y = x * x는 가장 빠르며 Numpy에 비해 20 배 정도 빠른 것을 확인할 수 있습니다. 배열 생성도 고려한다면 최대 100 배까지 빨라질 수 있습니다. 멋지지 않습니까? (Numpy devs는이 문제를 해결하기 위해 노력하고 있습니다)</p>
+<blockquote>
+<p>파이썬 스칼라 연산은 Numpy 스칼라 연산보다 빠릅니다. 따라서 하나 또는 두 개의 요소를 포함하는 연산의 경우 Python 스칼라가 Numpy 배열보다 낫습니다. Numpy는 배열의 크기가 조금 더 클 때 이점을 취합니다.</p>
+</blockquote>
+<p>우리는 한 가지 더 많은 예제를 시도 할 것입니다. 이번에는 동일한 이미지에 대해 <code>cv2.countNonZero()</code> 및 <code>np.count_nonzero()</code>의 성능을 비교합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">35</span>]: %timeit z = cv2.countNonZero(img)</span><br><span class="line"><span class="number">100000</span> loops, best of <span class="number">3</span>: <span class="number">15.8</span> us per loop</span><br><span class="line"></span><br><span class="line">In [<span class="number">36</span>]: %timeit z = np.count_nonzero(img)</span><br><span class="line"><span class="number">1000</span> loops, best of <span class="number">3</span>: <span class="number">370</span> us per loop</span><br></pre></td></tr></table></figure>
+<p>OpenCV 기능이 Numpy 기능보다 <code>25배</code> 빠릅니다.</p>
+<blockquote>
+<p>일반적으로 OpenCV 기능은 Numpy 기능보다 빠릅니다. 따라서 동일한 작업을 위해 OpenCV 기능이 선호됩니다. 그러나 예외가 있을 수 있습니다. 특히 Numpy가 사본 대신 보기를 사용할 때 그렇습니다.</p>
+</blockquote>
+<h2 id="더-많은-IPython-마법-명령"><a href="#더-많은-IPython-마법-명령" class="headerlink" title="더 많은 IPython 마법 명령"></a>더 많은 IPython 마법 명령</h2><p>성능, 프로파일링, 라인 프로파일링, 메모리 측정 등을 측정하는 몇 가지 다른 마법 명령이 있습니다. 그것들 모두 잘 문서화되어 있습니다. 따라서 해당 문서에 대한 링크만 제공됩니다. 관심있는 독자는 링크를 확인하시기 바랍니다.</p>
+<h2 id="성능-최적화-기법"><a href="#성능-최적화-기법" class="headerlink" title="성능 최적화 기법"></a>성능 최적화 기법</h2><p>Python과 Numpy의 최대 성능을 활용하기 위한 몇 가지 기술과 코딩 방법이 있습니다. 관련된 것만이 여기에 표시되며 링크는 중요한 출처에 제공됩니다. 여기서 주목해야 할 점은 먼저 알고리즘을 간단한 방식으로 구현하려고 시도한다는 것입니다. 일단 작동되면 프로파일링하고 병목 현상을 찾아 최적화하십시오.</p>
+<ul>
+<li>Python에서 가능한 한 루프를 사용하지 마십시오. 특히 이중 / 삼중 루프 등은 본질적으로 느립니다.</li>
+<li>Numpy와 OpenCV가 벡터 연산에 최적화되어 있기 때문에 알고리즘 / 코드를 가능한 최대로 벡터화하십시오.</li>
+<li>캐시 일관성을 이용하십시오.</li>
+<li>필요하지 않으면 배열의 복사본을 만들지 마십시오. 대신 보기를 사용해보십시오. 배열 복사는 비용이 많이 드는 작업입니다.</li>
+</ul>
+<p>이러한 모든 작업을 수행 한 후에도 코드가 여전히 느리거나 큰 루프를 사용해야하는 경우에는 Cython과 같은 추가 라이브러리를 사용하여 더 빨리 수행 할 수 있습니다.</p>
+<h2 id="추가-리소스"><a href="#추가-리소스" class="headerlink" title="추가 리소스"></a>추가 리소스</h2><ul>
+<li><a href="https://wiki.python.org/moin/PythonSpeed/PerformanceTips" target="_blank" rel="noopener">파이썬 최적화 기법</a></li>
+<li>Scipy 강의 노트 - <a href="http://www.scipy-lectures.org/advanced/advanced_numpy/index.html#advanced-numpy" target="_blank" rel="noopener">고급 Numpy</a></li>
+<li><a href="http://pynash.org/2013/03/06/timing-and-profiling/" target="_blank" rel="noopener">IPython의 타이밍 및 프로파일링</a></li>
+</ul>
+<h2 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h2><ul>
+<li><a href="https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_core/py_optimization/py_optimization.html" target="_blank" rel="noopener">https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_core/py_optimization/py_optimization.html</a></li>
+</ul>
+<script src="https://gist.github.com/jacegem/60ce233cf6adaa7a385233e1f164ed13.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://jacegem.github.io/blog/2018/OpenCV-Python-Tutorials-09-성능-측정-및-개선-기법/" data-id="cjc1vb79u0037v4pca1s7lr1t" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 반응형 -->
+<div style="text-align:center;margin-top:20px">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9184373525576918"
+     data-ad-slot="1959714988"
+     data-ad-format="auto"></ins></div>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/blog/" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="/blog/" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google-plus" href="/blog/" target="_blank">
+                        <i class="icon fa fa-google-plus"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jacegem/" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="/blog/" target="_blank">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/blog/" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/blog/2018/OpenCV-Python-Tutorials-10-색상-공간-변경하기/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            [OpenCV-Python Tutorials] 10. 색상 공간 변경하기
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/blog/2018/OpenCV-Python-Tutorials-06-색상표-트랙바-사용하기/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">[OpenCV-Python Tutorials 06] 색상표 트랙바 사용하기</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 300 x 600 큰 스카이스크래퍼 -->
+<div style="text-align:center;">
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-9184373525576918"
+     data-ad-slot="3828038188"></ins></div>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/OpenCV-Python-Tutorials-21-Contours-윤곽선-추가-기능/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://opencv-python-tutroals.readthedocs.io/en/latest/_images/defects.jpg)" alt="[OpenCV-Python Tutorials] 21. Contours(윤곽선) 추가 기능" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Programming/">Programming</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Programming/Python/">Python</a></p>
+                            <p class="item-title"><a href="/blog/2018/OpenCV-Python-Tutorials-21-Contours-윤곽선-추가-기능/" class="title">[OpenCV-Python Tutorials] 21. Contours(윤곽선) 추가 기능</a></p>
+                            <p class="item-date"><time datetime="2018-01-21T10:18:37.000Z" itemprop="datePublished">2018-01-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/OpenCV-Python-Tutorials-20-Contours-윤곽선-속성/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://opencv-python-tutroals.readthedocs.io/en/latest/_images/extremepoints.jpg)" alt="[OpenCV-Python Tutorials] 20. Contours(윤곽선) 속성" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Programming/">Programming</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Programming/Python/">Python</a></p>
+                            <p class="item-title"><a href="/blog/2018/OpenCV-Python-Tutorials-20-Contours-윤곽선-속성/" class="title">[OpenCV-Python Tutorials] 20. Contours(윤곽선) 속성</a></p>
+                            <p class="item-date"><time datetime="2018-01-20T10:18:19.000Z" itemprop="datePublished">2018-01-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/OpenCV-Python-Tutorials-19-Contours-윤곽선-특징/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://opencv-python-tutroals.readthedocs.io/en/latest/_images/approx.jpg)" alt="[OpenCV-Python Tutorials] 19. Contours(윤곽선) 특징" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Programming/">Programming</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Programming/Python/">Python</a></p>
+                            <p class="item-title"><a href="/blog/2018/OpenCV-Python-Tutorials-19-Contours-윤곽선-특징/" class="title">[OpenCV-Python Tutorials] 19. Contours(윤곽선) 특징</a></p>
+                            <p class="item-date"><time datetime="2018-01-19T10:17:53.000Z" itemprop="datePublished">2018-01-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/OpenCV-Python-Tutorials-18-Contours-윤곽선-시작하기/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://goo.gl/7dwL43)" alt="[OpenCV-Python Tutorials] 18. Contours(윤곽선) 시작하기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Programming/">Programming</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Programming/Python/">Python</a></p>
+                            <p class="item-title"><a href="/blog/2018/OpenCV-Python-Tutorials-18-Contours-윤곽선-시작하기/" class="title">[OpenCV-Python Tutorials] 18. Contours(윤곽선) 시작하기</a></p>
+                            <p class="item-date"><time datetime="2018-01-18T10:17:33.000Z" itemprop="datePublished">2018-01-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/OpenCV-Python-Tutorials-17-이미지-피라미드/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://goo.gl/Kdokqq)" alt="[OpenCV-Python Tutorials] 17. 이미지 피라미드" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/blog/2018/OpenCV-Python-Tutorials-17-이미지-피라미드/" class="title">[OpenCV-Python Tutorials] 17. 이미지 피라미드</a></p>
+                            <p class="item-date"><time datetime="2018-01-17T10:17:09.000Z" itemprop="datePublished">2018-01-17</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Programming/">Programming</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Programming/Python/">Python</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Shopping/">Shopping</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 상단336검정 -->
+<div style="text-align:center;">
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-9184373525576918"
+     data-ad-slot="6957178622"></ins></div>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/01/">January 2018</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/12/">December 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/02/">February 2016</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/01/">January 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2015/02/">February 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2014/03/">March 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2014/02/">February 2014</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/blog/tags/15분/" style="font-size: 10px;">15분</a> <a href="/blog/tags/3D/" style="font-size: 10px;">3D</a> <a href="/blog/tags/Bevel/" style="font-size: 10px;">Bevel</a> <a href="/blog/tags/Extrude/" style="font-size: 10px;">Extrude</a> <a href="/blog/tags/adsense/" style="font-size: 10px;">adsense</a> <a href="/blog/tags/ahk/" style="font-size: 12px;">ahk</a> <a href="/blog/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/blog/tags/algospot/" style="font-size: 10px;">algospot</a> <a href="/blog/tags/array/" style="font-size: 10px;">array</a> <a href="/blog/tags/autohotkey/" style="font-size: 12px;">autohotkey</a> <a href="/blog/tags/blog/" style="font-size: 12px;">blog</a> <a href="/blog/tags/bluetooth/" style="font-size: 10px;">bluetooth</a> <a href="/blog/tags/c/" style="font-size: 10px;">c#</a> <a href="/blog/tags/c/" style="font-size: 10px;">c++</a> <a href="/blog/tags/callback/" style="font-size: 10px;">callback</a> <a href="/blog/tags/category/" style="font-size: 10px;">category</a> <a href="/blog/tags/command/" style="font-size: 12px;">command</a> <a href="/blog/tags/comment/" style="font-size: 10px;">comment</a> <a href="/blog/tags/cpp/" style="font-size: 10px;">cpp</a> <a href="/blog/tags/deploy/" style="font-size: 10px;">deploy</a> <a href="/blog/tags/df/" style="font-size: 10px;">df</a> <a href="/blog/tags/do/" style="font-size: 10px;">do</a> <a href="/blog/tags/dokuwiki/" style="font-size: 12px;">dokuwiki</a> <a href="/blog/tags/draft/" style="font-size: 10px;">draft</a> <a href="/blog/tags/drinking/" style="font-size: 10px;">drinking</a> <a href="/blog/tags/drive/" style="font-size: 10px;">drive</a> <a href="/blog/tags/du/" style="font-size: 10px;">du</a> <a href="/blog/tags/duplcate/" style="font-size: 10px;">duplcate</a> <a href="/blog/tags/dysfunction/" style="font-size: 10px;">dysfunction</a> <a href="/blog/tags/earphone/" style="font-size: 10px;">earphone</a> <a href="/blog/tags/earset/" style="font-size: 10px;">earset</a> <a href="/blog/tags/effect/" style="font-size: 10px;">effect</a> <a href="/blog/tags/ejs/" style="font-size: 10px;">ejs</a> <a href="/blog/tags/excel/" style="font-size: 10px;">excel</a> <a href="/blog/tags/font/" style="font-size: 10px;">font</a> <a href="/blog/tags/framework/" style="font-size: 10px;">framework</a> <a href="/blog/tags/function/" style="font-size: 10px;">function</a> <a href="/blog/tags/game/" style="font-size: 10px;">game</a> <a href="/blog/tags/google/" style="font-size: 10px;">google</a> <a href="/blog/tags/grid/" style="font-size: 10px;">grid</a> <a href="/blog/tags/haroopad/" style="font-size: 14px;">haroopad</a> <a href="/blog/tags/hbs-760/" style="font-size: 10px;">hbs-760</a> <a href="/blog/tags/hbs-810/" style="font-size: 10px;">hbs-810</a> <a href="/blog/tags/headset/" style="font-size: 10px;">headset</a> <a href="/blog/tags/hearthstone/" style="font-size: 10px;">hearthstone</a> <a href="/blog/tags/hello/" style="font-size: 10px;">hello</a> <a href="/blog/tags/hexo/" style="font-size: 18px;">hexo</a> <a href="/blog/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/blog/tags/ifttt/" style="font-size: 10px;">ifttt</a> <a href="/blog/tags/illustrator/" style="font-size: 10px;">illustrator</a> <a href="/blog/tags/illustratro/" style="font-size: 10px;">illustratro</a> <a href="/blog/tags/input/" style="font-size: 10px;">input</a> <a href="/blog/tags/install/" style="font-size: 10px;">install</a> <a href="/blog/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/blog/tags/js/" style="font-size: 10px;">js</a> <a href="/blog/tags/jstl/" style="font-size: 10px;">jstl</a> <a href="/blog/tags/layout/" style="font-size: 10px;">layout</a> <a href="/blog/tags/length/" style="font-size: 10px;">length</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/markdown/" style="font-size: 12px;">markdown</a> <a href="/blog/tags/md/" style="font-size: 12px;">md</a> <a href="/blog/tags/mercy/" style="font-size: 10px;">mercy</a> <a href="/blog/tags/muscle/" style="font-size: 10px;">muscle</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/blog/tags/opencv/" style="font-size: 16px;">opencv</a> <a href="/blog/tags/oracle/" style="font-size: 10px;">oracle</a> <a href="/blog/tags/pathfinder/" style="font-size: 10px;">pathfinder</a> <a href="/blog/tags/perspective/" style="font-size: 10px;">perspective</a> <a href="/blog/tags/post/" style="font-size: 10px;">post</a> <a href="/blog/tags/powercmd/" style="font-size: 10px;">powercmd</a> <a href="/blog/tags/ppt/" style="font-size: 10px;">ppt</a> <a href="/blog/tags/preset/" style="font-size: 10px;">preset</a> <a href="/blog/tags/programming/" style="font-size: 10px;">programming</a> <a href="/blog/tags/prompt/" style="font-size: 10px;">prompt</a> <a href="/blog/tags/publish/" style="font-size: 10px;">publish</a> <a href="/blog/tags/python/" style="font-size: 16px;">python</a> <a href="/blog/tags/regex/" style="font-size: 10px;">regex</a> <a href="/blog/tags/resophnotes/" style="font-size: 10px;">resophnotes</a> <a href="/blog/tags/scala/" style="font-size: 12px;">scala</a> <a href="/blog/tags/scribble/" style="font-size: 10px;">scribble</a> <a href="/blog/tags/script/" style="font-size: 12px;">script</a> <a href="/blog/tags/select/" style="font-size: 10px;">select</a> <a href="/blog/tags/selector/" style="font-size: 10px;">selector</a> <a href="/blog/tags/shortcut/" style="font-size: 10px;">shortcut</a> <a href="/blog/tags/skin/" style="font-size: 10px;">skin</a> <a href="/blog/tags/sms/" style="font-size: 10px;">sms</a> <a href="/blog/tags/spreadsheet/" style="font-size: 10px;">spreadsheet</a> <a href="/blog/tags/stylize/" style="font-size: 10px;">stylize</a> <a href="/blog/tags/substring/" style="font-size: 10px;">substring</a> <a href="/blog/tags/sw/" style="font-size: 10px;">sw</a> <a href="/blog/tags/syntax/" style="font-size: 10px;">syntax</a> <a href="/blog/tags/tablespace/" style="font-size: 10px;">tablespace</a> <a href="/blog/tags/tag/" style="font-size: 10px;">tag</a> <a href="/blog/tags/theme/" style="font-size: 10px;">theme</a> <a href="/blog/tags/tistory/" style="font-size: 10px;">tistory</a> <a href="/blog/tags/toad/" style="font-size: 10px;">toad</a> <a href="/blog/tags/tool/" style="font-size: 10px;">tool</a> <a href="/blog/tags/tutorial/" style="font-size: 16px;">tutorial</a> <a href="/blog/tags/type/" style="font-size: 10px;">type</a> <a href="/blog/tags/undo/" style="font-size: 10px;">undo</a> <a href="/blog/tags/unix/" style="font-size: 10px;">unix</a> <a href="/blog/tags/vegas/" style="font-size: 10px;">vegas</a> <a href="/blog/tags/wiki/" style="font-size: 12px;">wiki</a> <a href="/blog/tags/words/" style="font-size: 10px;">words</a> <a href="/blog/tags/world/" style="font-size: 10px;">world</a> <a href="/blog/tags/writing/" style="font-size: 10px;">writing</a> <a href="/blog/tags/게임/" style="font-size: 10px;">게임</a> <a href="/blog/tags/공식/" style="font-size: 10px;">공식</a> <a href="/blog/tags/글자/" style="font-size: 10px;">글자</a> <a href="/blog/tags/노트/" style="font-size: 10px;">노트</a> <a href="/blog/tags/노하우/" style="font-size: 10px;">노하우</a> <a href="/blog/tags/능력/" style="font-size: 10px;">능력</a> <a href="/blog/tags/단축키/" style="font-size: 12px;">단축키</a> <a href="/blog/tags/드로잉/" style="font-size: 10px;">드로잉</a> <a href="/blog/tags/라이브/" style="font-size: 10px;">라이브</a> <a href="/blog/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/blog/tags/메모/" style="font-size: 10px;">메모</a> <a href="/blog/tags/문자열/" style="font-size: 10px;">문자열</a> <a href="/blog/tags/배경/" style="font-size: 10px;">배경</a> <a href="/blog/tags/베가스/" style="font-size: 10px;">베가스</a> <a href="/blog/tags/변환기/" style="font-size: 10px;">변환기</a> <a href="/blog/tags/보기/" style="font-size: 10px;">보기</a> <a href="/blog/tags/분할/" style="font-size: 10px;">분할</a> <a href="/blog/tags/사용법/" style="font-size: 10px;">사용법</a> <a href="/blog/tags/사이트/" style="font-size: 10px;">사이트</a> <a href="/blog/tags/사진/" style="font-size: 10px;">사진</a> <a href="/blog/tags/선술집/" style="font-size: 16px;">선술집</a> <a href="/blog/tags/섭씨/" style="font-size: 10px;">섭씨</a> <a href="/blog/tags/숫자키/" style="font-size: 10px;">숫자키</a> <a href="/blog/tags/스킨/" style="font-size: 10px;">스킨</a> <a href="/blog/tags/안드로이드/" style="font-size: 10px;">안드로이드</a> <a href="/blog/tags/알고리즘/" style="font-size: 10px;">알고리즘</a> <a href="/blog/tags/알고스팟/" style="font-size: 10px;">알고스팟</a> <a href="/blog/tags/언덕/" style="font-size: 10px;">언덕</a> <a href="/blog/tags/엑셀/" style="font-size: 10px;">엑셀</a> <a href="/blog/tags/영상/" style="font-size: 10px;">영상</a> <a href="/blog/tags/영웅/" style="font-size: 10px;">영웅</a> <a href="/blog/tags/예약/" style="font-size: 10px;">예약</a> <a href="/blog/tags/오브젝트/" style="font-size: 10px;">오브젝트</a> <a href="/blog/tags/온도/" style="font-size: 10px;">온도</a> <a href="/blog/tags/옵션/" style="font-size: 10px;">옵션</a> <a href="/blog/tags/우두머리/" style="font-size: 10px;">우두머리</a> <a href="/blog/tags/의지/" style="font-size: 10px;">의지</a> <a href="/blog/tags/일러스트레이터/" style="font-size: 20px;">일러스트레이터</a> <a href="/blog/tags/임실/" style="font-size: 10px;">임실</a> <a href="/blog/tags/주제/" style="font-size: 10px;">주제</a> <a href="/blog/tags/중복/" style="font-size: 10px;">중복</a> <a href="/blog/tags/참고/" style="font-size: 12px;">참고</a> <a href="/blog/tags/촬영/" style="font-size: 10px;">촬영</a> <a href="/blog/tags/치즈/" style="font-size: 10px;">치즈</a> <a href="/blog/tags/캐릭터/" style="font-size: 10px;">캐릭터</a> <a href="/blog/tags/커피/" style="font-size: 10px;">커피</a> <a href="/blog/tags/커피베이/" style="font-size: 10px;">커피베이</a> <a href="/blog/tags/테마파크/" style="font-size: 10px;">테마파크</a> <a href="/blog/tags/투명도/" style="font-size: 10px;">투명도</a> <a href="/blog/tags/툴/" style="font-size: 10px;">툴</a> <a href="/blog/tags/트레이싱/" style="font-size: 10px;">트레이싱</a> <a href="/blog/tags/티스토리/" style="font-size: 10px;">티스토리</a> <a href="/blog/tags/파일/" style="font-size: 10px;">파일</a> <a href="/blog/tags/패스파인더/" style="font-size: 10px;">패스파인더</a> <a href="/blog/tags/편집/" style="font-size: 10px;">편집</a> <a href="/blog/tags/하스스톤/" style="font-size: 16px;">하스스톤</a> <a href="/blog/tags/화씨/" style="font-size: 10px;">화씨</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 300 x 600 큰 스카이스크래퍼 -->
+<div style="text-align:center;">
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-9184373525576918"
+     data-ad-slot="3828038188"></ins></div>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">        
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 970x250 Billboard -->
+<div style="text-align:center;margin-top:40px;">
+<ins class="adsbygoogle"
+     style="display:inline-block;width:970px;height:250px"
+     data-ad-client="ca-pub-9184373525576918"
+     data-ad-slot="8514248184"></ins></div>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            <div class="credit">
+                <!--<h1 class="logo-wrap">
+                    <a href="/blog/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 Jace</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>-->
+                <p>&copy; 2018 Jace. Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'jacegem';
+    
+    
+    var disqus_url = 'http://jacegem.github.io/blog/2018/OpenCV-Python-Tutorials-09-성능-측정-및-개선-기법/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/blog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/blog/js/main.js"></script>
+        
+    </div>
+</body>
+</html>

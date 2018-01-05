@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>[OpenCV-Python Tutorials] 17. 이미지 피라미드 | Momentous for the future</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="[OpenCV-Python Tutorials] 17. 이미지 피라미드목표 이미지 피라미드에 대해 알아보겠습니다. Image 피라미드를 사용하여 새로운 이미지를 만들어볼게요 함수: cv2.pyrUp(), cv2.pyrDown()  이론일반적으로 우리는 일정한 크기의 이미지로 작업했습니다. 그러나 어떤 경우에는 같은 이미지의 다른 해상도의 이미지로 작업해야 합">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[OpenCV-Python Tutorials] 17. 이미지 피라미드">
+<meta property="og:url" content="http://jacegem.github.io/blog/2018/OpenCV-Python-Tutorials-17-이미지-피라미드/index.html">
+<meta property="og:site_name" content="Momentous for the future">
+<meta property="og:description" content="[OpenCV-Python Tutorials] 17. 이미지 피라미드목표 이미지 피라미드에 대해 알아보겠습니다. Image 피라미드를 사용하여 새로운 이미지를 만들어볼게요 함수: cv2.pyrUp(), cv2.pyrDown()  이론일반적으로 우리는 일정한 크기의 이미지로 작업했습니다. 그러나 어떤 경우에는 같은 이미지의 다른 해상도의 이미지로 작업해야 합">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://goo.gl/Kdokqq">
+<meta property="og:updated_time" content="2018-01-05T10:17:14.489Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[OpenCV-Python Tutorials] 17. 이미지 피라미드">
+<meta name="twitter:description" content="[OpenCV-Python Tutorials] 17. 이미지 피라미드목표 이미지 피라미드에 대해 알아보겠습니다. Image 피라미드를 사용하여 새로운 이미지를 만들어볼게요 함수: cv2.pyrUp(), cv2.pyrDown()  이론일반적으로 우리는 일정한 크기의 이미지로 작업했습니다. 그러나 어떤 경우에는 같은 이미지의 다른 해상도의 이미지로 작업해야 합">
+<meta name="twitter:image" content="https://goo.gl/Kdokqq">
+    
+
+    
+        <link rel="alternate" href="/" title="Momentous for the future" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="https://image.flaticon.com/icons/png/512/557/557050.png" />
+    
+
+    <link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/blog/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/blog/css/style.css">
+
+    <script src="/blog/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/blog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/blog/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Momentous for the future</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/blog/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Programming/">Programming</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Programming/Python/">Python</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Shopping/">Shopping</a></li></ul>
+                                    
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/blog/',
+        CONTENT_URL: '/blog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/blog/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    uncategorized
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 반응형 -->
+<div style="text-align:center;margin-top:20px">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9184373525576918"
+     data-ad-slot="1959714988"
+     data-ad-format="auto"></ins></div>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article id="post-2018/OpenCV-Python-Tutorials-17-이미지-피라미드" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        [OpenCV-Python Tutorials] 17. 이미지 피라미드
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/blog/2018/OpenCV-Python-Tutorials-17-이미지-피라미드/" class="article-date">
+            <time datetime="2018-01-17T10:17:09.000Z" itemprop="datePublished">2018-01-17</time>
+        </a>
+    </div>
+
+                
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">            
+            <h1 id="OpenCV-Python-Tutorials-17-이미지-피라미드"><a href="#OpenCV-Python-Tutorials-17-이미지-피라미드" class="headerlink" title="[OpenCV-Python Tutorials] 17. 이미지 피라미드"></a>[OpenCV-Python Tutorials] 17. 이미지 피라미드</h1><h2 id="목표"><a href="#목표" class="headerlink" title="목표"></a>목표</h2><ul>
+<li>이미지 피라미드에 대해 알아보겠습니다.</li>
+<li>Image 피라미드를 사용하여 새로운 이미지를 만들어볼게요</li>
+<li>함수: <code>cv2.pyrUp()</code>, <code>cv2.pyrDown()</code></li>
+</ul>
+<h2 id="이론"><a href="#이론" class="headerlink" title="이론"></a>이론</h2><p>일반적으로 우리는 일정한 크기의 이미지로 작업했습니다. 그러나 어떤 경우에는 같은 이미지의 다른 해상도의 이미지로 작업해야 합니다. 예를 들어, 얼굴과 같은 이미지에서 무언가를 검색하는 동안 이미지에 어떤 크기의 물체가 나타날지 확신 할 수 없습니다. 이 경우, 우리는 해상도가 다른 일련의 이미지를 만들고 모든 이미지에서 객체를 검색해야합니다. 서로 다른 해상도의 이미지 세트를 <code>Image Pyramids</code>라고 부릅니다. 왜냐하면 피라미드처럼 맨 아래에 가장 큰 이미지가 가장 큰 이미지가 있는 스택에 보관되어 있기 때문입니다.</p>
+<p>이미지 피라미드에는 두 가지 종류가 있습니다. </p>
+<ol>
+<li>가우시안 피라미드</li>
+<li>라플라시안 피라미드</li>
+</ol>
+<p>Gaussian 피라미드의 높은 레벨(저해상도)은 낮은 레벨(고해상도) 이미지에서 연속적인 행과 열을 제거하여 생성합니다.  이렇게 하면, $$ M \times N $$ 이미지는 $$M/2 \times N/2$$ 이미지가 됩니다. 따라서 면적은 원래 면적의 1/4로 줄어 듭니다. 그것은 <code>옥타브</code>라고 합니다. 피라미드에서 위쪽으로 갈수록 같은 패턴이 계속됩니다 (즉, 해상도가 감소합니다). 마찬가지로 확장하면서 면적은 각 단계에서 4 배가 됩니다. <code>cv2.pyrDown()</code> 및 <code>cv2.pyrUp()</code> 함수를 사용하여 가우시안 피라미드를 찾을 수 있습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">'model.jpg'</span>)</span><br><span class="line">titles = [<span class="string">'orginal'</span>, <span class="string">'level1'</span>, <span class="string">'level2'</span>, <span class="string">'level3'</span>]</span><br><span class="line"></span><br><span class="line">images = []</span><br><span class="line">images.append(img)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">    img = cv2.pyrDown(img)</span><br><span class="line">    images.append(img)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">    cv2.imshow(titles[i], images[i])</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<p>아래는 이미지 피라미드의 4 단계입니다.</p>
+<p><img src="https://goo.gl/Kdokqq" alt="original"></p>
+<p><img src="https://goo.gl/A8LmZt" alt="level1"></p>
+<p><img src="https://goo.gl/aNJ4yb" alt="level2"></p>
+<p><img src="https://goo.gl/SBJnHn" alt="level3"></p>
+<p>이제 <code>cv2.pyrUp()</code> 함수를 사용하여 이미지 피라미드로 이동할 수 있습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">higher_reso2 = cv2.pyrUp(lower_reso)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">'small.jpg'</span>)</span><br><span class="line">titles = [<span class="string">'orginal'</span>, <span class="string">'level1'</span>, <span class="string">'level2'</span>, <span class="string">'level3'</span>]</span><br><span class="line"></span><br><span class="line">images = []</span><br><span class="line">images.append(img)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">    img = cv2.pyrUp(img)</span><br><span class="line">    images.append(img)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">    cv2.imshow(titles[i], images[i])</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<p><img src="https://goo.gl/FZLunw" alt="original"></p>
+<p><img src="https://goo.gl/WSCGr2" alt="level1"></p>
+<p><img src="https://goo.gl/1HZJSb" alt="level2"></p>
+<p>Laplacian 피라미드는 Gaussian Pyramids에서 형성됩니다. 거기에 대한 독점적인 기능은 없습니다. Laplacian 피라미드 이미지는 가장자리 이미지와 같습니다. 요소의 대부분은 0입니다. 이미지 압축에 사용됩니다. 라플라시안 피라미드의 레벨은 가우시안 피라미드의 해당 레벨과 가우시안 피라미드의 상위 레벨 확장 버전의 차이에 의해 형성됩니다. Laplacian 레벨의 세 가지 레벨은 아래와 같이 보일 것입니다 (내용을 향상시키기 위해 대비가 조정 됨).</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">'large.jpg'</span>)</span><br><span class="line">titles = [<span class="string">'orginal'</span>, <span class="string">'level1'</span>, <span class="string">'level2'</span>, <span class="string">'level3'</span>]</span><br><span class="line"></span><br><span class="line">images = []</span><br><span class="line">images.append(img)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">    img = cv2.pyrDown(img)</span><br><span class="line">    images.append(img)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">    resize = cv2.resize(images[i]</span><br><span class="line">                        , dsize=(images[i+<span class="number">1</span>].shape[<span class="number">1</span>], images[i+<span class="number">1</span>].shape[<span class="number">0</span>])</span><br><span class="line">                        , interpolation=cv2.INTER_CUBIC)</span><br><span class="line">    images[i] = cv2.subtract(resize, images[i+<span class="number">1</span>])</span><br><span class="line">    cv2.imshow(titles[i], images[i])</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<p><img src="https://goo.gl/AKdhSm" alt=""></p>
+<p><img src="https://goo.gl/qSVRya" alt=""></p>
+<p><img src="https://goo.gl/oDqMXS" alt=""></p>
+<h2 id="피라미드를-사용한-이미지-블렌딩"><a href="#피라미드를-사용한-이미지-블렌딩" class="headerlink" title="피라미드를 사용한 이미지 블렌딩"></a>피라미드를 사용한 이미지 블렌딩</h2><p>피라미드의 한 응용 프로그램은 이미지 블렌딩입니다. 예를 들어, 이미지 바느질에서는 두 이미지를 함께 쌓아야 하지만 이미지간에 불연속성으로 인해 잘 보이지 않을 수 있습니다. 이 경우 피라미드로 이미지 블렌딩을 하면 이미지에 많은 데이터를 남기지 않고도 원활한 혼합이 가능합니다. 하나의 고전적인 예는 Orange와 Apple의 두 과일을 혼합 한 것입니다. 지금 하고 있는 것을 이해하기 위해 지금 결과를 확인해보세요</p>
+<p><img src="https://opencv-python-tutroals.readthedocs.io/en/latest/_images/orapple.jpg" alt=""></p>
+<p>추가 리소스의 첫 번째 참조를 확인하십시오. 이미지 블렌딩, Laplacian Pyramids 등의 전체 다이어그램 세부 정보가 있습니다. 간단히 말해서 다음과 같이 수행됩니다.</p>
+<ul>
+<li>사과와 오렌지의 두 이미지 로드</li>
+<li>사과와 오렌지에 대한 가우시안 피라미드를 찾으십시오 (이 예제에서는 레벨 수가 6입니다).</li>
+<li>가우시안 피라미드에서 라플라시안 피라미드를 찾으십시오.</li>
+<li>이제 Laplacian Pyramids의 각 레벨에서 사과의 왼쪽 절반과 오렌지의 오른쪽 절반에 합칩니다.</li>
+<li>마지막으로이 공동 이미지 피라미드에서 원래 이미지를 재구성하십시오.</li>
+</ul>
+<p>전체 코드는 다음과 같습니다. (간단히하기 위해 각 단계가 별도로 수행되므로 더 많은 메모리가 필요할 수 있습니다. 원하는 경우 최적화 할 수 있습니다).</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">A = cv2.imread(<span class="string">'resize_a.jpg'</span>)</span><br><span class="line">B = cv2.imread(<span class="string">'resize_b.jpg'</span>)</span><br><span class="line"></span><br><span class="line">B = cv2.resize(B, dsize=(A.shape[<span class="number">1</span>], A.shape[<span class="number">0</span>]), interpolation=cv2.INTER_CUBIC)</span><br><span class="line"></span><br><span class="line"><span class="comment"># generate Gaussian pyramid for A</span></span><br><span class="line">G = A.copy()</span><br><span class="line">gpA = [G]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">6</span>):</span><br><span class="line">    G = cv2.pyrDown(G)</span><br><span class="line">    gpA.append(G)</span><br><span class="line"></span><br><span class="line"><span class="comment"># generate Gaussian pyramid for B</span></span><br><span class="line">G = B.copy()</span><br><span class="line">gpB = [G]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">6</span>):</span><br><span class="line">    G = cv2.pyrDown(G)</span><br><span class="line">    gpB.append(G)</span><br><span class="line"></span><br><span class="line"><span class="comment"># generate Laplacian Pyramid for A</span></span><br><span class="line">lpA = [gpA[<span class="number">5</span>]]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>, <span class="number">0</span>, <span class="number">-1</span>):</span><br><span class="line">    GE = cv2.pyrUp(gpA[i])</span><br><span class="line">    L = cv2.subtract(gpA[i - <span class="number">1</span>], GE)</span><br><span class="line">    lpA.append(L)</span><br><span class="line"></span><br><span class="line"><span class="comment"># generate Laplacian Pyramid for B</span></span><br><span class="line">lpB = [gpB[<span class="number">5</span>]]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>, <span class="number">0</span>, <span class="number">-1</span>):</span><br><span class="line">    GE = cv2.pyrUp(gpB[i])</span><br><span class="line">    L = cv2.subtract(gpB[i - <span class="number">1</span>], GE)</span><br><span class="line">    lpB.append(L)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Now add left and right halves of images in each level</span></span><br><span class="line">LS = []</span><br><span class="line"><span class="keyword">for</span> la, lb <span class="keyword">in</span> zip(lpA, lpB):</span><br><span class="line">    rows, cols, dpt = la.shape</span><br><span class="line">    ls = np.hstack((la[:, <span class="number">0</span>:int(cols / <span class="number">2</span>)], lb[:, int(cols / <span class="number">2</span>):]))</span><br><span class="line">    LS.append(ls)</span><br><span class="line"></span><br><span class="line"><span class="comment"># now reconstruct</span></span><br><span class="line">ls_ = LS[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">6</span>):</span><br><span class="line">    ls_ = cv2.pyrUp(ls_)</span><br><span class="line">    ls_ = cv2.add(ls_, LS[i])</span><br><span class="line"></span><br><span class="line"><span class="comment"># image with direct connecting each half</span></span><br><span class="line">real = np.hstack((A[:, :int(cols / <span class="number">2</span>)], B[:, int(cols / <span class="number">2</span>):]))</span><br><span class="line"></span><br><span class="line">cv2.imwrite(<span class="string">'Pyramid_blending2.jpg'</span>, ls_)</span><br><span class="line">cv2.imwrite(<span class="string">'Direct_blending.jpg'</span>, real)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>두 이미지의 크기가 동일해야 합니다.<br><code>ls = np.hstack((la[:, 0:int(cols / 2)], lb[:, int(cols / 2):]))</code> 에서 정수값이 입력되야 하므로, <code>int()</code> 를 사용하였습니다.</p>
+</blockquote>
+<p><img src="https://goo.gl/hBNGXr" alt="Direct_blending"></p>
+<p><img src="https://lh3.googleusercontent.com/-clhOritegYQ/WY0AelkVJ2I/AAAAAAAAEuk/G7fKKbKrW9kisAnAeWTzeCv1VLepvGd6ACHMYCw/s0/Pyramid_blending2.jpg" alt="Pyramid_blending2"></p>
+<h2 id="Additional-Resources"><a href="#Additional-Resources" class="headerlink" title="Additional Resources"></a>Additional Resources</h2><ul>
+<li><a href="http://pages.cs.wisc.edu/~csverma/CS766_09/ImageMosaic/imagemosaic.html" target="_blank" rel="noopener">Image Blending</a></li>
+</ul>
+<h2 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h2><ul>
+<li><a href="https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_pyramids/py_pyramids.html" target="_blank" rel="noopener">https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_pyramids/py_pyramids.html</a></li>
+<li><a href="https://blog.naver.com/PostView.nhn?blogId=samsjang&amp;logNo=220508552078&amp;parentCategoryNo=&amp;categoryNo=66&amp;viewDate=&amp;isShowPopularPosts=false&amp;from=postList" target="_blank" rel="noopener">https://blog.naver.com/PostView.nhn?blogId=samsjang&amp;logNo=220508552078&amp;parentCategoryNo=&amp;categoryNo=66&amp;viewDate=&amp;isShowPopularPosts=false&amp;from=postList</a></li>
+</ul>
+<script src="https://gist.github.com/jacegem/60ce233cf6adaa7a385233e1f164ed13.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://jacegem.github.io/blog/2018/OpenCV-Python-Tutorials-17-이미지-피라미드/" data-id="cjc1vb7ad003nv4pc988ssahi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 반응형 -->
+<div style="text-align:center;margin-top:20px">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9184373525576918"
+     data-ad-slot="1959714988"
+     data-ad-format="auto"></ins></div>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/blog/" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="/blog/" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google-plus" href="/blog/" target="_blank">
+                        <i class="icon fa fa-google-plus"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jacegem/" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="/blog/" target="_blank">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/blog/" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/blog/2018/OpenCV-Python-Tutorials-18-Contours-윤곽선-시작하기/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            [OpenCV-Python Tutorials] 18. Contours(윤곽선) 시작하기
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/blog/2018/OpenCV-Python-Tutorials-16-Canny-Edge-Detection/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">[OpenCV-Python Tutorials] 16. Canny Edge Detection</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 300 x 600 큰 스카이스크래퍼 -->
+<div style="text-align:center;">
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-9184373525576918"
+     data-ad-slot="3828038188"></ins></div>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/OpenCV-Python-Tutorials-21-Contours-윤곽선-추가-기능/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://opencv-python-tutroals.readthedocs.io/en/latest/_images/defects.jpg)" alt="[OpenCV-Python Tutorials] 21. Contours(윤곽선) 추가 기능" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Programming/">Programming</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Programming/Python/">Python</a></p>
+                            <p class="item-title"><a href="/blog/2018/OpenCV-Python-Tutorials-21-Contours-윤곽선-추가-기능/" class="title">[OpenCV-Python Tutorials] 21. Contours(윤곽선) 추가 기능</a></p>
+                            <p class="item-date"><time datetime="2018-01-21T10:18:37.000Z" itemprop="datePublished">2018-01-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/OpenCV-Python-Tutorials-20-Contours-윤곽선-속성/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://opencv-python-tutroals.readthedocs.io/en/latest/_images/extremepoints.jpg)" alt="[OpenCV-Python Tutorials] 20. Contours(윤곽선) 속성" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Programming/">Programming</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Programming/Python/">Python</a></p>
+                            <p class="item-title"><a href="/blog/2018/OpenCV-Python-Tutorials-20-Contours-윤곽선-속성/" class="title">[OpenCV-Python Tutorials] 20. Contours(윤곽선) 속성</a></p>
+                            <p class="item-date"><time datetime="2018-01-20T10:18:19.000Z" itemprop="datePublished">2018-01-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/OpenCV-Python-Tutorials-19-Contours-윤곽선-특징/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://opencv-python-tutroals.readthedocs.io/en/latest/_images/approx.jpg)" alt="[OpenCV-Python Tutorials] 19. Contours(윤곽선) 특징" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Programming/">Programming</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Programming/Python/">Python</a></p>
+                            <p class="item-title"><a href="/blog/2018/OpenCV-Python-Tutorials-19-Contours-윤곽선-특징/" class="title">[OpenCV-Python Tutorials] 19. Contours(윤곽선) 특징</a></p>
+                            <p class="item-date"><time datetime="2018-01-19T10:17:53.000Z" itemprop="datePublished">2018-01-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/OpenCV-Python-Tutorials-18-Contours-윤곽선-시작하기/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://goo.gl/7dwL43)" alt="[OpenCV-Python Tutorials] 18. Contours(윤곽선) 시작하기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Programming/">Programming</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Programming/Python/">Python</a></p>
+                            <p class="item-title"><a href="/blog/2018/OpenCV-Python-Tutorials-18-Contours-윤곽선-시작하기/" class="title">[OpenCV-Python Tutorials] 18. Contours(윤곽선) 시작하기</a></p>
+                            <p class="item-date"><time datetime="2018-01-18T10:17:33.000Z" itemprop="datePublished">2018-01-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/OpenCV-Python-Tutorials-17-이미지-피라미드/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://goo.gl/Kdokqq)" alt="[OpenCV-Python Tutorials] 17. 이미지 피라미드" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/blog/2018/OpenCV-Python-Tutorials-17-이미지-피라미드/" class="title">[OpenCV-Python Tutorials] 17. 이미지 피라미드</a></p>
+                            <p class="item-date"><time datetime="2018-01-17T10:17:09.000Z" itemprop="datePublished">2018-01-17</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Programming/">Programming</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Programming/Python/">Python</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Shopping/">Shopping</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 상단336검정 -->
+<div style="text-align:center;">
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-9184373525576918"
+     data-ad-slot="6957178622"></ins></div>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/01/">January 2018</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/12/">December 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/02/">February 2016</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/01/">January 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2015/02/">February 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2014/03/">March 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2014/02/">February 2014</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/blog/tags/15분/" style="font-size: 10px;">15분</a> <a href="/blog/tags/3D/" style="font-size: 10px;">3D</a> <a href="/blog/tags/Bevel/" style="font-size: 10px;">Bevel</a> <a href="/blog/tags/Extrude/" style="font-size: 10px;">Extrude</a> <a href="/blog/tags/adsense/" style="font-size: 10px;">adsense</a> <a href="/blog/tags/ahk/" style="font-size: 12px;">ahk</a> <a href="/blog/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/blog/tags/algospot/" style="font-size: 10px;">algospot</a> <a href="/blog/tags/array/" style="font-size: 10px;">array</a> <a href="/blog/tags/autohotkey/" style="font-size: 12px;">autohotkey</a> <a href="/blog/tags/blog/" style="font-size: 12px;">blog</a> <a href="/blog/tags/bluetooth/" style="font-size: 10px;">bluetooth</a> <a href="/blog/tags/c/" style="font-size: 10px;">c#</a> <a href="/blog/tags/c/" style="font-size: 10px;">c++</a> <a href="/blog/tags/callback/" style="font-size: 10px;">callback</a> <a href="/blog/tags/category/" style="font-size: 10px;">category</a> <a href="/blog/tags/command/" style="font-size: 12px;">command</a> <a href="/blog/tags/comment/" style="font-size: 10px;">comment</a> <a href="/blog/tags/cpp/" style="font-size: 10px;">cpp</a> <a href="/blog/tags/deploy/" style="font-size: 10px;">deploy</a> <a href="/blog/tags/df/" style="font-size: 10px;">df</a> <a href="/blog/tags/do/" style="font-size: 10px;">do</a> <a href="/blog/tags/dokuwiki/" style="font-size: 12px;">dokuwiki</a> <a href="/blog/tags/draft/" style="font-size: 10px;">draft</a> <a href="/blog/tags/drinking/" style="font-size: 10px;">drinking</a> <a href="/blog/tags/drive/" style="font-size: 10px;">drive</a> <a href="/blog/tags/du/" style="font-size: 10px;">du</a> <a href="/blog/tags/duplcate/" style="font-size: 10px;">duplcate</a> <a href="/blog/tags/dysfunction/" style="font-size: 10px;">dysfunction</a> <a href="/blog/tags/earphone/" style="font-size: 10px;">earphone</a> <a href="/blog/tags/earset/" style="font-size: 10px;">earset</a> <a href="/blog/tags/effect/" style="font-size: 10px;">effect</a> <a href="/blog/tags/ejs/" style="font-size: 10px;">ejs</a> <a href="/blog/tags/excel/" style="font-size: 10px;">excel</a> <a href="/blog/tags/font/" style="font-size: 10px;">font</a> <a href="/blog/tags/framework/" style="font-size: 10px;">framework</a> <a href="/blog/tags/function/" style="font-size: 10px;">function</a> <a href="/blog/tags/game/" style="font-size: 10px;">game</a> <a href="/blog/tags/google/" style="font-size: 10px;">google</a> <a href="/blog/tags/grid/" style="font-size: 10px;">grid</a> <a href="/blog/tags/haroopad/" style="font-size: 14px;">haroopad</a> <a href="/blog/tags/hbs-760/" style="font-size: 10px;">hbs-760</a> <a href="/blog/tags/hbs-810/" style="font-size: 10px;">hbs-810</a> <a href="/blog/tags/headset/" style="font-size: 10px;">headset</a> <a href="/blog/tags/hearthstone/" style="font-size: 10px;">hearthstone</a> <a href="/blog/tags/hello/" style="font-size: 10px;">hello</a> <a href="/blog/tags/hexo/" style="font-size: 18px;">hexo</a> <a href="/blog/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/blog/tags/ifttt/" style="font-size: 10px;">ifttt</a> <a href="/blog/tags/illustrator/" style="font-size: 10px;">illustrator</a> <a href="/blog/tags/illustratro/" style="font-size: 10px;">illustratro</a> <a href="/blog/tags/input/" style="font-size: 10px;">input</a> <a href="/blog/tags/install/" style="font-size: 10px;">install</a> <a href="/blog/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/blog/tags/js/" style="font-size: 10px;">js</a> <a href="/blog/tags/jstl/" style="font-size: 10px;">jstl</a> <a href="/blog/tags/layout/" style="font-size: 10px;">layout</a> <a href="/blog/tags/length/" style="font-size: 10px;">length</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/markdown/" style="font-size: 12px;">markdown</a> <a href="/blog/tags/md/" style="font-size: 12px;">md</a> <a href="/blog/tags/mercy/" style="font-size: 10px;">mercy</a> <a href="/blog/tags/muscle/" style="font-size: 10px;">muscle</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/blog/tags/opencv/" style="font-size: 16px;">opencv</a> <a href="/blog/tags/oracle/" style="font-size: 10px;">oracle</a> <a href="/blog/tags/pathfinder/" style="font-size: 10px;">pathfinder</a> <a href="/blog/tags/perspective/" style="font-size: 10px;">perspective</a> <a href="/blog/tags/post/" style="font-size: 10px;">post</a> <a href="/blog/tags/powercmd/" style="font-size: 10px;">powercmd</a> <a href="/blog/tags/ppt/" style="font-size: 10px;">ppt</a> <a href="/blog/tags/preset/" style="font-size: 10px;">preset</a> <a href="/blog/tags/programming/" style="font-size: 10px;">programming</a> <a href="/blog/tags/prompt/" style="font-size: 10px;">prompt</a> <a href="/blog/tags/publish/" style="font-size: 10px;">publish</a> <a href="/blog/tags/python/" style="font-size: 16px;">python</a> <a href="/blog/tags/regex/" style="font-size: 10px;">regex</a> <a href="/blog/tags/resophnotes/" style="font-size: 10px;">resophnotes</a> <a href="/blog/tags/scala/" style="font-size: 12px;">scala</a> <a href="/blog/tags/scribble/" style="font-size: 10px;">scribble</a> <a href="/blog/tags/script/" style="font-size: 12px;">script</a> <a href="/blog/tags/select/" style="font-size: 10px;">select</a> <a href="/blog/tags/selector/" style="font-size: 10px;">selector</a> <a href="/blog/tags/shortcut/" style="font-size: 10px;">shortcut</a> <a href="/blog/tags/skin/" style="font-size: 10px;">skin</a> <a href="/blog/tags/sms/" style="font-size: 10px;">sms</a> <a href="/blog/tags/spreadsheet/" style="font-size: 10px;">spreadsheet</a> <a href="/blog/tags/stylize/" style="font-size: 10px;">stylize</a> <a href="/blog/tags/substring/" style="font-size: 10px;">substring</a> <a href="/blog/tags/sw/" style="font-size: 10px;">sw</a> <a href="/blog/tags/syntax/" style="font-size: 10px;">syntax</a> <a href="/blog/tags/tablespace/" style="font-size: 10px;">tablespace</a> <a href="/blog/tags/tag/" style="font-size: 10px;">tag</a> <a href="/blog/tags/theme/" style="font-size: 10px;">theme</a> <a href="/blog/tags/tistory/" style="font-size: 10px;">tistory</a> <a href="/blog/tags/toad/" style="font-size: 10px;">toad</a> <a href="/blog/tags/tool/" style="font-size: 10px;">tool</a> <a href="/blog/tags/tutorial/" style="font-size: 16px;">tutorial</a> <a href="/blog/tags/type/" style="font-size: 10px;">type</a> <a href="/blog/tags/undo/" style="font-size: 10px;">undo</a> <a href="/blog/tags/unix/" style="font-size: 10px;">unix</a> <a href="/blog/tags/vegas/" style="font-size: 10px;">vegas</a> <a href="/blog/tags/wiki/" style="font-size: 12px;">wiki</a> <a href="/blog/tags/words/" style="font-size: 10px;">words</a> <a href="/blog/tags/world/" style="font-size: 10px;">world</a> <a href="/blog/tags/writing/" style="font-size: 10px;">writing</a> <a href="/blog/tags/게임/" style="font-size: 10px;">게임</a> <a href="/blog/tags/공식/" style="font-size: 10px;">공식</a> <a href="/blog/tags/글자/" style="font-size: 10px;">글자</a> <a href="/blog/tags/노트/" style="font-size: 10px;">노트</a> <a href="/blog/tags/노하우/" style="font-size: 10px;">노하우</a> <a href="/blog/tags/능력/" style="font-size: 10px;">능력</a> <a href="/blog/tags/단축키/" style="font-size: 12px;">단축키</a> <a href="/blog/tags/드로잉/" style="font-size: 10px;">드로잉</a> <a href="/blog/tags/라이브/" style="font-size: 10px;">라이브</a> <a href="/blog/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/blog/tags/메모/" style="font-size: 10px;">메모</a> <a href="/blog/tags/문자열/" style="font-size: 10px;">문자열</a> <a href="/blog/tags/배경/" style="font-size: 10px;">배경</a> <a href="/blog/tags/베가스/" style="font-size: 10px;">베가스</a> <a href="/blog/tags/변환기/" style="font-size: 10px;">변환기</a> <a href="/blog/tags/보기/" style="font-size: 10px;">보기</a> <a href="/blog/tags/분할/" style="font-size: 10px;">분할</a> <a href="/blog/tags/사용법/" style="font-size: 10px;">사용법</a> <a href="/blog/tags/사이트/" style="font-size: 10px;">사이트</a> <a href="/blog/tags/사진/" style="font-size: 10px;">사진</a> <a href="/blog/tags/선술집/" style="font-size: 16px;">선술집</a> <a href="/blog/tags/섭씨/" style="font-size: 10px;">섭씨</a> <a href="/blog/tags/숫자키/" style="font-size: 10px;">숫자키</a> <a href="/blog/tags/스킨/" style="font-size: 10px;">스킨</a> <a href="/blog/tags/안드로이드/" style="font-size: 10px;">안드로이드</a> <a href="/blog/tags/알고리즘/" style="font-size: 10px;">알고리즘</a> <a href="/blog/tags/알고스팟/" style="font-size: 10px;">알고스팟</a> <a href="/blog/tags/언덕/" style="font-size: 10px;">언덕</a> <a href="/blog/tags/엑셀/" style="font-size: 10px;">엑셀</a> <a href="/blog/tags/영상/" style="font-size: 10px;">영상</a> <a href="/blog/tags/영웅/" style="font-size: 10px;">영웅</a> <a href="/blog/tags/예약/" style="font-size: 10px;">예약</a> <a href="/blog/tags/오브젝트/" style="font-size: 10px;">오브젝트</a> <a href="/blog/tags/온도/" style="font-size: 10px;">온도</a> <a href="/blog/tags/옵션/" style="font-size: 10px;">옵션</a> <a href="/blog/tags/우두머리/" style="font-size: 10px;">우두머리</a> <a href="/blog/tags/의지/" style="font-size: 10px;">의지</a> <a href="/blog/tags/일러스트레이터/" style="font-size: 20px;">일러스트레이터</a> <a href="/blog/tags/임실/" style="font-size: 10px;">임실</a> <a href="/blog/tags/주제/" style="font-size: 10px;">주제</a> <a href="/blog/tags/중복/" style="font-size: 10px;">중복</a> <a href="/blog/tags/참고/" style="font-size: 12px;">참고</a> <a href="/blog/tags/촬영/" style="font-size: 10px;">촬영</a> <a href="/blog/tags/치즈/" style="font-size: 10px;">치즈</a> <a href="/blog/tags/캐릭터/" style="font-size: 10px;">캐릭터</a> <a href="/blog/tags/커피/" style="font-size: 10px;">커피</a> <a href="/blog/tags/커피베이/" style="font-size: 10px;">커피베이</a> <a href="/blog/tags/테마파크/" style="font-size: 10px;">테마파크</a> <a href="/blog/tags/투명도/" style="font-size: 10px;">투명도</a> <a href="/blog/tags/툴/" style="font-size: 10px;">툴</a> <a href="/blog/tags/트레이싱/" style="font-size: 10px;">트레이싱</a> <a href="/blog/tags/티스토리/" style="font-size: 10px;">티스토리</a> <a href="/blog/tags/파일/" style="font-size: 10px;">파일</a> <a href="/blog/tags/패스파인더/" style="font-size: 10px;">패스파인더</a> <a href="/blog/tags/편집/" style="font-size: 10px;">편집</a> <a href="/blog/tags/하스스톤/" style="font-size: 16px;">하스스톤</a> <a href="/blog/tags/화씨/" style="font-size: 10px;">화씨</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 300 x 600 큰 스카이스크래퍼 -->
+<div style="text-align:center;">
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-9184373525576918"
+     data-ad-slot="3828038188"></ins></div>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">        
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 970x250 Billboard -->
+<div style="text-align:center;margin-top:40px;">
+<ins class="adsbygoogle"
+     style="display:inline-block;width:970px;height:250px"
+     data-ad-client="ca-pub-9184373525576918"
+     data-ad-slot="8514248184"></ins></div>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            <div class="credit">
+                <!--<h1 class="logo-wrap">
+                    <a href="/blog/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 Jace</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>-->
+                <p>&copy; 2018 Jace. Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'jacegem';
+    
+    
+    var disqus_url = 'http://jacegem.github.io/blog/2018/OpenCV-Python-Tutorials-17-이미지-피라미드/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/blog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/blog/js/main.js"></script>
+        
+    </div>
+</body>
+</html>
