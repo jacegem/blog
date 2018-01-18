@@ -1,7 +1,10 @@
 ---
 title: '[OpenCV-Python Tutorials] 16. Canny Edge Detection'
 date: 2018-01-16 19:16:50
-tags:
+tags: [opencv, python, tutorial]
+category:
+- Programming
+- Python
 ---
 
 # [OpenCV-Python Tutorials] 16. Canny Edge Detection

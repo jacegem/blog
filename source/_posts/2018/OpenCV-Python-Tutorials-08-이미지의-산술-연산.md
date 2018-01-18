@@ -1,7 +1,10 @@
 ---
 title: '[OpenCV-Python Tutorials] 08 이미지의 산술 연산'
 date: 2018-01-05 19:12:55
-tags:
+tags: [opencv, python, tutorial]
+category:
+- Programming
+- Python
 ---
 
 # [OpenCV-Python Tutorials] 08 이미지의 산술 연산

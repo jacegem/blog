@@ -1,7 +1,10 @@
 ---
 title: '[OpenCV-Python Tutorials] 12. 이미지의 기하학적 변환'
 date: 2018-01-12 19:15:26
-tags:
+tags: [opencv, python, tutorial]
+category:
+- Programming
+- Python
 ---
 
 # [OpenCV-Python Tutorials] 12. 이미지의 기하학적 변환

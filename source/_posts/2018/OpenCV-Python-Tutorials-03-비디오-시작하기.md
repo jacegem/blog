@@ -1,7 +1,10 @@
 ---
 title: '[OpenCV-Python Tutorials 03] 비디오 시작하기'
 date: 2018-01-03 19:11:01
-tags:
+tags: [opencv, python, tutorial]
+category:
+- Programming
+- Python
 ---
 
 # [OpenCV-Python Tutorials 03] 비디오 시작하기

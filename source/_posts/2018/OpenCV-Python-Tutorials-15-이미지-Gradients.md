@@ -1,7 +1,10 @@
 ---
 title: '[OpenCV-Python Tutorials] 15. 이미지 Gradients'
 date: 2018-01-15 19:16:32
-tags:
+tags: [opencv, python, tutorial]
+category:
+- Programming
+- Python
 ---
 # [OpenCV-Python Tutorials] 15. 이미지 Gradients
 

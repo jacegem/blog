@@ -1,7 +1,10 @@
 ---
 title: '[OpenCV-Python Tutorials] 11. 이미지 임계값'
 date: 2018-01-11 19:15:03
-tags:
+tags: [opencv, python, tutorial]
+category:
+- Programming
+- Python
 ---
 
 # [OpenCV-Python Tutorials] 11. 이미지 임계값

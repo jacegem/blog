@@ -1,7 +1,10 @@
 ---
 title: '[OpenCV-Python Tutorials] 10. 색상 공간 변경하기'
 date: 2018-01-10 19:14:45
-tags:
+tags: [opencv, python, tutorial]
+category:
+- Programming
+- Python
 ---
 
 # [OpenCV-Python Tutorials] 10. 색상 공간 변경하기

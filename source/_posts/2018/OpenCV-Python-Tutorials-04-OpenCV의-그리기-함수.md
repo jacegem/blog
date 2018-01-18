@@ -1,7 +1,10 @@
 ---
 title: '[OpenCV-Python Tutorials 04] OpenCV의 그리기 함수'
 date: 2018-01-04 19:11:27
-tags:
+tags: [opencv, python, tutorial]
+category:
+- Programming
+- Python
 ---
 
 # [OpenCV-Python Tutorials 04] OpenCV의 그리기 함수

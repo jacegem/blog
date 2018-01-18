@@ -1,7 +1,10 @@
 ---
 title: '[OpenCV-Python Tutorials 06] 색상표 트랙바 사용하기'
 date: 2018-01-06 19:12:16
-tags:
+tags: [opencv, python, tutorial]
+category:
+- Programming
+- Python
 ---
 
 # [OpenCV-Python Tutorials 06] 색상표 트랙바 사용하기

@@ -1,7 +1,10 @@
 ---
 title: '[OpenCV-Python Tutorials 02] 이미지 시작하기'
 date: 2018-01-02 19:10:35
-tags:
+tags: [opencv, python, tutorial]
+category:
+- Programming
+- Python
 ---
 
 # [OpenCV-Python Tutorials 02] 이미지 시작하기

@@ -1,7 +1,10 @@
 ---
 title: '[OpenCV-Python Tutorials 07] 이미지에 대한 기본 작업'
 date: 2018-01-05 19:12:36
-tags:
+tags: [opencv, python, tutorial]
+category:
+- Programming
+- Python
 ---
 
 # [OpenCV-Python Tutorials 07] 이미지에 대한 기본 작업

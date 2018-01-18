@@ -1,7 +1,10 @@
 ---
 title: '[OpenCV-Python Tutorials 01] OpenCV-Python Tutorials 소개'
 date: 2018-01-01 19:13:45
-tags:
+tags: [opencv, python, tutorial]
+category:
+- Programming
+- Python
 ---
 
 

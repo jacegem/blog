@@ -1,7 +1,10 @@
 ---
 title: '[OpenCV-Python Tutorials 05] 마우스로 그리기'
 date: 2018-01-05 19:11:51
-tags:
+tags: [opencv, python, tutorial]
+category:
+- Programming
+- Python
 ---
 
 

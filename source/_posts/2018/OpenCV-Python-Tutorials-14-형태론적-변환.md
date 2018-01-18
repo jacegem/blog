@@ -1,7 +1,10 @@
 ---
 title: '[OpenCV-Python Tutorials] 14. 형태론적 변환'
 date: 2018-01-14 19:15:58
-tags:
+tags: [opencv, python, tutorial]
+category:
+- Programming
+- Python
 ---
 
 # [OpenCV-Python Tutorials] 14. 형태론적 변환

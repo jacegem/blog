@@ -1,7 +1,10 @@
 ---
 title: '[OpenCV-Python Tutorials] 13. 이미지 Smoothing'
 date: 2018-01-13 19:15:42
-tags:
+tags: [opencv, python, tutorial]
+category:
+- Programming
+- Python
 ---
 
 # [OpenCV-Python Tutorials] 13. 이미지 Smoothing

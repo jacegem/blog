@@ -1,7 +1,10 @@
 ---
 title: '[OpenCV-Python Tutorials] 17. 이미지 피라미드'
 date: 2018-01-17 19:17:09
-tags:
+tags: [opencv, python, tutorial]
+category:
+- Programming
+- Python
 ---
 
 # [OpenCV-Python Tutorials] 17. 이미지 피라미드

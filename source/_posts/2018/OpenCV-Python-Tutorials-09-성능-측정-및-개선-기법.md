@@ -1,7 +1,10 @@
 ---
 title: '[OpenCV-Python Tutorials] 09 성능 측정 및 개선 기법'
 date: 2018-01-09 19:14:25
-tags:
+tags: [opencv, python, tutorial]
+category:
+- Programming
+- Python
 ---
 
 # [OpenCV-Python Tutorials] 09 성능 측정 및 개선 기법
