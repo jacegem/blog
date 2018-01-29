@@ -1,6 +1,6 @@
 ---
 title: "STS 실행시 에러 [Java was started but returned exit codes 13]"
-date:
+date: 2018.01.29
 tags: [sts, spring, java]
 categories:
 - Programming

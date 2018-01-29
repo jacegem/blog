@@ -1,5 +1,5 @@
 ---
-title:
+title: "맥에서 비주얼스튜디오 코드 실행하기 Run vscode in Mac Shell"
 date: 2018.01.27
 tags: [mac, vscode, shell]
 categories:
