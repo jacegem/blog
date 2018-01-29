@@ -4,7 +4,7 @@ date: 2017-02-16
 tags: [kobo, aura, h20, 공장초기화]
 categories:
 - Product
-- E-BOOK
+- Ebook
 ---
 
 # kobo Aura H20 공장초기화
