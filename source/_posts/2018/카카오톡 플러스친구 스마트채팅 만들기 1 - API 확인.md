@@ -1,7 +1,7 @@
 ---
 title: "카카오톡 플러스친구 스마트채팅 만들기 1 - API 확인"
 date: 2018.05.01
-tags: [카카오톡, 플러스친구, 스마트채팅, API, firestore, heroku, github]
+tags: [카카오톡, 플러스친구, 스마트채팅, API, firestore, heroku, github, python, flask]
 categories:
 - Programming
 - Python

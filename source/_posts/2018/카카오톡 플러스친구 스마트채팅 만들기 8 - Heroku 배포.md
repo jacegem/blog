@@ -1,7 +1,7 @@
 ---
 title: "카카오톡 플러스친구 스마트채팅 만들기 8 - heroku 배포"
 date: 2018.05.08
-tags: [카카오톡, 플러스친구, 스마트채팅, API, firestore, heroku, github]
+tags: [카카오톡, 플러스친구, 스마트채팅, API, firestore, heroku, github, python, flask]
 categories:
 - Programming
 - Python
@@ -159,3 +159,6 @@ $ heroku logs -a kakao-lunch-bot
 ```shell
 $ heroku logs --tail -a kakao-lunch-bot
 ```
+
+
+<script src="https://gist.github.com/jacegem/fee3dae8e7a0c630dc612b76ad3d1911.js"></script>
