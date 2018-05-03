@@ -1,6 +1,6 @@
 ---
 title: '[Leaflet] 시작하기 Quick Start Guide'
-date: 2018-01-22 15:51:20
+date: 2018.01.22 15:51:20
 tags: [leaflet, javascript]
 categories:
 - Programming

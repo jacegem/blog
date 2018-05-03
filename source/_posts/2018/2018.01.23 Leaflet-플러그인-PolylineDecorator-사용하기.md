@@ -1,6 +1,6 @@
 ---
 title: '[Leaflet] 플러그인 PolylineDecorator 사용하기'
-date: 2018-01-23 15:52:12
+date: 2018.01.23 15:52:12
 tags: [leaflet, javascript, PolylineDecorator]
 categories:
 - Programming

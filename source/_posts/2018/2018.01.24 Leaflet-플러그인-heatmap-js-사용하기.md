@@ -1,6 +1,6 @@
 ---
 title: '[Leaflet] 플러그인 heatmap.js 사용하기'
-date: 2018-01-24 15:52:29
+date: 2018.01.24 15:52:29
 tags: [leaflet, javascript, heatmap]
 categories:
 - Programming
