@@ -149,7 +149,7 @@ $ heroku login
 로그인 상태에서 진행합니다. -a 파라미터로 앱 이름을 지정합니다.
 
 ```shell
-$ heroku logs -a kakao-lunch-bot
+$ heroku logs -a [HEROKU 앱 이름]
 ```
 
 ### 로그 tail
@@ -157,5 +157,5 @@ $ heroku logs -a kakao-lunch-bot
 지속적으로 로그를 확인합니다. 
 
 ```shell
-$ heroku logs --tail -a kakao-lunch-bot
+$ heroku logs --tail -a [HEROKU 앱 이름]
 ```
