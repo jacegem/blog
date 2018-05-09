@@ -1,7 +1,7 @@
 ---
 title: "[책] React.JS 프로 리액트 (1/2)"
-date: 2018.05.08
-tags: [react, front-end]
+date: 2018.05.19
+tags: [react, javascript, front-end]
 categories:
 - Progrmming
 - Javascript
@@ -43,7 +43,7 @@ React.js를 이용한 모던 프런트엔드 구축
 CSS를 이용한 애니메이션에는 CSS 트랜지션과 CSS 키프레임 애니메이션의 두 가지 범주가 있다.
 
 - `CSS 트랜지션`은 시작 상태와 종료 상태의 두 가지 고유한 상태 간에 값을 보간하는 애니메이션 기법이다.
-- `CSS 키프레임` 애니메이션은 시작과 종료 외에도 키프레임을 이용해 중간 단계를 제어하는 방법으로 더 복잡한 애니메이션을 만들 수 있게 해준다.
+- `CSS 키프레임 애니메이션`은 시작과 종료 외에도 키프레임을 이용해 중간 단계를 제어하는 방법으로 더 복잡한 애니메이션을 만들 수 있게 해준다.
 
 ## 키프레임 애니메이션
 
@@ -60,8 +60,8 @@ CSS를 이용한 애니메이션에는 CSS 트랜지션과 CSS 키프레임 애�
 return(
 	<div>
     	<ReactCSSTransitionGroup transitionName="example"
-    							 transitionEnterTimeout={300}
-       							 transitionLeaveTimeout={300}
+    				transitionEnterTimeout={300}
+       				transitionLeaveTimeout={300}
     		{shoppingItems}
     	</ReactCSSTransitionGroup>
     </div>

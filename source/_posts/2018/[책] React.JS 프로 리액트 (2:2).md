@@ -1,7 +1,7 @@
 ---
 title: "[책] React.JS 프로 리액트 (2/2)"
-date: 2018.05.08
-tags: [react, front-end]
+date: 2018.05.20
+tags: [react, javascript, front-end]
 categories:
 - Progrmming
 - Javascript
@@ -51,7 +51,7 @@ devserver 설정
 | port               | 사용할 포트를 지정하며, 생략할 경우 기본값은 `8080`이다.     |
 | inline             | `true`로 설정하면 작은 클라이언트 엔트리를 번들에 삽입해 페이지가 변경되면 새로 고친다. |
 | colors             | 서버가 터미널에 출력하는 내용에 색상을 지정한다.             |
-| historyApiFallback | HTML5  히스토리 API를 이용하는 단일 페이지 애플리케이션을 개발할 때 유용한 옵션으로서 `true`로 설정하면 기존 에셋과 매핑되지 않는 웹팩 개발 서버에 대한 모든 요청이 곧바로 `/`로 라우팅 된다.{} |
+| historyApiFallback | HTML5  히스토리 API를 이용하는 단일 페이지 애플리케이션을 개발할 때 유용한 옵션으로서 `true`로 설정하면 기존 에셋과 매핑되지 않는 웹팩 개발 서버에 대한 모든 요청이 곧바로 `/`로 라우팅 된다. |
 
 ```javascript
 {
@@ -65,9 +65,10 @@ devserver 설정
 ## 로더
 
 웹팩의 가장 흥미로운 기능 중 하나로 로더 `loader`가 있다.
-로더를 이용하면 외부 스크립트와 도구를 토앻 소스 파일을 전처리하고 다양한 변경과 변환을 적용할 수 있다.
 
-로더는 별도로 설치해야 하며ㅕ, webpack.config.js의 `modules`키에서 구성해야 한다. 
+로더를 이용하면 외부 스크립트와 도구를 통해 소스 파일을 전처리하고 다양한 변경과 변환을 적용할 수 있다.
+
+로더는 별도로 설치해야 하며, webpack.config.js의 `modules`키에서 구성해야 한다. 
 
 - test: 이 로더로 처리하기 위해 일치해야 하는 파일 확장자를 비교하는 정규 표현식(필수)
 - loader: 로더의 이름(필수)
