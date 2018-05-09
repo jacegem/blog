@@ -1,5 +1,5 @@
 ---
-title: "[책] React.JS 프로 리액트"
+title: "[책] React.JS 프로 리액트 (2/2)"
 date: 2018.05.08
 tags: [react, front-end]
 categories:
@@ -7,143 +7,13 @@ categories:
 - Javascript
 ---
 
-# [책] React.JS 프로 리액트
+# [책] React.JS 프로 리액트 (2/2)
+
+
 
 React.js를 이용한 모던 프런트엔드 구축
 
 [![](http://image.yes24.com/goods/27871271/147x215)</br>프로 리액트 React.js를 이용한 모던 프런트엔드 구축</br>카시우 지 소자 안토니우 저/최민석 역](http://blog.yes24.com/lib/adon/View.aspx?blogid=9654534&goodsno=27871271&idx=25563&ADON_TYPE=B&regs=b)
-
-# 라우팅
-
-## 프로그래밍 방식으로 라우트 변경
-
-history 객체의 탐색 메서드
-
-| 메서드       | 설명                                                         |
-| ------------ | ------------------------------------------------------------ |
-| pushState    | 새로운 URL로 이동하는 기본 히스토리 탐색 메서드<br />옵션 매캐변수 객체를 지정<br />history.pushState(null, '/user/123')<br />history.pushState({showGrades: true}, '/user/123') |
-| replaceState | pushState와 동일한 구문을 사용하며 현재 URL을 새로운 URL로 대체<br />히스토리의 길이에 영향 주지 않고 URL을 대체한다는 점에서 리다이렉션과 비슷 |
-| goBack       | 탐색 히스토리에서 한 항목 뒤로 이동                          |
-| goForward    | 탐색 히스토리 한 항목 앞으로 이동                            |
-| Go           | n 또는 -n만큼 앞으로 또는 뒤로 이동                          |
-| createHref   | 라우터의 구성을 이용해 URL을 생성                            |
-
-## 히스토리
-
-리액트 라우터는 히스토리 라이브러리에 기반을 둔다.
-기본적으로 리액트 라우터는 URL의 해시(#) 부분을 기준으로 라우트를 생성한다.(예:example.com/#/path)
-
-# 플럭스를 이용한 리액트 애플리케이션 설계
-
-플럭스는 기본적으로 세 부분으로 구성된다.
-
-- 액션 action
-- 스토어 store
-- 디스패처 dispatcher 
-
-## 은행계좌 애플리케이션
-
-https://speakerdeck.com/jmorrell/jsconf-uy-flux-those-who-forget-the-past-dot-dot-dot-1
-
-### 애플리케이션의 상수
-
-constant.js
-
-```javascript
-export default {
-    CREATED_ACCOUNT: 'created account',
-    WITHDREW_FROM_ACCOUNT: 'withdrew from account',
-    DEPOSITED_INTO_ACCOUNT: 'deposited in account'
-};
-```
-### 디스패처
-
-```javascript
-import {Dispatcher} from 'flux';
-export default new Dispatcher();
-```
-
-
-```javascript
-import {Dispatcher} from 'flux';
-
-class AppDispatcher extends Dispatcher{
-    dispatch(action={}){
-        console.log('Dispatched', action);
-        super.dispatcher(action)
-    }
-}
-export default new AppDispatcher();
-```
-# 성능 튜닝
-
-리액트 컴포넌트에서 setState를 호출할 떄마다 해당 항목을 즉시 업데이트하는 대신 `더티`로 표시한다. 즉, 컴포넌트의 상태를 변경해도 즉시 효과가 나타나지는 않으며, 리액트는 이벤트 루프를 이용해 변경 사항을 일괄 처리를 통해 렌더링한다.
-
-기본적으로 `shouldComponentUpdate`는 기본적으로 true를 반환하지만 false를 반환하도록 메서드를 다시 구현하면 리액트가 디시 렌더링 할 때 이 컴포넌트와 자식을 제외한다.
-
-## 리액트 퍼프
-
-리액트 퍼프`React Perf`는 앱의 성능에 대한 전반적인 개요 정보를 확인하고 `shouldComponentUpdate` 생명주기 후크를 구현할 성능 최적화 기회를 찾는 데 도움을 주는 프로파일링 도구다.
-
-리액트 퍼프 메서드
-
-| 유효성 검사기               | 설명                                                         |
-| :-------------------------- | ------------------------------------------------------------ |
-| Perf.start() 및 Perf.stop() | 측정을 시작 및 중지한다. 두 메서드 중간에 수행된 리액트 작업은 분석을 위해 기록된다. |
-| Perf.printInclusive()       | 소비된 전체 시간을 출력한다.                                 |
-| Perf.printExclusive()       | 컴포넌트를 마운팅하는 데 소비된 시간 출력<br />속성을 처리하거나 componentWillMount 및 componentDidMount 호출 시간을 제외하고 소비된 나머지 시간을 출력한다. |
-| Perf.printWasted()          | 허비된 시간을 출력한다.<br />허비된 시간은 DOM에 변경된 사항이 없기 떄문에 동일하게 유지되므로 사실상 아무것도 렌더링하지 않는 컴포넌트에 소비된 시간이다. |
-
-> 리액트 퍼프 애드온으로 유용한 정보를 얻을 수 있지만 이것만으로 애플리케이션의 모든 최적화 기회를 찾을 수 있는 것은 아니다. 직접 테스트와 디버그를 하고 `브라우저의 개발자 도구를 리액트 퍼프와 함께 사용`해야 한다.
-
-## 리액트 퍼프 설치와 이용
-
-```shell
-$ npm install --save react-addones-perf
-```
-
-
-
-```javascript
-import React, { component } from 'react';
-import { render } from 'react-dom';
-import Perf from 'react-addons-perf';
-import Clock from './Clock';
-
-class App extends Component {...}
-
-Perf.start();
-redner(<App />, document.getElementById('root'));
-Perf.stop();
-Perf.printInclusive();
-Perf.printWasted();
-```
-
-
-## shouldComponentUpdate
-
-리액트의 `shouldComponentUpdate` 수명주기 메서드는 렌더링 프로세스가 시작하기 직전에 트리거되며, 해당하는 트리를 렌더링에서 제외할 수 있는 기회를 제공한다. 
-
-```javascript
-shouldComponentUpdate(nextPros, nextState){
-    // 숫자 값이 변경되지 않았으면 다시 렌더링하지 않는다
-    return nextProps.value !== this.props.value;
-}
-```
-
-
-## shallowCompoare 애드온
-
-리액트는 shouldComponentUpdate에서 사용할 수 있는 `shallowCompare` 라는 애드온을 제공한다. 이 애드온은 객체의 속성과 상태를 간소하게 비교하고 변경 사항이 있는지 여부를 반환한다.
-
-shallowCompare 애드온이 만능은 아니지만 다음 조건에 해당하는 앱에서는 성능 향상 효과를 기대할 수 있다.
-
-- 간소하게 비교하려는 컴포넌트가 `순수` 컴포넌트다. 즉, 속성과 상태가 동일할 경우 동일한 결과를 렌더링한다.
-- 상태를 조작하는 데 변경 불가능한 값이나 리액트의 불변성 도우미를 이용한다.
-
-```shell
-$ npm install --save react-addons-shallow-compare
-```
 
 # 동형 리액트 애플리케이션
 
@@ -311,4 +181,24 @@ module.exports = {
 {
     "presets": ["react", "es2015"]
 }
+```
+## HMR
+
+웹팩이 널리 알려지는 데 기여한 특성 중 하나로 HMR `Hot Module Replacement`이 있다. 
+
+1. 웹팩 구성에 `HotModuleReplacementPlugin`을 추가한다.
+2. 웹팩 개발 서버 구성에 `hot` 매개변수를 추가하다.
+
+중요 사항을 정리하면 다음과 같다.
+
+- 웹팩과 바벨은 서로 다른 별개의 도구다.
+- 두 도구는 잘 어울린다.
+- 바벨은 플러그인을 통해 확장할 수 있다.
+- HMR은 컴포넌트의 코드를 수정할 때 브라우저에서 실시간으로 컴포넌트를 업데이트할 수 있는 웹팩 플러그인이며, 제대로 작동하려면 모듈에 특수한 코드를 추가해야 한다.
+- 바벨의  react-transform-hmr 플러그인은 자동으로 모든 리액트 컴포넌트에 필요한 HMR코드를 삽입한다.
+
+npm을 이용해 필요한 바벨 플러그인을 설치한다.
+
+```shell
+$ npm install --save-dev babel-plugin-react-transform react-transfomr-hmr
 ```
