@@ -1,6 +1,6 @@
 ---
 title: "[책] 빠른 모바일 앱 개발을 위한 React Native"
-date: 2018.05.08
+date: 2018.05.16
 tags: [react, native]
 categories:
 - Progrmming
