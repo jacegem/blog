@@ -25,17 +25,18 @@ yarn eject
 
 모듈 설치
 
-- cesium 
-- cesium-react
-- html-webpack-include-assets-plugin
-- copy-webpack-plugin
+* cesium
+* cesium-react
+* html-webpack-include-assets-plugin
+* copy-webpack-plugin
 
 ```shell
 yarn add cesium cesium-react html-webpack-include-assets-plugin copy-webpack-plugin
 ```
+
 ## webpack.config 수정
 
-### config/webpack.config.dev.js 
+### config/webpack.config.dev.js
 
 ```javascript
 // config/webpack.config.dev.js
@@ -62,7 +63,7 @@ module.exports = {
       ]
     }),
     new webpack.DefinePlugin({
-      "process.env": {        
+      "process.env": {
         CESIUM_BASE_URL: JSON.stringify("/cesium")
       }
     }),
@@ -72,10 +73,10 @@ module.exports = {
 }
 ```
 
-### config/webpack.config.dev.js
+### config/webpack.config.prod.js
 
 ```javascript
-// config/webpack.config.dev.js
+// config/webpack.config.prod.js
 
 const HtmlIncludeAssetsPlugin = require("html-webpack-include-assets-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
@@ -99,7 +100,7 @@ module.exports = {
       ]
     }),
     new webpack.DefinePlugin({
-      "process.env": {        
+      "process.env": {
         CESIUM_BASE_URL: JSON.stringify("/cesium")
       }
     }),
