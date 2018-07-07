@@ -1,7 +1,7 @@
 ---
 title: "카카오톡 플러스친구 스마트채팅 만들기 8 - heroku 배포"
 date: 2018.05.08
-tags: [카카오톡, 플러스친구, 스마트채팅, API, firestore, heroku, github]
+tags: [카카오톡, 플러스친구, 스마트채팅, API, firestore, heroku, github, python, flask]
 categories:
 - Programming
 - Python
@@ -13,14 +13,12 @@ categories:
 
 ![](https://goo.gl/9x1zA3)
 
+heroku 에서 운영하기 위해 필요한 파일들을 추가합니다.
 
-heroku 에서 운영하기 위해 필요한 파일들을 추가합니다. 
-
-- Procfile
-- requirements.txt
-- runtime.txt
-- uwsgi.ini
-
+* Procfile
+* requirements.txt
+* runtime.txt
+* uwsgi.ini
 
 ## Procfile
 
@@ -30,7 +28,7 @@ web: uwsgi uwsgi.ini
 
 ## requirements.txt
 
-로컬에서 실행할 때와는 다른게 `uwsgi` 를 추가해야 합니다. 
+로컬에서 실행할 때와는 다른게 `uwsgi` 를 추가해야 합니다.
 
 ```python
 Flask
@@ -49,7 +47,7 @@ python-3.6.4
 
 ## uwsgi.ini
 
-실행 모듈을 지정합니다. kakotalk_lunch_bot.py 에 있는 `app`을 실행합니다. 
+실행 모듈을 지정합니다. kakotalk_lunch_bot.py 에 있는 `app`을 실행합니다.
 
 ```python
 [uwsgi]
@@ -62,8 +60,7 @@ memory-report = true
 
 # Github 가입 및 배포
 
-4개의 파일을 추가한 후 Github에 배포합니다. Heroku에서 github에 연결한 후에 Deploy를 할 것입니다. 
-
+4 개의 파일을 추가한 후 Github 에 배포합니다. Heroku 에서 github 에 연결한 후에 Deploy 를 할 것입니다.
 
 # Heroku 가입 및 앱 추가
 
@@ -79,7 +76,7 @@ memory-report = true
 
 ## Deployment method
 
-`대시보드 - Deploy` 에서 GitHub를 연결합니다. 물론 소스는 GitHub에 배포되어 있어야 합니다.
+`대시보드 - Deploy` 에서 GitHub 를 연결합니다. 물론 소스는 GitHub 에 배포되어 있어야 합니다.
 
 ![](https://goo.gl/bRqc95)
 
@@ -87,7 +84,7 @@ memory-report = true
 
 ![](https://goo.gl/YnbQWD)
 
-heroku에 배포할 Github 저장소를 검색해서 선택합니다. 
+heroku 에 배포할 Github 저장소를 검색해서 선택합니다.
 
 ## Manual deploy
 
@@ -95,46 +92,41 @@ Manual deploy 에서 `Deploy Branch` 버튼을 눌러 배포를 시작합니다.
 
 ![](https://goo.gl/hgj8Pm)
 
-정상적으로 배포가 되면 녹색 체크박스로 나타나게 되고 아래에 `View`버튼이 생성됩니다. 
+정상적으로 배포가 되면 녹색 체크박스로 나타나게 되고 아래에 `View`버튼이 생성됩니다.
 
 누르면 해당 주소로 이동해서 웹브라우저에서 확인할 수 있습니다.
 
-
-
 # 플러스친구 스마트채팅 설정
 
-카카오톡 [플러스친구 관리자 센터](https://center-pf.kakao.com/login)에 로그인을 합니다. 
+카카오톡 [플러스친구 관리자 센터](https://center-pf.kakao.com/login)에 로그인을 합니다.
 
-생성한 플러스친구를 선택합니다. 
+생성한 플러스친구를 선택합니다.
 
 좌측 사이드 메뉴 중에서 `스마트채팅`을 선택합니다.
 
 ![](https://goo.gl/jBrJDb)
 
-우측에 있는 `API형`에서 Edit를 선택합니다. 
+우측에 있는 `API형`에서 Edit 를 선택합니다.
 
-`앱 URL`에 heroku에 배포한 URL을 등록합니다. 
+`앱 URL`에 heroku 에 배포한 URL 을 등록합니다.
 
 ![](https://goo.gl/yPvkky)
 
-서버가 정상적으로 동작하면 API테스트 시에 결과를 확인할 수 있습니다. 
+서버가 정상적으로 동작하면 API 테스트 시에 결과를 확인할 수 있습니다.
 
 ![](https://goo.gl/fQyag2)
-
 
 ## Heroku Pricing
 
 ![](https://goo.gl/uFPX4Y)
 
-무료는 30분간 활성화가 되지 않으면 잠자기 모드로 진입합니다. 잠자기 모드일 경우에 웹 접속이 발생하면 그 때 시동이 되기 때문에 결과값을 받는데 오래 걸립니다. 
+무료는 30 분간 활성화가 되지 않으면 잠자기 모드로 진입합니다. 잠자기 모드일 경우에 웹 접속이 발생하면 그 때 시동이 되기 때문에 결과값을 받는데 오래 걸립니다.
 
 ![](https://goo.gl/FwvV9V)
 
-
-
 ## Heroku CLI
 
-[Heroku CLI | Heroku Dev Center](https://devcenter.heroku.com/articles/heroku-cli)에서 CLI를 설치합니다.
+[Heroku CLI | Heroku Dev Center](https://devcenter.heroku.com/articles/heroku-cli)에서 CLI 를 설치합니다.
 
 ### 로그인
 
@@ -154,8 +146,10 @@ $ heroku logs -a [HEROKU 앱 이름]
 
 ### 로그 tail
 
-지속적으로 로그를 확인합니다. 
+지속적으로 로그를 확인합니다.
 
 ```shell
 $ heroku logs --tail -a [HEROKU 앱 이름]
 ```
+
+<script src="https://gist.github.com/jacegem/fee3dae8e7a0c630dc612b76ad3d1911.js"></script>
