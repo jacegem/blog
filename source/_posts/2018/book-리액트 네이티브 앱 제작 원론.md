@@ -3,12 +3,11 @@ title: "[책] 리액트 네이티브 앱 제작 원론"
 date: 2018.05.21
 tags: [react-native, react, native, app]
 categories:
-- Progrmming
+- Programming
 - Javascript
 ---
 
 # [책] 리액트 네이티브 앱 제작 원론
-
 
 [![](http://image.yes24.com/goods/58409654/147x215)<br>리액트 네이티브 앱 제작 원론<br>에릭 마시엘로,제이콥 프리드만 공저/이태상 역](http://blog.yes24.com/lib/adon/View.aspx?blogid=9654534&goodsno=58409654&idx=25576&ADON_TYPE=B&regs=b)
 
@@ -57,16 +56,15 @@ npm install -g react-native-cli
 
 ## Error: ACCESS:permission denied...
 
-1. npm config get prefix를 실행한다.
-2. /usr/local이 보인다면 sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}를 실행한다.
-3. 패스워드를 물어보면 패스워드를 입력하고 리턴을 누른다. 이로써 권한 설정이 완료된다.
-4. 만약 npm config get prefix를 실행했을 때 다른 결과가 보였다면, npm 권한 문제를 해결하기 위한 자세한 사항을 설명하는 https://docs.npmjs.com/getting-started/fixing-npm-permissions 페이지를 확인해 본다.
-
+1.  npm config get prefix 를 실행한다.
+2.  /usr/local 이 보인다면 sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}를 실행한다.
+3.  패스워드를 물어보면 패스워드를 입력하고 리턴을 누른다. 이로써 권한 설정이 완료된다.
+4.  만약 npm config get prefix 를 실행했을 때 다른 결과가 보였다면, npm 권한 문제를 해결하기 위한 자세한 사항을 설명하는 https://docs.npmjs.com/getting-started/fixing-npm-permissions 페이지를 확인해 본다.
 
 ## 루트 컴포넌트 등록
 
 ```javascript
-AppRegistry.registerComponent('HelloWrold', ()=>HelloWorld);
+AppRegistry.registerComponent("HelloWrold", () => HelloWorld);
 ```
 
 ## 플렉스박스
@@ -75,7 +73,6 @@ justifyContent 속성을 사용하면 메인 축을 따라 아이템을 배치�
 
 - 플렉스박스 개구리(http://flexboxfroggy.com)
 
-
 # 리액트 네이티브 컴포넌트
 
 # 플럭스와 리덕스
@@ -83,7 +80,7 @@ justifyContent 속성을 사용하면 메인 축을 따라 아이템을 배치�
 ## 플럭스 구현하기
 
 높은 수준에서 보면 플럭스는 하나의 순환적인 패턴이라고 생각할 수 있다.
-대개 그 순환은 뷰레이어에서 시작한다. 
+대개 그 순환은 뷰레이어에서 시작한다.
 뷰레이어는 리액트 컴포넌트다.
 사용자가 `뷰`와 상호작용을 하면 플럭스는 `액션 생성자`를 사용해 `액션`을 만든다.
 이 액션은 `디스패처`에 전달되는데, 디스패처는 한 번에 하나의 액션만을 처리하는 싱글턴 컴포넌트다.
@@ -98,6 +95,7 @@ $ npm install redux --save
 ```
 
 ## 리액트-리덕스 설치
+
 ```shell
 $ npm install react-redux --save
 ```
@@ -144,19 +142,3 @@ $ npm install react-native-macos-cli -g
 - https://expo.io
 - https://js.coach/?search=react-native
 - https://github.com/donglowder/react-native-appletv
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
