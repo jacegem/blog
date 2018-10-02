@@ -32,12 +32,12 @@ widgets:
     - adsense_sky
     - recent_posts
     - category
-    - adsense_sky
+    # - adsense_sky
     - archive
     #- tag
     - tagcloud
     - links
-    - adsense_sky
+    # - adsense_sky
 
 # Search
 search:
