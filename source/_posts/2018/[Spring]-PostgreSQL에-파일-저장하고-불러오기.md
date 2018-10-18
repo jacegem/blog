@@ -3,8 +3,8 @@ title: "[Spring] PostgreSQL에 파일 저장하고 불러오기"
 date: 2018.09.21
 tags: [spring, mybatis, postgresql, psql, file, bytea]
 categories:
-  - programming
-  - spring
+- Programming
+- Spring
 ---
 
 # [Spring] PostgreSQL에 파일 저장하고 불러오기

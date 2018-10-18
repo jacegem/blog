@@ -3,8 +3,8 @@ title: "[도쿠위키] 파일명 인코딩을 urlencode 에서 utf8로 변경하
 date: 2018.09.05
 tags: [도쿠위키, 파일명, 인코딩, urlencode, utf-8]
 categories:
-  - application
-  - wiki
+  - Application
+  - Wiki
 ---
 
   # [도쿠위키] 파일명 인코딩을 urlencode 에서 utf8로 변경하기
