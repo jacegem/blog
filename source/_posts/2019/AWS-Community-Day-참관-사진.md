@@ -2,9 +2,9 @@
 title: "AWS Community Day 참관 사진"
 date: 2019-01-25
 tags: [AWS, Community, Day, 참관]
-categories: 
-- Conference
-- AWS
+categories:
+  - Conference
+  - AWS
 ---
 
 # AWS Community Day 참관 사진
@@ -181,7 +181,7 @@ Deploy
 
 자신의 비지니스 문제를 `ML`로 해결하기 위해서는 데이터셋을 만드는 때가 온다.
 
-![](https://monosnap.com/image/WbJJwxaEe3wrGoIsiwbYBtL2DAyvkX.png) 
+![](https://monosnap.com/image/WbJJwxaEe3wrGoIsiwbYBtL2DAyvkX.png)
 
 가능한 라벨링 작업
 
