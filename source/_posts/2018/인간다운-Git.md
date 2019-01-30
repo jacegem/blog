@@ -3,21 +3,20 @@ title: "[책] 인간다운 Git"
 date: 2018.05.22
 tags: [book, git]
 categories:
-- Programming
+  - Programming
 ---
+
 # [책] 인간다운 Git
 
-
 [![](http://image.yes24.com/goods/58214924/147x215)<br>인간다운 Git <br>데이비드 디마리 저/이태상 역](http://blog.yes24.com/lib/adon/View.aspx?blogid=9654534&goodsno=58214924&idx=25604&ADON_TYPE=B&regs=b)
-
 
 ## 버전 관리의 요소
 
 버전 관리 시스템(Version Control System) `VCS`
 
-어떤  작업물의 최종본만 갖고 있는 것이 아니라 그 이전 각 수정본을 모두 보유함으로써, 필요할 때 이전 버전을 참고하거나 그 버전으로 되돌릴 수 있게 하자
+어떤 작업물의 최종본만 갖고 있는 것이 아니라 그 이전 각 수정본을 모두 보유함으로써, 필요할 때 이전 버전을 참고하거나 그 버전으로 되돌릴 수 있게 하자
 
-##병합 충돌 (merge conflict)
+## 병합 충돌 (merge conflict)
 
 포함하고자 하는 변경 사항을 먼저 스테이징하고 그 다음에 커밋을 하는 것은 마찬가지다
 
@@ -40,7 +39,7 @@ $ git commit -m "merge branch"
 
 ## GitHub
 
-실전에서 대부분의 팀은 GitHub로 호스팅하는 하나의 공유 사본을 주된 저장소로 URL며, 이를 git의 관용어로 오리진`origin`이라고 한다. 
+실전에서 대부분의 팀은 GitHub로 호스팅하는 하나의 공유 사본을 주된 저장소로 URL며, 이를 git의 관용어로 오리진`origin`이라고 한다.
 
 마스터 브랜치를 `주된`브랜치로 할 것인지가 사용자에게 달렸듯, 오리진 리모트 역시 마찬가지다.
 
@@ -83,7 +82,7 @@ $ git commit -m "Merge origin"
 
 ## 푸시 거부
 
-git의 어떤 장난에도 놀아나고 싶지 않다면, 항상 푸시하기 전 먼저 풀`pull`을 해서 로컬 사본을 최신으로 만들기 바란다. 
+git의 어떤 장난에도 놀아나고 싶지 않다면, 항상 푸시하기 전 먼저 풀`pull`을 해서 로컬 사본을 최신으로 만들기 바란다.
 
 변경 사항을 pull하는 것이 문제가 되는 경우는 거의 없으며 오히려 많은 이득을 얻는다.
 
@@ -149,7 +148,7 @@ $ git config --global core.editor "atom --wait"
 
 커밋 메시지의 목적은 변경 사항을 요약하는 것이다. 이 커밋에서 변경된 내용을 간결하고 명쾌하게 설명하는 메시지를 작성해야 한다.
 
-내가 어떤 일을 했고 이게 내가 한 일이다 라는 식의 훨씬 쉬운 얘기로 설명할 수 있다. 
+내가 어떤 일을 했고 이게 내가 한 일이다 라는 식의 훨씬 쉬운 얘기로 설명할 수 있다.
 
 ```shell
 $ git commit -m "Update homepage for lunch"
@@ -216,7 +215,7 @@ $ git push <tag-name>
 - git remote add <name> <url>
 - git remote rm <name>
 - git push <remote-name> <branch-name>
-- git pull <remote-name> <branch-name> 
+- git pull <remote-name> <branch-name>
 - git fetch <remote-name> : 리모트의 모든 사항을 로컬 사본으로 복사한다. git pull 명령을 실행하면 git fetch 작업은 자동으로 포함된다.
 - git log [--oneline] \[--pretty] \[<branch-name-or-commit>]
 - git diff [--stat] \[<branch-name-or-commit>]
@@ -227,7 +226,7 @@ $ git push <tag-name>
 
 ## 추천 Git 앱
 
--  GitHub 데스크톱
+- GitHub 데스크톱
 - 타워(Tower)
 - 소스트리(SourceTree)
 
@@ -240,4 +239,3 @@ $ git push <tag-name>
 ## 추가정보
 
 - https://try.github.io/levels/1/challenges/1
-
