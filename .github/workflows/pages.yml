@@ -32,7 +32,9 @@ jobs:
       # - name: Build
       #   run: npm run build
       - name: BEFORE_INSTALL
-        run: npm i -g hexo workbox-cli
+        run: npm i -g hexo
+      - name: NPM_INSTALL
+        run: npm install
       - name: HEXO_CLEAN
         run: hexo clean
       - name: HEXO_GENERATE
