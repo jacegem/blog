@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Vworld 3D Data를 Three.js로 출력하기 | Momentous for the future</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="threejs,javascript,vworld,3d,data" />
+    
+    <meta name="description" content="Vworld 3D Data를 Three.js로 출력하기  Vworld WebGL기반 3차원 지도 Vworld WebGL기반 3차원 지도 에 접속하시면 아래와 같은 화면을 볼 수 있습니다.  여기서 WebGL 이란  웹 기반의 그래픽 라이브러리 자바스크립트 프로그래밍 언어를 통해서 사용 호환성이 있는 웹 브라우저에서 인터랙티브한 3D 그래픽을 사용할 수 있">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vworld 3D Data를 Three.js로 출력하기">
+<meta property="og:url" content="http://jacegem.github.io/blog/2018/Vworld-3D-Data%EB%A5%BC-Three.js%EB%A1%9C-%EC%B6%9C%EB%A0%A5%ED%95%98%EA%B8%B0/index.html">
+<meta property="og:site_name" content="Momentous for the future">
+<meta property="og:description" content="Vworld 3D Data를 Three.js로 출력하기  Vworld WebGL기반 3차원 지도 Vworld WebGL기반 3차원 지도 에 접속하시면 아래와 같은 화면을 볼 수 있습니다.  여기서 WebGL 이란  웹 기반의 그래픽 라이브러리 자바스크립트 프로그래밍 언어를 통해서 사용 호환성이 있는 웹 브라우저에서 인터랙티브한 3D 그래픽을 사용할 수 있">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://lh3.googleusercontent.com/-XmBI4rDR5YI/W63qpRTd0QI/AAAAAAAAG40/ZgA5mYbYLiA899XwwFiG-nc0zD7xC5ofACHMYCw/s0/chrome_2018-09-28_45.jpg">
+<meta property="article:published_time" content="2018-10-16T15:00:00.000Z">
+<meta property="article:modified_time" content="2023-10-23T11:46:44.473Z">
+<meta property="article:author" content="Jace">
+<meta property="article:tag" content="threejs">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="vworld">
+<meta property="article:tag" content="3d">
+<meta property="article:tag" content="data">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lh3.googleusercontent.com/-XmBI4rDR5YI/W63qpRTd0QI/AAAAAAAAG40/ZgA5mYbYLiA899XwwFiG-nc0zD7xC5ofACHMYCw/s0/chrome_2018-09-28_45.jpg">
+    
+
+    
+        <link rel="alternate" href="/" title="Momentous for the future" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="https://image.flaticon.com/icons/png/512/557/557050.png" />
+    
+
+    
+<link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/blog/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/blog/css/style.css">
+
+
+    
+<script src="/blog/libs/jquery/2.0.3/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/blog/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/blog/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/blog/">홈</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Android/Game/">Game</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Application/">Application</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Application/Console/">Console</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Application/Cryptocurrency/">Cryptocurrency</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Application/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Application/Download/">Download</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Application/GIS/">GIS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Application/IDE/">IDE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Application/NAS/">NAS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Application/VM/">VM</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Application/VPN/">VPN</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Application/Web/">Web</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Application/Wiki/">Wiki</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Blog/">Blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Blog/Book/">Book</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Blog/Seminar/">Seminar</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Blog/Test/">Test</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Conference/">Conference</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Conference/AWS/">AWS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Conference/ETC/">ETC</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Conference/Microsoft/">Microsoft</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Conference/Startup/">Startup</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Flutter/">Flutter</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Flutter/Project/">Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Product/">Product</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Product/Earphone/">Earphone</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Product/Ebook/">Ebook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Product/Notebook/">Notebook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Product/Printer/">Printer</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Product/Wearable/">Wearable</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Programming/">Programming</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Programming/Android/">Android</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Programming/Autohotkey/">Autohotkey</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Programming/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Programming/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Programming/ETC/">ETC</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Programming/Elm/">Elm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Programming/General/">General</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Programming/HTML/">HTML</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Programming/JSP/">JSP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Programming/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Programming/Protocol/">Protocol</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Programming/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Programming/R/">R</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Programming/SQL/">SQL</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Programming/Spring/">Spring</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Programming/Unity/">Unity</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Programming/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Service/">Service</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Service/Cloud/">Cloud</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/blog/categories/Service/GitBook/">GitBook</a></li></ul></li></ul>
+                                    
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '포스트',
+            PAGES: 'Pages',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/blog/',
+        CONTENT_URL: '/blog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/blog/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/blog/categories/Programming/">Programming</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/blog/categories/Programming/Javascript/">Javascript</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-2018/Vworld-3D-Data를-Three.js로-출력하기" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Vworld 3D Data를 Three.js로 출력하기
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/blog/2018/Vworld-3D-Data%EB%A5%BC-Three.js%EB%A1%9C-%EC%B6%9C%EB%A0%A5%ED%95%98%EA%B8%B0/" class="article-date">
+            <time datetime="2018-10-16T15:00:00.000Z" itemprop="datePublished">2018-10-17</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/blog/tags/3d/" rel="tag">3d</a>, <a class="tag-link-link" href="/blog/tags/data/" rel="tag">data</a>, <a class="tag-link-link" href="/blog/tags/javascript/" rel="tag">javascript</a>, <a class="tag-link-link" href="/blog/tags/threejs/" rel="tag">threejs</a>, <a class="tag-link-link" href="/blog/tags/vworld/" rel="tag">vworld</a>
+    </div>
+
+            </div>
+        
+                
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 반응형 -->
+<div style="text-align:center;margin-top:20px">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9184373525576918"
+     data-ad-slot="1959714988"
+     data-ad-format="auto"></ins></div>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <div class="article-entry" itemprop="articleBody">            
+            <h1 id="vworld-3d-data를-threejs로-출력하기"><a class="markdownIt-Anchor" href="#vworld-3d-data를-threejs로-출력하기"></a> Vworld 3D Data를 Three.js로 출력하기</h1>
+<h1 id="vworld-webgl기반-3차원-지도"><a class="markdownIt-Anchor" href="#vworld-webgl기반-3차원-지도"></a> Vworld WebGL기반 3차원 지도</h1>
+<p><a target="_blank" rel="noopener" href="http://map.vworld.kr/map/wcmaps.do#">Vworld WebGL기반 3차원 지도</a> 에 접속하시면 아래와 같은 화면을 볼 수 있습니다.</p>
+<p><img src="https://lh3.googleusercontent.com/-XmBI4rDR5YI/W63qpRTd0QI/AAAAAAAAG40/ZgA5mYbYLiA899XwwFiG-nc0zD7xC5ofACHMYCw/s0/chrome_2018-09-28_45.jpg" alt="" /></p>
+<p>여기서 WebGL 이란</p>
+<ul>
+<li>웹 기반의 그래픽 라이브러리</li>
+<li>자바스크립트 프로그래밍 언어를 통해서 사용</li>
+<li>호환성이 있는 웹 브라우저에서 인터랙티브한 3D 그래픽을 사용할 수 있도록 제공</li>
+</ul>
+<p>(출처: 위키피디아)</p>
+<h1 id="3d-데이터api-레퍼런스-소개"><a class="markdownIt-Anchor" href="#3d-데이터api-레퍼런스-소개"></a> <a target="_blank" rel="noopener" href="http://dev.vworld.kr/dev/v4dv_3ddataintro_s001.do">3D 데이터API 레퍼런스  소개</a></h1>
+<p>데이터 API는 브이월드에서 제공하는 다양한 국가공간정보를 외부(기관,기업,개인등)에서 활용할 수 있도록 <code>XML또는 JSON형식으로 데이터를 제공하는 API서비스</code> 입니다.</p>
+<h2 id="어떻게-사용해야-하나요"><a class="markdownIt-Anchor" href="#어떻게-사용해야-하나요"></a> 어떻게 사용해야 하나요?</h2>
+<p><img src="https://lh3.googleusercontent.com/-ybCi5A2RMhw/W63nc3InV7I/AAAAAAAAG4o/sZHXwxCjyLgjIoP-VeAOjRpd1YvgLYYowCHMYCw/s0/StrokesPlus_2018-09-28_44.png" alt="" /></p>
+<h2 id="어떤-데이터가-어떻게-제공-되나요"><a class="markdownIt-Anchor" href="#어떤-데이터가-어떻게-제공-되나요"></a> 어떤 데이터가 어떻게 제공 되나요?</h2>
+<p><img src="https://lh3.googleusercontent.com/-cySQn8IweXA/W7FnAJst5II/AAAAAAAAG5Q/SlTmi_r7atomOOw5-e4W6pJNSXOz7snEQCHMYCw/s0/StrokesPlus_2018-10-01_46.png" alt="" /></p>
+<h1 id="3d-데이터api-레퍼런스"><a class="markdownIt-Anchor" href="#3d-데이터api-레퍼런스"></a> <a target="_blank" rel="noopener" href="http://dev.vworld.kr/dev/v4dv_3ddataintro_s001.do">3D 데이터API 레퍼런스</a></h1>
+<p><img src="https://lh3.googleusercontent.com/-Njh-dbKYA3U/W7FnRDwOaTI/AAAAAAAAG5Y/3NPb5FinLfguauWLHtPbO7q84HteKZ4XQCHMYCw/s0/StrokesPlus_2018-10-01_47.png" alt="" /></p>
+<h2 id="키-발급"><a class="markdownIt-Anchor" href="#키-발급"></a> 키 발급</h2>
+<p><code>개발자센터 &gt; 인증키 &gt;  인증키 발급</code>에서 키를 발급 받을 수 있습니다. (<code>로그인</code> 되어 있어야 이용 가능합니다. )</p>
+<p><img src="https://lh3.googleusercontent.com/-f-jbniH3hRQ/W7FnsoV-viI/AAAAAAAAG5g/CDAfCeGR6d8O1I9X6V7tPDYd47Y20sJ2ACHMYCw/s0/StrokesPlus_2018-10-01_48.png" alt="" /></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 발급 받은 키</span></span><br><span class="line">3XE3C10E-82B7-3E7F-<span class="title class_">AC31</span>-37175F32CDE4</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>개인 키를 발급 받아서 사용하시기 바랍니다.</p>
+</blockquote>
+<h2 id="레이어-목록-요청-api"><a class="markdownIt-Anchor" href="#레이어-목록-요청-api"></a> <a target="_blank" rel="noopener" href="http://dev.vworld.kr/dev/v4dv_3ddataguide_s002.do">레이어 목록 요청 API</a></h2>
+<p><img src="https://lh3.googleusercontent.com/-MDUSKVnYJDA/W7Fn8yNZfQI/AAAAAAAAG5o/Np0ZpPRIpH41oMUZlU_qJ-KTBpxvtm5oACHMYCw/s0/StrokesPlus_2018-10-01_49.png" alt="" /></p>
+<h3 id="출력-결과"><a class="markdownIt-Anchor" href="#출력-결과"></a> 출력 결과</h3>
+<p><img src="https://lh3.googleusercontent.com/-wooW0QPFAzI/W7Fw--F4UKI/AAAAAAAAG6Q/SnjUMNc0fh8RRz88_gR5z0WnzE1T_UEnwCHMYCw/s0/StrokesPlus_2018-10-01_53.png" alt="" /></p>
+<h3 id="각-요소별-정의"><a class="markdownIt-Anchor" href="#각-요소별-정의"></a> 각 요소별 정의</h3>
+<p><img src="https://lh3.googleusercontent.com/-E05iuxMOY2A/W7FxIiL7_SI/AAAAAAAAG6U/5TRqms4yK2IzKcI7VwjJbZOvIlfsJOEnQCHMYCw/s0/StrokesPlus_2018-10-01_54.png" alt="" /></p>
+<h3 id="데이터-요청"><a class="markdownIt-Anchor" href="#데이터-요청"></a> 데이터 요청</h3>
+<p>발급받은 키를 사용하여 요청합니다.</p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th><a target="_blank" rel="noopener" href="http://xdworld.vworld.kr:8080/XDServer/3DData">http://xdworld.vworld.kr:8080/XDServer/3DData</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Version</td>
+<td>2.0.0.0</td>
+</tr>
+<tr>
+<td>Request</td>
+<td><code>GetCapabilites</code></td>
+</tr>
+<tr>
+<td>Key</td>
+<td>3XE3C10E-82B7-3E7F-AC31-37175F32CDE4</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>// 요청 URL</p>
+<p><a target="_blank" rel="noopener" href="http://xdworld.vworld.kr:8080/XDServer/3DData?Version=2.0.0.0&amp;Request=GetCapabilities&amp;Key=3XE3C10E-82B7-3E7F-AC31-37175F32CDE4">http://xdworld.vworld.kr:8080/XDServer/3DData?Version=2.0.0.0&amp;Request=GetCapabilities&amp;Key=3XE3C10E-82B7-3E7F-AC31-37175F32CDE4</a></p>
+</blockquote>
+<h3 id="요청-결과"><a class="markdownIt-Anchor" href="#요청-결과"></a> 요청 결과</h3>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">GetCapabilities</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">SCRIPT</span> <span class="attr">id</span>=<span class="string">&quot;allow-copy_script&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">(<span class="keyword">function</span> <span class="title function_">agent</span>(<span class="params"></span>) &#123; <span class="keyword">let</span> isUnlockingCached = <span class="literal">false</span> <span class="keyword">const</span> <span class="title function_">isUnlocking</span> = (<span class="params"></span>) =&gt; isUnlockingCached <span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;allow_copy&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123; <span class="keyword">const</span> &#123; unlock &#125; = event.<span class="property">detail</span> isUnlockingCached = unlock &#125;) <span class="keyword">const</span> copyEvents = [ <span class="string">&#x27;copy&#x27;</span>, <span class="string">&#x27;cut&#x27;</span>, <span class="string">&#x27;contextmenu&#x27;</span>, <span class="string">&#x27;selectstart&#x27;</span>, <span class="string">&#x27;mousedown&#x27;</span>, <span class="string">&#x27;mouseup&#x27;</span>, <span class="string">&#x27;mousemove&#x27;</span>, <span class="string">&#x27;keydown&#x27;</span>, <span class="string">&#x27;keypress&#x27;</span>, <span class="string">&#x27;keyup&#x27;</span>, ] <span class="keyword">const</span> <span class="title function_">rejectOtherHandlers</span> = e =&gt; &#123; <span class="keyword">if</span> (<span class="title function_">isUnlocking</span>()) &#123; e.<span class="title function_">stopPropagation</span>() <span class="keyword">if</span> (e.<span class="property">stopImmediatePropagation</span>) e.<span class="title function_">stopImmediatePropagation</span>() &#125; &#125; copyEvents.<span class="title function_">forEach</span>(<span class="function"><span class="params">evt</span> =&gt;</span> &#123; <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="title function_">addEventListener</span>(evt, rejectOtherHandlers, &#123; <span class="attr">capture</span>: <span class="literal">true</span>, &#125;) &#125;) &#125;)()</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">SCRIPT</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Version</span>&gt;</span>2.0.0.0<span class="tag">&lt;/<span class="name">Version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layers</span> <span class="attr">Count</span>=<span class="string">&quot;77&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;tile&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;terrainImg&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;dem&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;terrainDEM&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;2015&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;time&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;2016&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;time&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;2017&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;time&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;2018&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;time&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;16&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;tile_mo&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;terrainImg_MO&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;18&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;tile_mo_2015&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;terrainImg_2015&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;18&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;tile_mo_HD&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;terrainImg_MO_HD&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;18&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;tile_mo2d&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;terrainImg_MO2D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;tile_mo2d_HD&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;terrainImg_MO2DHD&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;dem_mo&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;terrainDEM_MO&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;indoor_build&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Indoor&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;indoor_build_HD&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Indoor&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;facility_build_boan&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;boan1&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;facility_bridge_boan&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;boan1&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;facility_build_lod1&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;boan1&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;hybrid_2017&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;boan2&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;5&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;facility_build&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Real3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;facility_build_world&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Real3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;facility_build_world_mo&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Real3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;facility_bridge&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Real3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;14&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;facility_dokdo&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Real3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;13&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;facility_build_at&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Real3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;facility_build_mo&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Real3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;facility_dokdo_mo&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Real3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;13&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;facility_bridge_mo&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Real3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;14&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;facility_bridge_ag&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Real3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;14&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;facility_build_ag&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Real3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;facility_bridge_ag_mo&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Real3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;14&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;facility_build_ag_mo&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Real3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;facility_indoor&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Real3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;facility_olympic2018&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Real3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;tile_bridge_mo&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;terrainImg_wgt&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;10&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;14&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;tile_build_mo&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;terrainImg_wgt&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;10&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_base&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;16&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_base_u8&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;16&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_base_north&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;14&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_base_world&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;14&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_bound&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;11&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_bound_north&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;8&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_bound_world&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;7&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_road&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;14&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_road_north&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;14&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_em_base&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;16&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_em_bound&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;12&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_em_dept&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;7&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_em_dokdo&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_em_embassy&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;6&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_em_issue&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;4&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_em_korea&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;4&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_em_park&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;4&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_em_whc&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;4&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_base_north_u8&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;14&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_base_world_u8&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;14&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_bound_u8&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;11&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_bound_north_u8&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;8&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_bound_world_u8&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;7&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_road_u8&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;14&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_road_north_u8&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;14&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;poi_indoor&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Point3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;14&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;hybrid_road&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;HybridImg&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;5&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;16&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;hybrid_bound&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;HybridImg&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;14&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;hybrid_add_sansatai&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;HybridImg&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;5&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;14&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;hybrid_road_mo&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;HybridImg&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;5&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;16&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;hybrid_silgam&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;HybridImg&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;5&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;hybrid_2016&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;HybridImg&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;5&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;bill_Tree&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Billboard3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;16&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;timeseries&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;TimeseriesImg&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;16&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;T197801&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;TimeseriesImg&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;16&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;T198901&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;TimeseriesImg&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;16&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;T195001&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;TimeseriesImg&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;16&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;T195101&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;TimeseriesImg&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;16&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;T195212&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;TimeseriesImg&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;16&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;T199601&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;TimeseriesImg&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;16&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;T200601&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;TimeseriesImg&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;16&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;T200712&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;TimeseriesImg&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;14&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Layers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">GetCapabilities</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>이 중에서 <code>facility_build</code> 를 사용하겠습니다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;facility_build&quot;</span> <span class="attr">Type</span>=<span class="string">&quot;Real3D&quot;</span> <span class="attr">MinLevel</span>=<span class="string">&quot;0&quot;</span> <span class="attr">MaxLevel</span>=<span class="string">&quot;15&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="데이터-검색-요청-apigetlayerexists"><a class="markdownIt-Anchor" href="#데이터-검색-요청-apigetlayerexists"></a> <a target="_blank" rel="noopener" href="http://dev.vworld.kr/dev/v4dv_3ddataguide_s002.do">데이터 검색 요청 API(GetLayerExists)</a></h2>
+<p><img src="https://lh3.googleusercontent.com/-gcqUwonAZhw/W7FyP7QImLI/AAAAAAAAG6k/GslG2NVFVS8_LrIIptjl3-BqLJbwr7b5ACHMYCw/s0/StrokesPlus_2018-10-01_56.png" alt="" /></p>
+<h3 id="요청-변수"><a class="markdownIt-Anchor" href="#요청-변수"></a> 요청 변수</h3>
+<p><img src="https://lh3.googleusercontent.com/-kDt3PHuS8oA/W7FyU4Z48nI/AAAAAAAAG6o/U1tLjwJ2I801Teyp184OzoIJY-6Xo6GxgCHMYCw/s0/StrokesPlus_2018-10-01_57.png" alt="" /></p>
+<h3 id="출력결과"><a class="markdownIt-Anchor" href="#출력결과"></a> 출력결과</h3>
+<p><img src="https://lh3.googleusercontent.com/-O6jJdTpdiy4/W7Fydj0bhfI/AAAAAAAAG6w/rYAqSScpUG0jycdYLSPsOFZeLlsOVeUbwCHMYCw/s0/StrokesPlus_2018-10-01_58.png" alt="" /></p>
+<h3 id="각-요소별-정의-2"><a class="markdownIt-Anchor" href="#각-요소별-정의-2"></a> 각 요소별 정의</h3>
+<p><img src="https://lh3.googleusercontent.com/-jaxdC62fuj8/W7FyhNdlgcI/AAAAAAAAG64/8X6E6lmvz7EPVcGqa902E8xGg0_sCX1uQCHMYCw/s0/StrokesPlus_2018-10-01_59.png" alt="" /></p>
+<h3 id="데이터-요청-2"><a class="markdownIt-Anchor" href="#데이터-요청-2"></a> 데이터 요청</h3>
+<p>발급받은 키를 사용하여 요청합니다.</p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th><a target="_blank" rel="noopener" href="http://xdworld.vworld.kr:8080/XDServer/3DData">http://xdworld.vworld.kr:8080/XDServer/3DData</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Version</td>
+<td>2.0.0.0</td>
+</tr>
+<tr>
+<td>Request</td>
+<td><code>GetLayerExists</code></td>
+</tr>
+<tr>
+<td>Key</td>
+<td>3XE3C10E-82B7-3E7F-AC31-37175F32CDE4</td>
+</tr>
+</tbody>
+</table>
+<p>추가 되는 내용들</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th><code>facility_build</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Level</td>
+<td><code>15</code></td>
+</tr>
+<tr>
+<td>BBOX</td>
+<td><code>126.976987,37.570187,126.979433,37.574251</code></td>
+</tr>
+<tr>
+<td>CheckFlag</td>
+<td><code>True</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://xdworld.vworld.kr:8080/XDServer/3DData?Version=2.0.0.0&amp;Request=GetLayerExists&amp;Key=3XE3C10E-82B7-3E7F-AC31-37175F32CDE4&amp;Layer=facility_build&amp;Level=15&amp;BBOX=126.976987,37.570187,126.979433,37.574251&amp;CheckFlag=True">http://xdworld.vworld.kr:8080/XDServer/3DData?Version=2.0.0.0&amp;Request=GetLayerExists&amp;Key=3XE3C10E-82B7-3E7F-AC31-37175F32CDE4&amp;Layer=facility_build&amp;Level=15&amp;BBOX=126.976987,37.570187,126.979433,37.574251&amp;CheckFlag=True</a></p>
+</blockquote>
+<h3 id="요청-결과-2"><a class="markdownIt-Anchor" href="#요청-결과-2"></a> 요청 결과</h3>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">SearchResult</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Version</span>&gt;</span>2.0.0.0<span class="tag">&lt;/<span class="name">Version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Layer</span> <span class="attr">Name</span>=<span class="string">&quot;facility_build&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Nodes</span> <span class="attr">Level</span>=<span class="string">&quot;15&quot;</span> <span class="attr">NodeCount</span>=<span class="string">&quot;18&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Node</span> <span class="attr">IDX</span>=<span class="string">&quot;279417&quot;</span> <span class="attr">IDY</span>=<span class="string">&quot;116117&quot;</span> <span class="attr">Flag</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Node</span> <span class="attr">IDX</span>=<span class="string">&quot;279418&quot;</span> <span class="attr">IDY</span>=<span class="string">&quot;116117&quot;</span> <span class="attr">Flag</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Node</span> <span class="attr">IDX</span>=<span class="string">&quot;279419&quot;</span> <span class="attr">IDY</span>=<span class="string">&quot;116117&quot;</span> <span class="attr">Flag</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Node</span> <span class="attr">IDX</span>=<span class="string">&quot;279420&quot;</span> <span class="attr">IDY</span>=<span class="string">&quot;116117&quot;</span> <span class="attr">Flag</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Node</span> <span class="attr">IDX</span>=<span class="string">&quot;279417&quot;</span> <span class="attr">IDY</span>=<span class="string">&quot;116118&quot;</span> <span class="attr">Flag</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Node</span> <span class="attr">IDX</span>=<span class="string">&quot;279418&quot;</span> <span class="attr">IDY</span>=<span class="string">&quot;116118&quot;</span> <span class="attr">Flag</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Node</span> <span class="attr">IDX</span>=<span class="string">&quot;279419&quot;</span> <span class="attr">IDY</span>=<span class="string">&quot;116118&quot;</span> <span class="attr">Flag</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Node</span> <span class="attr">IDX</span>=<span class="string">&quot;279420&quot;</span> <span class="attr">IDY</span>=<span class="string">&quot;116118&quot;</span> <span class="attr">Flag</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Node</span> <span class="attr">IDX</span>=<span class="string">&quot;279417&quot;</span> <span class="attr">IDY</span>=<span class="string">&quot;116119&quot;</span> <span class="attr">Flag</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Node</span> <span class="attr">IDX</span>=<span class="string">&quot;279418&quot;</span> <span class="attr">IDY</span>=<span class="string">&quot;116119&quot;</span> <span class="attr">Flag</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Node</span> <span class="attr">IDX</span>=<span class="string">&quot;279419&quot;</span> <span class="attr">IDY</span>=<span class="string">&quot;116119&quot;</span> <span class="attr">Flag</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Node</span> <span class="attr">IDX</span>=<span class="string">&quot;279420&quot;</span> <span class="attr">IDY</span>=<span class="string">&quot;116119&quot;</span> <span class="attr">Flag</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Node</span> <span class="attr">IDX</span>=<span class="string">&quot;279417&quot;</span> <span class="attr">IDY</span>=<span class="string">&quot;116120&quot;</span> <span class="attr">Flag</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Node</span> <span class="attr">IDX</span>=<span class="string">&quot;279418&quot;</span> <span class="attr">IDY</span>=<span class="string">&quot;116120&quot;</span> <span class="attr">Flag</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Node</span> <span class="attr">IDX</span>=<span class="string">&quot;279419&quot;</span> <span class="attr">IDY</span>=<span class="string">&quot;116120&quot;</span> <span class="attr">Flag</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Node</span> <span class="attr">IDX</span>=<span class="string">&quot;279420&quot;</span> <span class="attr">IDY</span>=<span class="string">&quot;116120&quot;</span> <span class="attr">Flag</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Node</span> <span class="attr">IDX</span>=<span class="string">&quot;279417&quot;</span> <span class="attr">IDY</span>=<span class="string">&quot;116121&quot;</span> <span class="attr">Flag</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Node</span> <span class="attr">IDX</span>=<span class="string">&quot;279418&quot;</span> <span class="attr">IDY</span>=<span class="string">&quot;116121&quot;</span> <span class="attr">Flag</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Node</span> <span class="attr">IDX</span>=<span class="string">&quot;279419&quot;</span> <span class="attr">IDY</span>=<span class="string">&quot;116121&quot;</span> <span class="attr">Flag</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Node</span> <span class="attr">IDX</span>=<span class="string">&quot;279420&quot;</span> <span class="attr">IDY</span>=<span class="string">&quot;116121&quot;</span> <span class="attr">Flag</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Nodes</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Layer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">SearchResult</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>이 중에서 가장 마지막에 있는 것을 이용해보도록 하겠습니다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Node</span> <span class="attr">IDX</span>=<span class="string">&quot;279420&quot;</span> <span class="attr">IDY</span>=<span class="string">&quot;116121&quot;</span> <span class="attr">Flag</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="레이어-노드-및-객체-요청-apigetlayer"><a class="markdownIt-Anchor" href="#레이어-노드-및-객체-요청-apigetlayer"></a> <a target="_blank" rel="noopener" href="http://dev.vworld.kr/dev/v4dv_3ddataguide_s002.do">레이어 노드 및 객체 요청 API(GetLayer)</a></h2>
+<h3 id="요청-url"><a class="markdownIt-Anchor" href="#요청-url"></a> 요청 URL</h3>
+<p><img src="https://lh3.googleusercontent.com/-ckP_PsyMmas/W7GIhETirxI/AAAAAAAAG7E/fsiFpDNgBhEF81UidsCQuSnHLURAl4yigCHMYCw/s0/StrokesPlus_2018-10-01_60.png" alt="" /></p>
+<h3 id="요청-변수-2"><a class="markdownIt-Anchor" href="#요청-변수-2"></a> 요청 변수</h3>
+<p><img src="https://lh3.googleusercontent.com/-BqddgDvn7VE/W7GI4lqk4UI/AAAAAAAAG7M/jjJKBh2LBFUh3kjwZesC0R8GNDdeHmX2QCHMYCw/s0/StrokesPlus_2018-10-01_61.png" alt="" /></p>
+<h3 id="데이터-요청-3"><a class="markdownIt-Anchor" href="#데이터-요청-3"></a> 데이터 요청</h3>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th><a target="_blank" rel="noopener" href="http://xdworld.vworld.kr:8080/XDServer/3DData">http://xdworld.vworld.kr:8080/XDServer/3DData</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Version</td>
+<td>2.0.0.0</td>
+</tr>
+<tr>
+<td>Request</td>
+<td><code>GetLayer</code></td>
+</tr>
+<tr>
+<td>Key</td>
+<td>3XE3C10E-82B7-3E7F-AC31-37175F32CDE4</td>
+</tr>
+</tbody>
+</table>
+<p>추가 되는 내용들</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th><code>facility_build</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Level</td>
+<td>15</td>
+</tr>
+<tr>
+<td>IDX</td>
+<td><code>279420</code></td>
+</tr>
+<tr>
+<td>IDY</td>
+<td><code>116121</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://xdworld.vworld.kr:8080/XDServer/3DData?Version=2.0.0.0&amp;Request=GetLayer&amp;Key=3XE3C10E-82B7-3E7F-AC31-37175F32CDE4&amp;Layer=facility_build&amp;Level=15&amp;IDX=279420&amp;IDY=116121">http://xdworld.vworld.kr:8080/XDServer/3DData?Version=2.0.0.0&amp;Request=GetLayer&amp;Key=3XE3C10E-82B7-3E7F-AC31-37175F32CDE4&amp;Layer=facility_build&amp;Level=15&amp;IDX=279420&amp;IDY=116121</a></p>
+</blockquote>
+<p>위의 요청을 보내면 <a target="_blank" rel="noopener" href="https://drive.google.com/a/knou.ac.kr/file/d/1HA8XiPB_Gtli7u_PV30zN4JOfFMGhdcS/view?usp=drivesdk">3DData</a> 바이너리 파일이 리턴됩니다.</p>
+<h3 id="요청-결과-3"><a class="markdownIt-Anchor" href="#요청-결과-3"></a> 요청 결과</h3>
+<p><a target="_blank" rel="noopener" href="http://www.vworld.kr/notice/VWorld_Data_Format_D.pdf">VWorld 3D Map Binary Data File Format</a>을 확인하여 리턴된 바이너리 파일을 분석합니다.</p>
+<p><img src="https://lh3.googleusercontent.com/-4HYABenr8jw/W7GgCOmEThI/AAAAAAAAG7c/Trq0Tbv6NZo_wd0j0DxVWxhFC4LUnfPdACHMYCw/s0/2018-10-01_62.png" alt="" /></p>
+<h4 id="header-정보"><a class="markdownIt-Anchor" href="#header-정보"></a> Header 정보</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Size(byte)</th>
+<th>Type</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Level</td>
+<td>4</td>
+<td>u32</td>
+<td>레벨 (0 베이스)</td>
+</tr>
+<tr>
+<td>IDX</td>
+<td>4</td>
+<td>u32</td>
+<td>경도 ID</td>
+</tr>
+<tr>
+<td>IDY</td>
+<td>4</td>
+<td>u32</td>
+<td>위도 ID</td>
+</tr>
+<tr>
+<td>Object Count</td>
+<td>4</td>
+<td>u32</td>
+<td>객체의 총수</td>
+</tr>
+</tbody>
+</table>
+<h4 id="model-object-정보"><a class="markdownIt-Anchor" href="#model-object-정보"></a> Model Object 정보</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Size(byte)</th>
+<th>Type</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Version</td>
+<td>4</td>
+<td>u32</td>
+<td>객체의 등록 버전 (XDO 파일의 버전정보)</td>
+</tr>
+<tr>
+<td>Type</td>
+<td>1</td>
+<td>u8</td>
+<td>객체의 타입 (객체의 타입정보 - 8로 고정: 예약됨)</td>
+</tr>
+<tr>
+<td>KeyLen</td>
+<td>1</td>
+<td>u8</td>
+<td>객체의 키값 크기</td>
+</tr>
+<tr>
+<td>Key</td>
+<td>KeyLen</td>
+<td>char*</td>
+<td>객체의 키값 (객체의 고유 ID 값)</td>
+</tr>
+<tr>
+<td>CenterPos</td>
+<td>16</td>
+<td>vector2dd</td>
+<td>객체의 중심좌표 (경위도 radian) (Model이 위치 할 공간좌표 경위도값)</td>
+</tr>
+<tr>
+<td>altitude</td>
+<td>4</td>
+<td>f32</td>
+<td>객체의 고도값 (Model이 위치 할 공간의 해발고도 높이)</td>
+</tr>
+<tr>
+<td>box</td>
+<td>48</td>
+<td>aabbox3dd</td>
+<td>객체의 바운더리 (구면 Vector) (Model 의 3차원 최대, 최소 공간 영역 좌표 정보)</td>
+</tr>
+<tr>
+<td>ImgLevel</td>
+<td>1</td>
+<td>u8</td>
+<td>이미지 레벨 (사용되는 LOD 레벨의 수)</td>
+</tr>
+<tr>
+<td>dataFileLen</td>
+<td>1</td>
+<td>u8</td>
+<td>객체의 파일이름 길이</td>
+</tr>
+<tr>
+<td>dataFile</td>
+<td>dataFileLen</td>
+<td>char*</td>
+<td>객체의 파일이름 (확장자 포함) (Tile 내에 실제 Model의 XDO 파일명)</td>
+</tr>
+<tr>
+<td>imgFileNameLen</td>
+<td>1</td>
+<td>u8</td>
+<td>이미지 파일이름 길이</td>
+</tr>
+<tr>
+<td>imgFileName</td>
+<td>imgFileNameLen</td>
+<td>char*</td>
+<td>이미지 파일이름 (XDO 파일이 사용하는 Texture 이미지 명)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="parsing"><a class="markdownIt-Anchor" href="#parsing"></a> Parsing</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> idx = <span class="number">279420</span></span><br><span class="line"><span class="keyword">var</span> idy = <span class="number">116121</span></span><br><span class="line"><span class="keyword">var</span> layerUrl = <span class="string">`http://xdworld.vworld.kr:8080/XDServer/3DData?Version=2.0.0.0&amp;Request=GetLayer&amp;Key=3XE3C10E-82B7-3E7F-AC31-37175F32CDE4&amp;Layer=facility_build&amp;Level=15&amp;IDX=<span class="subst">$&#123;idx&#125;</span>&amp;IDY=<span class="subst">$&#123;idy&#125;</span>`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> promise = $.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">    <span class="attr">url</span>: layerUrl,</span><br><span class="line">    <span class="attr">dataType</span>: <span class="string">&quot;binary&quot;</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">promise.<span class="title function_">done</span>(<span class="keyword">function</span> (<span class="params">data</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> p = <span class="keyword">new</span> <span class="title class_">Parser</span>(data);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// header</span></span><br><span class="line">    _data.<span class="property">level</span> = p.<span class="title function_">getUint4</span>();</span><br><span class="line">    _data.<span class="property">idx</span> = p.<span class="title function_">getUint4</span>();</span><br><span class="line">    _data.<span class="property">idy</span> = p.<span class="title function_">getUint4</span>();</span><br><span class="line">    _data.<span class="property">objectCount</span> = p.<span class="title function_">getUint4</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// model object</span></span><br><span class="line">    _data.<span class="property">version</span> = p.<span class="title function_">getVersion</span>();</span><br><span class="line">    _data.<span class="property">type</span> = p.<span class="title function_">getUint1</span>();</span><br><span class="line">    <span class="keyword">var</span> lenStr = p.<span class="title function_">getLenStr</span>();</span><br><span class="line">    _data.<span class="property">keyLen</span> = lenStr.<span class="property">len</span>;</span><br><span class="line">    _data.<span class="property">key</span> = lenStr.<span class="property">str</span>;</span><br><span class="line"></span><br><span class="line">    _data.<span class="property">centerPosX</span> = p.<span class="title function_">getFloat8</span>();</span><br><span class="line">    _data.<span class="property">centerPosY</span> = p.<span class="title function_">getFloat8</span>();</span><br><span class="line">    _data.<span class="property">altitude</span> = p.<span class="title function_">getFloat4</span>();</span><br><span class="line">    _data.<span class="property">box</span> = p.<span class="title function_">getBox3dd</span>();</span><br><span class="line"></span><br><span class="line">    _data.<span class="property">imgLevel</span> = p.<span class="title function_">getUint1</span>();</span><br><span class="line">    <span class="keyword">var</span> lenStr = p.<span class="title function_">getLenStr</span>();</span><br><span class="line">    _data.<span class="property">dataFileLen</span> = lenStr.<span class="property">len</span>;</span><br><span class="line">    _data.<span class="property">dataFileName</span> = lenStr.<span class="property">str</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> lenStr = p.<span class="title function_">getLenStr</span>();</span><br><span class="line">    _data.<span class="property">imgFileLen</span> = lenStr.<span class="property">len</span>;</span><br><span class="line">    _data.<span class="property">imgFileName</span> = lenStr.<span class="property">str</span>;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">resolve</span>();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>이렇게 하면 아래와 같은 정보를 얻을 수 있습니다.</p>
+<p><img src="https://lh3.googleusercontent.com/-z5g_pDXKnVc/W7GoTCCCBBI/AAAAAAAAG7o/evljzZGpHWsfGntyNi8kBq9nHJpvK-LowCHMYCw/s0/StrokesPlus_2018-10-01_63.png" alt="크롬 개발자 도구 캡쳐 화면" /></p>
+<p>여기서 얻은 파일명을 사용하여 3D data 를 조회합니다.</p>
+<ul>
+<li>dataFileName : <code>a13_52.xdo</code></li>
+<li>imgFileName: <code>a13_52.jpg</code></li>
+</ul>
+<h3 id="parser-class"><a class="markdownIt-Anchor" href="#parser-class"></a> Parser Class</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="variable language_">document</span>).<span class="title function_">ready</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    $.<span class="title function_">ajaxSetup</span>(&#123;</span><br><span class="line">        <span class="attr">beforeSend</span>: <span class="keyword">function</span> (<span class="params">jqXHR, settings</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (settings.<span class="property">dataType</span> === <span class="string">&#x27;binary&#x27;</span>) &#123;</span><br><span class="line">                settings.<span class="title function_">xhr</span>().<span class="property">responseType</span> = <span class="string">&#x27;blob&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    $.<span class="title function_">ajaxTransport</span>(<span class="string">&quot;+binary&quot;</span>, <span class="keyword">function</span> (<span class="params">options, originalOptions, jqXHR</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">FormData</span> &amp;&amp; ((options.<span class="property">dataType</span> &amp;&amp; (options.<span class="property">dataType</span> == <span class="string">&#x27;binary&#x27;</span>))</span><br><span class="line">                || (options.<span class="property">data</span> &amp;&amp; ((<span class="variable language_">window</span>.<span class="property">ArrayBuffer</span> &amp;&amp; options.<span class="property">data</span> <span class="keyword">instanceof</span> <span class="title class_">ArrayBuffer</span>)</span><br><span class="line">                    || (<span class="variable language_">window</span>.<span class="property">Blob</span> &amp;&amp; options.<span class="property">data</span> <span class="keyword">instanceof</span> <span class="title class_">Blob</span>))))) &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                <span class="attr">send</span>: <span class="keyword">function</span> (<span class="params">headers, callback</span>) &#123;</span><br><span class="line">                    <span class="keyword">var</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>(),</span><br><span class="line">                        url = options.<span class="property">url</span>,</span><br><span class="line">                        type = options.<span class="property">type</span>,</span><br><span class="line">                        <span class="keyword">async</span> = options.<span class="property">async</span> || <span class="literal">true</span>,                        </span><br><span class="line">                        dataType = options.<span class="property">responseType</span> || <span class="string">&quot;arraybuffer&quot;</span>,</span><br><span class="line">                        data = options.<span class="property">data</span> || <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">                    xhr.<span class="title function_">addEventListener</span>(<span class="string">&#x27;load&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">                        <span class="keyword">var</span> data = &#123;&#125;;</span><br><span class="line">                        data[options.<span class="property">dataType</span>] = xhr.<span class="property">response</span>;</span><br><span class="line">                        <span class="title function_">callback</span>(xhr.<span class="property">status</span>, xhr.<span class="property">statusText</span>, data, xhr.<span class="title function_">getAllResponseHeaders</span>());</span><br><span class="line">                    &#125;);</span><br><span class="line"></span><br><span class="line">                    xhr.<span class="title function_">open</span>(type, url, <span class="keyword">async</span>);</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> headers) &#123;</span><br><span class="line">                        xhr.<span class="title function_">setRequestHeader</span>(i, headers[i]);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    xhr.<span class="property">responseType</span> = dataType;</span><br><span class="line">                    xhr.<span class="title function_">send</span>(data);</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">abort</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Parser</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">data</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">dv</span> = <span class="keyword">new</span> <span class="title class_">DataView</span>(data);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">endian</span> = <span class="literal">true</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">offset</span> = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">getUint4</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> val = <span class="variable language_">this</span>.<span class="property">dv</span>.<span class="title function_">getUint32</span>(<span class="variable language_">this</span>.<span class="property">offset</span>, <span class="variable language_">this</span>.<span class="property">endian</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">offset</span> += <span class="number">4</span>;</span><br><span class="line">        <span class="keyword">return</span> val;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">getUint1</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> val = <span class="variable language_">this</span>.<span class="property">dv</span>.<span class="title function_">getUint8</span>(<span class="variable language_">this</span>.<span class="property">offset</span>, <span class="variable language_">this</span>.<span class="property">endian</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">offset</span> += <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> val;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">getUint2</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> val = <span class="variable language_">this</span>.<span class="property">dv</span>.<span class="title function_">getUint16</span>(<span class="variable language_">this</span>.<span class="property">offset</span>, <span class="variable language_">this</span>.<span class="property">endian</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">offset</span> += <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">return</span> val;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">getLenStr</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> len = <span class="variable language_">this</span>.<span class="title function_">getUint1</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> str = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">var</span> val = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">            val = <span class="variable language_">this</span>.<span class="title function_">getUint1</span>();</span><br><span class="line">            str += <span class="title class_">String</span>.<span class="title function_">fromCharCode</span>(val);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">len</span>: len,</span><br><span class="line">            <span class="attr">str</span>: str,</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">getFloat8</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> val = <span class="variable language_">this</span>.<span class="property">dv</span>.<span class="title function_">getFloat64</span>(<span class="variable language_">this</span>.<span class="property">offset</span>, <span class="variable language_">this</span>.<span class="property">endian</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">offset</span> += <span class="number">8</span>;</span><br><span class="line">        <span class="keyword">return</span> val;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">getFloat4</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> val = <span class="variable language_">this</span>.<span class="property">dv</span>.<span class="title function_">getFloat32</span>(<span class="variable language_">this</span>.<span class="property">offset</span>, <span class="variable language_">this</span>.<span class="property">endian</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">offset</span> += <span class="number">4</span>;</span><br><span class="line">        <span class="keyword">return</span> val;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">getVersion</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> val = <span class="string">`<span class="subst">$&#123;<span class="variable language_">this</span>.getUint1()&#125;</span>.<span class="subst">$&#123;<span class="variable language_">this</span>.getUint1()&#125;</span>.<span class="subst">$&#123;<span class="variable language_">this</span>.getUint1()&#125;</span>.<span class="subst">$&#123;<span class="variable language_">this</span>.getUint1()&#125;</span>`</span>;</span><br><span class="line">        <span class="keyword">return</span> val;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">getBox</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> minX = <span class="variable language_">this</span>.<span class="title function_">getFloat8</span>();</span><br><span class="line">        <span class="keyword">var</span> maxX = <span class="variable language_">this</span>.<span class="title function_">getFloat8</span>();</span><br><span class="line">        <span class="keyword">var</span> minY = <span class="variable language_">this</span>.<span class="title function_">getFloat8</span>();</span><br><span class="line">        <span class="keyword">var</span> maxY = <span class="variable language_">this</span>.<span class="title function_">getFloat8</span>();</span><br><span class="line">        <span class="keyword">var</span> minZ = <span class="variable language_">this</span>.<span class="title function_">getFloat8</span>();</span><br><span class="line">        <span class="keyword">var</span> maxZ = <span class="variable language_">this</span>.<span class="title function_">getFloat8</span>();</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">minX</span>: minX,</span><br><span class="line">            <span class="attr">maxX</span>: maxX,</span><br><span class="line">            <span class="attr">minY</span>: minY,</span><br><span class="line">            <span class="attr">maxY</span>: maxY,</span><br><span class="line">            <span class="attr">minZ</span>: minZ,</span><br><span class="line">            <span class="attr">maxZ</span>: maxZ</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">getVector2df</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> x = <span class="variable language_">this</span>.<span class="title function_">getFloat4</span>();</span><br><span class="line">        <span class="keyword">var</span> y = <span class="variable language_">this</span>.<span class="title function_">getFloat4</span>();</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">x</span>: x,</span><br><span class="line">            <span class="attr">y</span>: y</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">getVector3df</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> x = <span class="variable language_">this</span>.<span class="title function_">getFloat4</span>();</span><br><span class="line">        <span class="keyword">var</span> y = <span class="variable language_">this</span>.<span class="title function_">getFloat4</span>();</span><br><span class="line">        <span class="keyword">var</span> z = <span class="variable language_">this</span>.<span class="title function_">getFloat4</span>();</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">x</span>: x,</span><br><span class="line">            <span class="attr">y</span>: y,</span><br><span class="line">            <span class="attr">z</span>: z</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">getVector3dd</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> x = <span class="variable language_">this</span>.<span class="title function_">getFloat8</span>();</span><br><span class="line">        <span class="keyword">var</span> y = <span class="variable language_">this</span>.<span class="title function_">getFloat8</span>();</span><br><span class="line">        <span class="keyword">var</span> z = <span class="variable language_">this</span>.<span class="title function_">getFloat8</span>();</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">x</span>: x,</span><br><span class="line">            <span class="attr">y</span>: y,</span><br><span class="line">            <span class="attr">z</span>: z</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//http://irrlicht.sourceforge.net/docu/structirr_1_1video_1_1_s3_d_vertex.html</span></span><br><span class="line">    <span class="title function_">getCountVert</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> count = <span class="variable language_">this</span>.<span class="title function_">getUint4</span>();</span><br><span class="line">        <span class="keyword">var</span> vert = [];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">            <span class="keyword">const</span> pos = <span class="variable language_">this</span>.<span class="title function_">getVector3df</span>();</span><br><span class="line">            <span class="keyword">const</span> normal = <span class="variable language_">this</span>.<span class="title function_">getVector3df</span>();</span><br><span class="line">            <span class="keyword">const</span> uv = <span class="variable language_">this</span>.<span class="title function_">getVector2df</span>();</span><br><span class="line"></span><br><span class="line">            vert.<span class="title function_">push</span>(&#123;</span><br><span class="line">                <span class="attr">pos</span>: pos,</span><br><span class="line">                <span class="attr">normal</span>: normal,</span><br><span class="line">                <span class="attr">uv</span>: uv</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">count</span>: count,</span><br><span class="line">            <span class="attr">vert</span>: vert</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">getCountIndex</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> count = <span class="variable language_">this</span>.<span class="title function_">getUint4</span>();</span><br><span class="line">        <span class="keyword">var</span> index = [];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">            <span class="keyword">const</span> val = <span class="variable language_">this</span>.<span class="title function_">getUint2</span>();</span><br><span class="line">            index.<span class="title function_">push</span>(val)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">count</span>: count,</span><br><span class="line">            <span class="attr">index</span>: index</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="title function_">getBox3dd</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> min = <span class="variable language_">this</span>.<span class="title function_">getVector3dd</span>();</span><br><span class="line">        <span class="keyword">const</span> max = <span class="variable language_">this</span>.<span class="title function_">getVector3dd</span>();</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">min</span>: min,</span><br><span class="line">            <span class="attr">max</span>: max</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="데이터-파일-조회"><a class="markdownIt-Anchor" href="#데이터-파일-조회"></a> 데이터 파일 조회</h3>
+<p>위에서 얻은 데이터 파일명을 사용하여 조회합니다.</p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th><a target="_blank" rel="noopener" href="http://xdworld.vworld.kr:8080/XDServer/3DData">http://xdworld.vworld.kr:8080/XDServer/3DData</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Version</td>
+<td>2.0.0.0</td>
+</tr>
+<tr>
+<td>Request</td>
+<td>GetLayer</td>
+</tr>
+<tr>
+<td>Key</td>
+<td>3XE3C10E-82B7-3E7F-AC31-37175F32CDE4</td>
+</tr>
+<tr>
+<td>Layer</td>
+<td>facility_build</td>
+</tr>
+<tr>
+<td>Level</td>
+<td>15</td>
+</tr>
+<tr>
+<td>IDX</td>
+<td>279420</td>
+</tr>
+<tr>
+<td>IDY</td>
+<td>116121</td>
+</tr>
+<tr>
+<td>DataFile</td>
+<td>a13_52.xdo</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>요청 URL</p>
+<p><a target="_blank" rel="noopener" href="http://xdworld.vworld.kr:8080/XDServer/3DData?Version=2.0.0.0&amp;Request=GetLayer&amp;Key=3XE3C10E-82B7-3E7F-AC31-37175F32CDE4&amp;Layer=facility_build&amp;Level=15&amp;IDX=279420&amp;IDY=116121&amp;DataFile=a13_112.xdo">http://xdworld.vworld.kr:8080/XDServer/3DData?Version=2.0.0.0&amp;Request=GetLayer&amp;Key=3XE3C10E-82B7-3E7F-AC31-37175F32CDE4&amp;Layer=facility_build&amp;Level=15&amp;IDX=279420&amp;IDY=116121&amp;DataFile=a13_112.xdo</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.vworld.kr/notice/VWorld_Data_Format_D.pdf">VWorld 3D Map Binary Data File Format</a>을 확인하여 리턴된 바이너리 파일을 분석합니다.</p>
+<p><strong>Real3D Model Data</strong> <strong>(*.xdo)</strong> <strong>Format 구성</strong></p>
+<p><img src="https://lh3.googleusercontent.com/-29DO330ZM0k/W7GsGucWJ6I/AAAAAAAAG70/apI8NfA5RB0OC3LZmIne07IB4gstz1mMgCHMYCw/s0/2018-10-01_64.png" alt="" /></p>
+<h4 id="object-attribute"><a class="markdownIt-Anchor" href="#object-attribute"></a> Object Attribute</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Size(byte)</th>
+<th>Type</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type</td>
+<td>1</td>
+<td>u8</td>
+<td>객체의 타입 (객체의 형식 Real3D Model 은 8 고정으로 사용)</td>
+</tr>
+<tr>
+<td>Object ID</td>
+<td>4</td>
+<td>u32</td>
+<td>객체의 고유번호 (객체의 고유 ID 식별번호, 레이어 기준으로 객체 등록 번호)</td>
+</tr>
+<tr>
+<td>KeyLen</td>
+<td>1</td>
+<td>u8</td>
+<td>객체의 키값 길이</td>
+</tr>
+<tr>
+<td>Key</td>
+<td>KeyLen</td>
+<td>char*</td>
+<td>객체의 키값 (객체의 고유 식별 문자열)</td>
+</tr>
+<tr>
+<td>Object Box</td>
+<td>48</td>
+<td>aabbox3dd</td>
+<td>객체의 범위 (구면 Vector) (객체의 최대 최소 영역 범위, World Wind 구면 Vector 좌표계)</td>
+</tr>
+<tr>
+<td>Altitude</td>
+<td>4</td>
+<td>f32</td>
+<td>객체의 높이 (객체의 바닥면 기준 해발고도 높이)</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://lh3.googleusercontent.com/-tEvzVfDH_LM/W7GtMh5QgPI/AAAAAAAAG78/eHF255-ttJg7T1K1v9n_hSSIEH5AYpLmACHMYCw/s0/StrokesPlus_2018-10-01_65.png" alt="" /></p>
+<h4 id="3d-mesh-data"><a class="markdownIt-Anchor" href="#3d-mesh-data"></a> 3D Mesh Data</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Size (byte)</th>
+<th>Type</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vertex Count</td>
+<td>4</td>
+<td>u32</td>
+<td>버텍스 총수</td>
+</tr>
+<tr>
+<td>Vertex</td>
+<td>Vertex Count</td>
+<td>S3DVertex*</td>
+<td>버텍스 값 (형상을 구성하는 정규화된 공간 좌표점)</td>
+</tr>
+<tr>
+<td>Indexed Count</td>
+<td>4</td>
+<td>u32</td>
+<td>인덱스 총수</td>
+</tr>
+<tr>
+<td>Indexed</td>
+<td>Indexed Count</td>
+<td>u16*</td>
+<td>인덱스 값 (Vertex 정점을 삼각형 그릴 시에 그리는 순서 리스트)</td>
+</tr>
+<tr>
+<td>Color</td>
+<td>4</td>
+<td>u32</td>
+<td>객체색상 (Mesh의 재질의 색상(A8R8G8B8))</td>
+</tr>
+<tr>
+<td>ImageLevel</td>
+<td>1</td>
+<td>byte</td>
+<td>이미지 LOD 총 레벨 (LOD 텍스처의 레벨 단계)</td>
+</tr>
+<tr>
+<td>ImageNameLen</td>
+<td>1</td>
+<td>byte</td>
+<td>텍스쳐 이미지명 길이</td>
+</tr>
+<tr>
+<td>imageName</td>
+<td>ImageNameLen</td>
+<td>char*</td>
+<td>텍스처 이미지명(확장자 제외, jpg) (LOD 텍스처 파일명)</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://lh3.googleusercontent.com/-iVzjXGFo8F0/W7GuHNcKf7I/AAAAAAAAG8I/3lnHauHvuRYkZoCd-g4oKUXqnsDO0H1ZwCHMYCw/s0/StrokesPlus_2018-10-01_67.png" alt="" /></p>
+<p>index를 확인합니다.</p>
+<p><img src="https://lh3.googleusercontent.com/-Ke4ikMlsRCc/W7GuRCxMYLI/AAAAAAAAG8Q/OoYKsesnvJUwS-TFBj52GE7hJ9xmz0LWQCHMYCw/s0/StrokesPlus_2018-10-01_68.png" alt="" /></p>
+<p>vertex 를 확인합니다.</p>
+<p><img src="https://lh3.googleusercontent.com/--2mb0fayDvY/W7GudoSoh0I/AAAAAAAAG8Y/bHAE1Ztq-p4a48JbzuSV_tIHcuPK7Bh9gCHMYCw/s0/StrokesPlus_2018-10-01_70.png" alt="" /></p>
+<h3 id="v-world-2013-data-format-schema"><a class="markdownIt-Anchor" href="#v-world-2013-data-format-schema"></a> <a target="_blank" rel="noopener" href="http://www.vworld.kr/notice/VWorld_Data_Format.pdf">V-World 2013 Data Format Schema</a></h3>
+<p><strong>S3DVertex</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Size(byte)</th>
+<th>Type</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pos</td>
+<td>12</td>
+<td>vector3df</td>
+<td>버텍스 좌표</td>
+</tr>
+<tr>
+<td>Normal</td>
+<td>12</td>
+<td>vector3df</td>
+<td>버텍스 노말</td>
+</tr>
+<tr>
+<td>UV</td>
+<td>8</td>
+<td>vector2df</td>
+<td>텍스처 UV</td>
+</tr>
+</tbody>
+</table>
+<p><strong>aabbox3d</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Size(byte)</th>
+<th>Type</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Min</td>
+<td>24</td>
+<td>vector3dd</td>
+<td>최소 좌표점</td>
+</tr>
+<tr>
+<td>Max</td>
+<td>24</td>
+<td>vector3dd</td>
+<td>최대 좌표점</td>
+</tr>
+</tbody>
+</table>
+<p><strong>vector2df</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Size(byte)</th>
+<th>Type</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>4</td>
+<td>float</td>
+<td>x축 값</td>
+</tr>
+<tr>
+<td>y</td>
+<td>4</td>
+<td>float</td>
+<td>y축 값</td>
+</tr>
+</tbody>
+</table>
+<p><strong>vector2dd</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Size(byte)</th>
+<th>Type</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>8</td>
+<td>double</td>
+<td>x축 값</td>
+</tr>
+<tr>
+<td>y</td>
+<td>8</td>
+<td>double</td>
+<td>y축 값</td>
+</tr>
+</tbody>
+</table>
+<p><strong>vector3df</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Size(byte)</th>
+<th>Type</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>4</td>
+<td>float</td>
+<td>x축 값</td>
+</tr>
+<tr>
+<td>y</td>
+<td>4</td>
+<td>float</td>
+<td>y축 값</td>
+</tr>
+<tr>
+<td>z</td>
+<td>4</td>
+<td>float</td>
+<td>z축 값</td>
+</tr>
+</tbody>
+</table>
+<p><strong>vector3dd</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Size(byte)</th>
+<th>Type</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>8</td>
+<td>double</td>
+<td>x축 값</td>
+</tr>
+<tr>
+<td>y</td>
+<td>8</td>
+<td>double</td>
+<td>y축 값</td>
+</tr>
+<tr>
+<td>z</td>
+<td>8</td>
+<td>double</td>
+<td>z축 값</td>
+</tr>
+</tbody>
+</table>
+<h3 id="이미지-파일-조회"><a class="markdownIt-Anchor" href="#이미지-파일-조회"></a> 이미지 파일 조회</h3>
+<p>위에서 얻은 이미지 파일명을 사용하여 조회합니다.</p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th><a target="_blank" rel="noopener" href="http://xdworld.vworld.kr:8080/XDServer/3DData">http://xdworld.vworld.kr:8080/XDServer/3DData</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Version</td>
+<td>2.0.0.0</td>
+</tr>
+<tr>
+<td>Request</td>
+<td>GetLayer</td>
+</tr>
+<tr>
+<td>Key</td>
+<td>3XE3C10E-82B7-3E7F-AC31-37175F32CDE4</td>
+</tr>
+<tr>
+<td>Layer</td>
+<td>facility_build</td>
+</tr>
+<tr>
+<td>Level</td>
+<td>15</td>
+</tr>
+<tr>
+<td>IDX</td>
+<td>279420</td>
+</tr>
+<tr>
+<td>IDY</td>
+<td>116121</td>
+</tr>
+<tr>
+<td>DataFile</td>
+<td><code>a13\_52.jpg</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://xdworld.vworld.kr:8080/XDServer/3DData?Version=2.0.0.0&amp;Request=GetLayer&amp;Key=3XE3C10E-82B7-3E7F-AC31-37175F32CDE4&amp;Layer=facility_build&amp;Level=15&amp;IDX=279420&amp;IDY=116121&amp;DataFile=a13_52.jpg">http://xdworld.vworld.kr:8080/XDServer/3DData?Version=2.0.0.0&amp;Request=GetLayer&amp;Key=3XE3C10E-82B7-3E7F-AC31-37175F32CDE4&amp;Layer=facility_build&amp;Level=15&amp;IDX=279420&amp;IDY=116121&amp;DataFile=a13_52.jpg</a></p>
+</blockquote>
+<p>다운로드 받은 파일의 확장자를 <code>jpg</code>로 변경하여 이미지를 확인할 수 있습니다.</p>
+<p><img src="https://lh3.googleusercontent.com/-0cecQkRHoG8/W7Gv2tv0vHI/AAAAAAAAG8o/OTySg4q9OHo4pVrbcPNTU6A79yaA3sBVgCHMYCw/s0/3DData%2B%25283%2529.jpg" alt="" /></p>
+<p>여기까지 해서 오브젝트 생성을 위한 데이터를 모두 얻었습니다.</p>
+<h2 id="오브젝트-생성-threejs-사용"><a class="markdownIt-Anchor" href="#오브젝트-생성-threejs-사용"></a> 오브젝트 생성 (Three.js 사용)</h2>
+<p>기본 구조는 이렇습니다.</p>
+<ol>
+<li>Geometry  생성</li>
+<li>버텍스 추가</li>
+<li>버텍스 인덱스 추가</li>
+<li>UV 추가</li>
+<li>이미지 파일 추가</li>
+<li>메테리얼 생성</li>
+<li>메시 생성</li>
+</ol>
+<h3 id="샘플-코드"><a class="markdownIt-Anchor" href="#샘플-코드"></a> 샘플 코드</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vert = data.<span class="property">vert</span>;</span><br><span class="line"><span class="keyword">var</span> index = data.<span class="property">index</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. Geometry  생성</span></span><br><span class="line"><span class="keyword">var</span> geometry = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Geometry</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; vert.<span class="property">length</span>; i += <span class="number">3</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> v1 = vert[i];</span><br><span class="line">    <span class="keyword">var</span> v2 = vert[i + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">var</span> v3 = vert[i + <span class="number">2</span>];</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// 2. 버텍스 추가</span></span><br><span class="line">    geometry.<span class="property">vertices</span>.<span class="title function_">push</span>(<span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Vector3</span>(v1.<span class="property">pos</span>.<span class="property">x</span>, v1.<span class="property">pos</span>.<span class="property">y</span>, v1.<span class="property">pos</span>.<span class="property">z</span>));</span><br><span class="line">    geometry.<span class="property">vertices</span>.<span class="title function_">push</span>(<span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Vector3</span>(v2.<span class="property">pos</span>.<span class="property">x</span>, v2.<span class="property">pos</span>.<span class="property">y</span>, v2.<span class="property">pos</span>.<span class="property">z</span>));</span><br><span class="line">    geometry.<span class="property">vertices</span>.<span class="title function_">push</span>(<span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Vector3</span>(v3.<span class="property">pos</span>.<span class="property">x</span>, v3.<span class="property">pos</span>.<span class="property">y</span>, v3.<span class="property">pos</span>.<span class="property">z</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. 버텍스 인덱스 추가</span></span><br><span class="line">    geometry.<span class="property">faces</span>.<span class="title function_">push</span>(<span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Face3</span>(index[i], index[i + <span class="number">1</span>], index[i + <span class="number">2</span>]));</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// 4. UV 추가</span></span><br><span class="line">    geometry.<span class="property">faceVertexUvs</span>[<span class="number">0</span>].<span class="title function_">push</span>([</span><br><span class="line">        <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Vector2</span>(v1.<span class="property">uv</span>.<span class="property">x</span>, <span class="number">1</span> - v1.<span class="property">uv</span>.<span class="property">y</span>),</span><br><span class="line">        <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Vector2</span>(v3.<span class="property">uv</span>.<span class="property">x</span>, <span class="number">1</span> - v3.<span class="property">uv</span>.<span class="property">y</span>),</span><br><span class="line">        <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Vector2</span>(v2.<span class="property">uv</span>.<span class="property">x</span>, <span class="number">1</span> - v2.<span class="property">uv</span>.<span class="property">y</span>)</span><br><span class="line">    ]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">geometry.<span class="property">uvsNeedUpdate</span> = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 5. 이미지 파일 추가</span></span><br><span class="line"><span class="keyword">const</span> textureLoader = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">TextureLoader</span>();</span><br><span class="line">textureLoader.<span class="property">crossOrigin</span> = <span class="string">&quot;Anonymous&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> myTexture = textureLoader.<span class="title function_">load</span>(jpgUrl);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 6. 메테리얼 생성</span></span><br><span class="line"><span class="keyword">var</span> material = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">MeshBasicMaterial</span>(&#123;</span><br><span class="line">    <span class="attr">side</span>: <span class="variable constant_">THREE</span>.<span class="property">DoubleSide</span>,</span><br><span class="line">    <span class="attr">map</span>: myTexture</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 7. 메시 생성</span></span><br><span class="line"><span class="keyword">var</span> build = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Mesh</span>(geometry, material);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>코드상에 잘못된 부분이 있으면 말씀해 주세요.</p>
+</blockquote>
+<p>여기까지가 메시를 생성하는 부분이고, 이후에는 <code>Three.js Scene</code>에 추가합니다.</p>
+<ol>
+<li>Scene 생성</li>
+<li>카메라 생성</li>
+<li>렌더러 생성</li>
+<li>컨테이너에 추가</li>
+<li>메쉬 추가</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;ThreeContainer&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">function</span> <span class="title function_">initThree</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> fov = <span class="number">45</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> width = <span class="variable language_">window</span>.<span class="property">innerWidth</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> height = <span class="variable language_">window</span>.<span class="property">innerHeight</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> aspect = width / height;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> near = <span class="number">1</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> far = <span class="number">10</span> * <span class="number">1000</span> * <span class="number">1000</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 1. Scene 생성</span></span></span><br><span class="line"><span class="language-javascript">        _three.<span class="property">scene</span> = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Scene</span>();</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 2. 카메라 생성</span></span></span><br><span class="line"><span class="language-javascript">        _three.<span class="property">camera</span> = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">PerspectiveCamera</span>(fov, aspect, near, far);</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 3. 렌더러 생성</span></span></span><br><span class="line"><span class="language-javascript">        _three.<span class="property">renderer</span> = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">WebGLRenderer</span>(&#123;<span class="attr">alpha</span>: <span class="literal">true</span>&#125;);</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 4. 컨테이너에 추가</span></span></span><br><span class="line"><span class="language-javascript">        _ThreeContainer.<span class="title function_">appendChild</span>(_three.<span class="property">renderer</span>.<span class="property">domElement</span>);</span></span><br><span class="line"><span class="language-javascript">      &#125;</span></span><br><span class="line"><span class="language-javascript">      </span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">function</span> <span class="title function_">init3DObject</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">          <span class="comment">// ... 위의 코드 ...  </span></span></span><br><span class="line"><span class="language-javascript">          </span></span><br><span class="line"><span class="language-javascript">          <span class="keyword">var</span> buildGroup = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Group</span>();</span></span><br><span class="line"><span class="language-javascript">          buildGroup.<span class="title function_">add</span>(build);</span></span><br><span class="line"><span class="language-javascript">          <span class="comment">// 5. 메쉬 추가</span></span></span><br><span class="line"><span class="language-javascript">          _three.<span class="property">scene</span>.<span class="title function_">add</span>(buildGroup); <span class="comment">// don’t forget to add it to the Three.js scene manually</span></span></span><br><span class="line"><span class="language-javascript">      &#125;</span></span><br><span class="line"><span class="language-javascript">      </span></span><br><span class="line"><span class="language-javascript">      <span class="title function_">initThree</span>(); <span class="comment">// Initialize Three.js renderer</span></span></span><br><span class="line"><span class="language-javascript">      <span class="title function_">init3DObject</span>(); <span class="comment">// Initialize Three.js object mesh with Cesium Cartesian coordinate system</span></span></span><br><span class="line"><span class="language-javascript">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>이렇게 하면 Vworld 로 부터 받은 3D data 를 Three.js 로 그릴 수 있습니다.</p>
+<p><img src="https://lh3.googleusercontent.com/-gHP0eQsRf3I/W7GzdYX4_PI/AAAAAAAAG80/hrM8sb9VcO8mgEzAww15Nuc-o2oG08tUwCHMYCw/s0/StrokesPlus_2018-10-01_71.png" alt="" /></p>
+            
+        </div>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-9184373525576918"
+     data-ad-slot="4673445327"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>  
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://jacegem.github.io/blog/2018/Vworld-3D-Data%EB%A5%BC-Three.js%EB%A1%9C-%EC%B6%9C%EB%A0%A5%ED%95%98%EA%B8%B0/" data-id="clo2u1qad00dlksos59qv175r" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>팔로우:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/blog/" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="/blog/" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google-plus" href="/blog/" target="_blank">
+                        <i class="icon fa fa-google-plus"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jacegem/" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="/blog/" target="_blank">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/blog/" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/blog/2019/%ED%85%90%ED%8A%B8%EC%99%80-%EB%82%98%EB%AC%B4/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">새로운</strong>
+        <p class="article-nav-title">
+        
+            텐트와 나무
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/blog/2018/Spring-PostgreSQL%EC%97%90-%ED%8C%8C%EC%9D%BC-%EC%A0%80%EC%9E%A5%ED%95%98%EA%B3%A0-%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">오래된</strong>
+        <p class="article-nav-title">[Spring] PostgreSQL에 파일 저장하고 불러오기</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">최근 글</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2023/flutter-work/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Flutter/">Flutter</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Flutter/Project/">Project</a></p>
+                            <p class="item-title"><a href="/blog/2023/flutter-work/" class="title">flutter 작업 내용을 기록하다</a></p>
+                            <p class="item-date"><time datetime="2023-10-22T15:00:00.000Z" itemprop="datePublished">2023-10-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2023/hexo-action-test/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Blog/">Blog</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Blog/Test/">Test</a></p>
+                            <p class="item-title"><a href="/blog/2023/hexo-action-test/" class="title">Hexo action test</a></p>
+                            <p class="item-date"><time datetime="2023-07-19T15:00:00.000Z" itemprop="datePublished">2023-07-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2019/%EC%84%B1%EA%B3%B5%ED%95%98%EB%8A%94-%EC%82%AC%EB%9E%8C%EB%93%A4%EC%9D%98-%EC%9E%90%EA%B8%B0-%EC%8B%9C%EA%B0%84-%EC%97%B0%EA%B5%AC/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://image.yes24.com/goods/64464976/147x215)" alt="성공하는 사람들의 자기 시간 연구 2" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Blog/">Blog</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Blog/Book/">Book</a></p>
+                            <p class="item-title"><a href="/blog/2019/%EC%84%B1%EA%B3%B5%ED%95%98%EB%8A%94-%EC%82%AC%EB%9E%8C%EB%93%A4%EC%9D%98-%EC%9E%90%EA%B8%B0-%EC%8B%9C%EA%B0%84-%EC%97%B0%EA%B5%AC/" class="title">성공하는 사람들의 자기 시간 연구 2</a></p>
+                            <p class="item-date"><time datetime="2019-02-25T15:00:00.000Z" itemprop="datePublished">2019-02-26</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2019/Y%EC%84%B8%EB%AF%B8%EB%82%98-%EB%8D%B0%EC%9D%B4%ED%84%B0%EA%B2%BD%EC%A0%9C-%EB%AC%B4%EC%97%87%EC%9D%84-%ED%95%B4%EC%95%BC-%ED%95%98%EB%82%98/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://content.screencast.com/users/beneapp/folders/Snagit/media/7c6952ac-b136-4fda-a835-d9b9ae8b1373/IMG_20190221_143712.jpeg)" alt="[Y세미나] 데이터경제, 무엇을 해야 하나" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Blog/">Blog</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Blog/Seminar/">Seminar</a></p>
+                            <p class="item-title"><a href="/blog/2019/Y%EC%84%B8%EB%AF%B8%EB%82%98-%EB%8D%B0%EC%9D%B4%ED%84%B0%EA%B2%BD%EC%A0%9C-%EB%AC%B4%EC%97%87%EC%9D%84-%ED%95%B4%EC%95%BC-%ED%95%98%EB%82%98/" class="title">[Y세미나] 데이터경제, 무엇을 해야 하나</a></p>
+                            <p class="item-date"><time datetime="2019-02-22T15:00:00.000Z" itemprop="datePublished">2019-02-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2019/%EB%82%B4-%EC%82%B6%EC%9D%84-%EB%B0%94%EA%BE%B8%EB%8A%94-52%EC%A3%BC%EC%9D%98-%EA%B8%B0%EB%A1%9D/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://image.yes24.com/goods/58771676)" alt="내 삶을 바꾸는 52주의 기록" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Blog/">Blog</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Blog/Book/">Book</a></p>
+                            <p class="item-title"><a href="/blog/2019/%EB%82%B4-%EC%82%B6%EC%9D%84-%EB%B0%94%EA%BE%B8%EB%8A%94-52%EC%A3%BC%EC%9D%98-%EA%B8%B0%EB%A1%9D/" class="title">내 삶을 바꾸는 52주의 기록</a></p>
+                            <p class="item-date"><time datetime="2019-02-17T15:00:00.000Z" itemprop="datePublished">2019-02-18</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 300 x 600 큰 스카이스크래퍼 -->
+<div style="text-align:center;">
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-9184373525576918"
+     data-ad-slot="3828038188"></ins></div>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">카테고리</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android/">Android</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android/Game/">Game</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Application/">Application</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Application/Console/">Console</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Application/Cryptocurrency/">Cryptocurrency</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Application/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Application/Download/">Download</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Application/GIS/">GIS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Application/IDE/">IDE</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Application/NAS/">NAS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Application/VM/">VM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Application/VPN/">VPN</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Application/Web/">Web</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Application/Wiki/">Wiki</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Blog/">Blog</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Blog/Book/">Book</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Blog/Seminar/">Seminar</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Blog/Test/">Test</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Conference/">Conference</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Conference/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Conference/ETC/">ETC</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Conference/Microsoft/">Microsoft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Conference/Startup/">Startup</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Flutter/">Flutter</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Flutter/Project/">Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Product/">Product</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Product/Earphone/">Earphone</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Product/Ebook/">Ebook</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Product/Notebook/">Notebook</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Product/Printer/">Printer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Product/Wearable/">Wearable</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Programming/">Programming</a><span class="category-list-count">103</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Programming/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Programming/Autohotkey/">Autohotkey</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Programming/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Programming/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Programming/ETC/">ETC</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Programming/Elm/">Elm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Programming/General/">General</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Programming/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Programming/JSP/">JSP</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Programming/Javascript/">Javascript</a><span class="category-list-count">26</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Programming/Protocol/">Protocol</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Programming/Python/">Python</a><span class="category-list-count">48</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Programming/R/">R</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Programming/SQL/">SQL</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Programming/Spring/">Spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Programming/Unity/">Unity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Programming/Web/">Web</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Service/">Service</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Service/Cloud/">Cloud</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Service/GitBook/">GitBook</a><span class="category-list-count">2</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">아카이브</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/10/">10월 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">7월 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/02/">2월 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/01/">1월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/10/">10월 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/09/">9월 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/08/">8월 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/07/">7월 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/05/">5월 2018</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/04/">4월 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/01/">1월 2018</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">5월 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/04/">4월 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">3월 2017</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">2월 2017</a><span class="archive-list-count">27</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/01/">1월 2017</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/12/">12월 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/02/">2월 2016</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/01/">1월 2016</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2015/02/">2월 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2014/06/">6월 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2014/02/">2월 2014</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">태그 클라우드</h3>
+        <div class="widget tagcloud">
+            <a href="/blog/tags/15%EB%B6%84/" style="font-size: 10px;">15분</a> <a href="/blog/tags/3D/" style="font-size: 11px;">3D</a> <a href="/blog/tags/3d/" style="font-size: 10px;">3d</a> <a href="/blog/tags/4%EC%B0%A8/" style="font-size: 10px;">4차</a> <a href="/blog/tags/52%EC%A3%BC/" style="font-size: 10px;">52주</a> <a href="/blog/tags/API/" style="font-size: 16px;">API</a> <a href="/blog/tags/AWS/" style="font-size: 10px;">AWS</a> <a href="/blog/tags/Bevel/" style="font-size: 10px;">Bevel</a> <a href="/blog/tags/Cesium/" style="font-size: 10px;">Cesium</a> <a href="/blog/tags/Community/" style="font-size: 10px;">Community</a> <a href="/blog/tags/Day/" style="font-size: 10px;">Day</a> <a href="/blog/tags/Extrude/" style="font-size: 10px;">Extrude</a> <a href="/blog/tags/KOYCERA/" style="font-size: 10px;">KOYCERA</a> <a href="/blog/tags/LATEX/" style="font-size: 10px;">LATEX</a> <a href="/blog/tags/Microsoft/" style="font-size: 10px;">Microsoft</a> <a href="/blog/tags/Minergate/" style="font-size: 10px;">Minergate</a> <a href="/blog/tags/Mybatis/" style="font-size: 10px;">Mybatis</a> <a href="/blog/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/blog/tags/OpenVPN/" style="font-size: 10px;">OpenVPN</a> <a href="/blog/tags/PolylineDecorator/" style="font-size: 10px;">PolylineDecorator</a> <a href="/blog/tags/Postgresql/" style="font-size: 10px;">Postgresql</a> <a href="/blog/tags/R/" style="font-size: 10px;">R</a> <a href="/blog/tags/React/" style="font-size: 11px;">React</a> <a href="/blog/tags/Seoul/" style="font-size: 10px;">Seoul</a> <a href="/blog/tags/Studio/" style="font-size: 11px;">Studio</a> <a href="/blog/tags/Summit/" style="font-size: 10px;">Summit</a> <a href="/blog/tags/Tech/" style="font-size: 10px;">Tech</a> <a href="/blog/tags/Visual/" style="font-size: 11px;">Visual</a> <a href="/blog/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/blog/tags/Y%EC%84%B8%EB%AF%B8%EB%82%98/" style="font-size: 10px;">Y세미나</a> <a href="/blog/tags/action/" style="font-size: 10px;">action</a> <a href="/blog/tags/adsense/" style="font-size: 10px;">adsense</a> <a href="/blog/tags/ahk/" style="font-size: 11px;">ahk</a> <a href="/blog/tags/algorithm/" style="font-size: 10px;">algorithm</a> <a href="/blog/tags/algospot/" style="font-size: 10px;">algospot</a> <a href="/blog/tags/amazfit/" style="font-size: 15px;">amazfit</a> <a href="/blog/tags/android/" style="font-size: 10px;">android</a> <a href="/blog/tags/animation/" style="font-size: 10px;">animation</a> <a href="/blog/tags/app/" style="font-size: 12px;">app</a> <a href="/blog/tags/array/" style="font-size: 10px;">array</a> <a href="/blog/tags/asset/" style="font-size: 10px;">asset</a> <a href="/blog/tags/aura/" style="font-size: 10px;">aura</a> <a href="/blog/tags/autohotkey/" style="font-size: 12px;">autohotkey</a> <a href="/blog/tags/axisj/" style="font-size: 10px;">axisj</a> <a href="/blog/tags/big-data/" style="font-size: 10px;">big data</a> <a href="/blog/tags/bip/" style="font-size: 15px;">bip</a> <a href="/blog/tags/blog/" style="font-size: 11px;">blog</a> <a href="/blog/tags/bluetooth/" style="font-size: 10px;">bluetooth</a> <a href="/blog/tags/book/" style="font-size: 14px;">book</a> <a href="/blog/tags/bytea/" style="font-size: 10px;">bytea</a> <a href="/blog/tags/c/" style="font-size: 10px;">c#</a> <a href="/blog/tags/c/" style="font-size: 10px;">c++</a> <a href="/blog/tags/callback/" style="font-size: 10px;">callback</a> <a href="/blog/tags/category/" style="font-size: 10px;">category</a> <a href="/blog/tags/celery/" style="font-size: 10px;">celery</a> <a href="/blog/tags/cesium/" style="font-size: 10px;">cesium</a> <a href="/blog/tags/check/" style="font-size: 10px;">check</a> <a href="/blog/tags/checkbox/" style="font-size: 10px;">checkbox</a> <a href="/blog/tags/checked/" style="font-size: 10px;">checked</a> <a href="/blog/tags/class/" style="font-size: 10px;">class</a> <a href="/blog/tags/clean/" style="font-size: 10px;">clean</a> <a href="/blog/tags/cloud/" style="font-size: 10px;">cloud</a> <a href="/blog/tags/coder/" style="font-size: 10px;">coder</a> <a href="/blog/tags/command/" style="font-size: 11px;">command</a> <a href="/blog/tags/comment/" style="font-size: 10px;">comment</a> <a href="/blog/tags/conemu/" style="font-size: 10px;">conemu</a> <a href="/blog/tags/conference/" style="font-size: 10px;">conference</a> <a href="/blog/tags/conoha/" style="font-size: 10px;">conoha</a> <a href="/blog/tags/console/" style="font-size: 10px;">console</a> <a href="/blog/tags/content/" style="font-size: 10px;">content</a> <a href="/blog/tags/cpp/" style="font-size: 10px;">cpp</a> <a href="/blog/tags/cql/" style="font-size: 10px;">cql</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/data/" style="font-size: 10px;">data</a> <a href="/blog/tags/database/" style="font-size: 10px;">database</a> <a href="/blog/tags/deploy/" style="font-size: 10px;">deploy</a> <a href="/blog/tags/design/" style="font-size: 11px;">design</a> <a href="/blog/tags/development/" style="font-size: 10px;">development</a> <a href="/blog/tags/df/" style="font-size: 10px;">df</a> <a href="/blog/tags/div/" style="font-size: 10px;">div</a> <a href="/blog/tags/django/" style="font-size: 15px;">django</a> <a href="/blog/tags/do/" style="font-size: 10px;">do</a> <a href="/blog/tags/dokuwiki/" style="font-size: 13px;">dokuwiki</a> <a href="/blog/tags/download/" style="font-size: 10px;">download</a> <a href="/blog/tags/draft/" style="font-size: 10px;">draft</a> <a href="/blog/tags/drinking/" style="font-size: 10px;">drinking</a> <a href="/blog/tags/drive/" style="font-size: 10px;">drive</a> <a href="/blog/tags/du/" style="font-size: 10px;">du</a> <a href="/blog/tags/duplcate/" style="font-size: 10px;">duplcate</a> <a href="/blog/tags/dysfunction/" style="font-size: 10px;">dysfunction</a> <a href="/blog/tags/earphone/" style="font-size: 10px;">earphone</a> <a href="/blog/tags/earset/" style="font-size: 10px;">earset</a> <a href="/blog/tags/eclipse/" style="font-size: 10px;">eclipse</a> <a href="/blog/tags/effect/" style="font-size: 10px;">effect</a> <a href="/blog/tags/ejs/" style="font-size: 10px;">ejs</a> <a href="/blog/tags/elm/" style="font-size: 10px;">elm</a> <a href="/blog/tags/enter/" style="font-size: 10px;">enter</a> <a href="/blog/tags/excel/" style="font-size: 10px;">excel</a> <a href="/blog/tags/file/" style="font-size: 11px;">file</a> <a href="/blog/tags/filter/" style="font-size: 10px;">filter</a> <a href="/blog/tags/firestore/" style="font-size: 16px;">firestore</a> <a href="/blog/tags/flask/" style="font-size: 16px;">flask</a> <a href="/blog/tags/flutter/" style="font-size: 10px;">flutter</a> <a href="/blog/tags/font/" style="font-size: 15px;">font</a> <a href="/blog/tags/for/" style="font-size: 11px;">for</a> <a href="/blog/tags/form/" style="font-size: 10px;">form</a> <a href="/blog/tags/formatting/" style="font-size: 10px;">formatting</a> <a href="/blog/tags/framework/" style="font-size: 10px;">framework</a> <a href="/blog/tags/function/" style="font-size: 10px;">function</a> <a href="/blog/tags/game/" style="font-size: 10px;">game</a> <a href="/blog/tags/geoserver/" style="font-size: 11px;">geoserver</a> <a href="/blog/tags/gis/" style="font-size: 11px;">gis</a> <a href="/blog/tags/git/" style="font-size: 10px;">git</a> <a href="/blog/tags/gitbook/" style="font-size: 11px;">gitbook</a> <a href="/blog/tags/github/" style="font-size: 17px;">github</a> <a href="/blog/tags/google/" style="font-size: 10px;">google</a> <a href="/blog/tags/grid/" style="font-size: 10px;">grid</a> <a href="/blog/tags/h20/" style="font-size: 10px;">h20</a> <a href="/blog/tags/haroopad/" style="font-size: 12px;">haroopad</a> <a href="/blog/tags/hbs-760/" style="font-size: 10px;">hbs-760</a> <a href="/blog/tags/hbs-810/" style="font-size: 10px;">hbs-810</a> <a href="/blog/tags/headset/" style="font-size: 10px;">headset</a> <a href="/blog/tags/hearthstone/" style="font-size: 10px;">hearthstone</a> <a href="/blog/tags/heatmap/" style="font-size: 10px;">heatmap</a> <a href="/blog/tags/hello/" style="font-size: 10px;">hello</a> <a href="/blog/tags/heroku/" style="font-size: 16px;">heroku</a> <a href="/blog/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/blog/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/blog/tags/html/" style="font-size: 10px;">html</a> <a href="/blog/tags/http/" style="font-size: 10px;">http</a> <a href="/blog/tags/icon/" style="font-size: 10px;">icon</a> <a href="/blog/tags/ifttt/" style="font-size: 10px;">ifttt</a> <a href="/blog/tags/illustrator/" style="font-size: 10px;">illustrator</a> <a href="/blog/tags/illustratro/" style="font-size: 10px;">illustratro</a> <a href="/blog/tags/include/" style="font-size: 10px;">include</a> <a href="/blog/tags/index/" style="font-size: 10px;">index</a> <a href="/blog/tags/input/" style="font-size: 14px;">input</a> <a href="/blog/tags/install/" style="font-size: 10px;">install</a> <a href="/blog/tags/integration/" style="font-size: 10px;">integration</a> <a href="/blog/tags/java/" style="font-size: 10px;">java</a> <a href="/blog/tags/javascript/" style="font-size: 19px;">javascript</a> <a href="/blog/tags/jquery/" style="font-size: 11px;">jquery</a> <a href="/blog/tags/js/" style="font-size: 10px;">js</a> <a href="/blog/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/blog/tags/jsp/" style="font-size: 11px;">jsp</a> <a href="/blog/tags/jstl/" style="font-size: 10px;">jstl</a> <a href="/blog/tags/key/" style="font-size: 10px;">key</a> <a href="/blog/tags/keyboard/" style="font-size: 10px;">keyboard</a> <a href="/blog/tags/kobo/" style="font-size: 10px;">kobo</a> <a href="/blog/tags/language/" style="font-size: 10px;">language</a> <a href="/blog/tags/layout/" style="font-size: 10px;">layout</a> <a href="/blog/tags/leaflet/" style="font-size: 15px;">leaflet</a> <a href="/blog/tags/learning/" style="font-size: 14px;">learning</a> <a href="/blog/tags/length/" style="font-size: 11px;">length</a> <a href="/blog/tags/like/" style="font-size: 10px;">like</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/list/" style="font-size: 10px;">list</a> <a href="/blog/tags/localStorage/" style="font-size: 10px;">localStorage</a> <a href="/blog/tags/mac/" style="font-size: 11px;">mac</a> <a href="/blog/tags/macbook/" style="font-size: 10px;">macbook</a> <a href="/blog/tags/machine/" style="font-size: 13px;">machine</a> <a href="/blog/tags/markdown/" style="font-size: 12px;">markdown</a> <a href="/blog/tags/md/" style="font-size: 11px;">md</a> <a href="/blog/tags/mercy/" style="font-size: 10px;">mercy</a> <a href="/blog/tags/model/" style="font-size: 11px;">model</a> <a href="/blog/tags/muscle/" style="font-size: 10px;">muscle</a> <a href="/blog/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/blog/tags/native/" style="font-size: 11px;">native</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/blog/tags/opencv/" style="font-size: 18px;">opencv</a> <a href="/blog/tags/oracle/" style="font-size: 10px;">oracle</a> <a href="/blog/tags/pathfinder/" style="font-size: 10px;">pathfinder</a> <a href="/blog/tags/pattern/" style="font-size: 10px;">pattern</a> <a href="/blog/tags/perspective/" style="font-size: 10px;">perspective</a> <a href="/blog/tags/platform/" style="font-size: 10px;">platform</a> <a href="/blog/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/blog/tags/post/" style="font-size: 10px;">post</a> <a href="/blog/tags/postgis/" style="font-size: 11px;">postgis</a> <a href="/blog/tags/postgresql/" style="font-size: 10px;">postgresql</a> <a href="/blog/tags/powercmd/" style="font-size: 10px;">powercmd</a> <a href="/blog/tags/ppt/" style="font-size: 11px;">ppt</a> <a href="/blog/tags/presentation/" style="font-size: 10px;">presentation</a> <a href="/blog/tags/preset/" style="font-size: 10px;">preset</a> <a href="/blog/tags/pro/" style="font-size: 12px;">pro</a> <a href="/blog/tags/programming/" style="font-size: 10px;">programming</a> <a href="/blog/tags/prompt/" style="font-size: 10px;">prompt</a> <a href="/blog/tags/psql/" style="font-size: 10px;">psql</a> <a href="/blog/tags/publish/" style="font-size: 10px;">publish</a> <a href="/blog/tags/pyinstaller/" style="font-size: 10px;">pyinstaller</a> <a href="/blog/tags/pyqt5/" style="font-size: 14px;">pyqt5</a> <a href="/blog/tags/pyrebase/" style="font-size: 10px;">pyrebase</a> <a href="/blog/tags/python/" style="font-size: 20px;">python</a> <a href="/blog/tags/query/" style="font-size: 11px;">query</a> <a href="/blog/tags/react/" style="font-size: 15px;">react</a> <a href="/blog/tags/react-native/" style="font-size: 10px;">react-native</a> <a href="/blog/tags/react-js/" style="font-size: 10px;">react.js</a> <a href="/blog/tags/regex/" style="font-size: 10px;">regex</a> <a href="/blog/tags/regexone/" style="font-size: 11px;">regexone</a> <a href="/blog/tags/resophnotes/" style="font-size: 10px;">resophnotes</a> <a href="/blog/tags/revealjs/" style="font-size: 12px;">revealjs</a> <a href="/blog/tags/rnn/" style="font-size: 10px;">rnn</a> <a href="/blog/tags/scala/" style="font-size: 11px;">scala</a> <a href="/blog/tags/scan/" style="font-size: 10px;">scan</a> <a href="/blog/tags/schedule/" style="font-size: 10px;">schedule</a> <a href="/blog/tags/scribble/" style="font-size: 10px;">scribble</a> <a href="/blog/tags/script/" style="font-size: 11px;">script</a> <a href="/blog/tags/search/" style="font-size: 10px;">search</a> <a href="/blog/tags/select/" style="font-size: 10px;">select</a> <a href="/blog/tags/selector/" style="font-size: 10px;">selector</a> <a href="/blog/tags/service/" style="font-size: 10px;">service</a> <a href="/blog/tags/shell/" style="font-size: 10px;">shell</a> <a href="/blog/tags/shortcut/" style="font-size: 10px;">shortcut</a> <a href="/blog/tags/shortcuts/" style="font-size: 10px;">shortcuts</a> <a href="/blog/tags/skin/" style="font-size: 10px;">skin</a> <a href="/blog/tags/sms/" style="font-size: 10px;">sms</a> <a href="/blog/tags/snippet/" style="font-size: 10px;">snippet</a> <a href="/blog/tags/span/" style="font-size: 10px;">span</a> <a href="/blog/tags/spreadsheet/" style="font-size: 10px;">spreadsheet</a> <a href="/blog/tags/spring/" style="font-size: 11px;">spring</a> <a href="/blog/tags/sql/" style="font-size: 11px;">sql</a> <a href="/blog/tags/start/" style="font-size: 10px;">start</a> <a href="/blog/tags/startup/" style="font-size: 10px;">startup</a> <a href="/blog/tags/sts/" style="font-size: 10px;">sts</a> <a href="/blog/tags/style/" style="font-size: 10px;">style</a> <a href="/blog/tags/stylize/" style="font-size: 10px;">stylize</a> <a href="/blog/tags/substring/" style="font-size: 10px;">substring</a> <a href="/blog/tags/sw/" style="font-size: 10px;">sw</a> <a href="/blog/tags/synology/" style="font-size: 11px;">synology</a> <a href="/blog/tags/syntax/" style="font-size: 10px;">syntax</a> <a href="/blog/tags/system/" style="font-size: 10px;">system</a> <a href="/blog/tags/tablespace/" style="font-size: 10px;">tablespace</a> <a href="/blog/tags/tag/" style="font-size: 11px;">tag</a> <a href="/blog/tags/tensorflow/" style="font-size: 12px;">tensorflow</a> <a href="/blog/tags/test/" style="font-size: 10px;">test</a> <a href="/blog/tags/theme/" style="font-size: 10px;">theme</a> <a href="/blog/tags/thread/" style="font-size: 10px;">thread</a> <a href="/blog/tags/threejs/" style="font-size: 10px;">threejs</a> <a href="/blog/tags/tilelayer/" style="font-size: 10px;">tilelayer</a> <a href="/blog/tags/tistory/" style="font-size: 10px;">tistory</a> <a href="/blog/tags/toad/" style="font-size: 10px;">toad</a> <a href="/blog/tags/tool/" style="font-size: 10px;">tool</a> <a href="/blog/tags/trading/" style="font-size: 10px;">trading</a> <a href="/blog/tags/trello/" style="font-size: 11px;">trello</a> <a href="/blog/tags/tutorial/" style="font-size: 18px;">tutorial</a> <a href="/blog/tags/type/" style="font-size: 11px;">type</a> <a href="/blog/tags/ui/" style="font-size: 11px;">ui</a> <a href="/blog/tags/undo/" style="font-size: 10px;">undo</a> <a href="/blog/tags/unity/" style="font-size: 11px;">unity</a> <a href="/blog/tags/unix/" style="font-size: 10px;">unix</a> <a href="/blog/tags/upload/" style="font-size: 10px;">upload</a> <a href="/blog/tags/urlencode/" style="font-size: 10px;">urlencode</a> <a href="/blog/tags/utf-8/" style="font-size: 10px;">utf-8</a> <a href="/blog/tags/ux/" style="font-size: 11px;">ux</a> <a href="/blog/tags/vegas/" style="font-size: 10px;">vegas</a> <a href="/blog/tags/viewer/" style="font-size: 10px;">viewer</a> <a href="/blog/tags/vps/" style="font-size: 10px;">vps</a> <a href="/blog/tags/vscode/" style="font-size: 11px;">vscode</a> <a href="/blog/tags/vue/" style="font-size: 16px;">vue</a> <a href="/blog/tags/vworld/" style="font-size: 10px;">vworld</a> <a href="/blog/tags/wiki/" style="font-size: 13px;">wiki</a> <a href="/blog/tags/windows/" style="font-size: 11px;">windows</a> <a href="/blog/tags/words/" style="font-size: 10px;">words</a> <a href="/blog/tags/work/" style="font-size: 10px;">work</a> <a href="/blog/tags/world/" style="font-size: 10px;">world</a> <a href="/blog/tags/writing/" style="font-size: 10px;">writing</a> <a href="/blog/tags/xamarin/" style="font-size: 10px;">xamarin</a> <a href="/blog/tags/youtube/" style="font-size: 10px;">youtube</a> <a href="/blog/tags/%EA%B2%8C%EC%9E%84/" style="font-size: 11px;">게임</a> <a href="/blog/tags/%EA%B2%BD%EC%A0%9C/" style="font-size: 10px;">경제</a> <a href="/blog/tags/%EA%B3%B5%EC%8B%9D/" style="font-size: 10px;">공식</a> <a href="/blog/tags/%EA%B3%B5%EC%9E%A5%EC%B4%88%EA%B8%B0%ED%99%94/" style="font-size: 10px;">공장초기화</a> <a href="/blog/tags/%EA%B8%80%EC%9E%90/" style="font-size: 10px;">글자</a> <a href="/blog/tags/%EA%B8%B0%EB%A1%9D/" style="font-size: 10px;">기록</a> <a href="/blog/tags/%EB%82%98%EB%AC%B4/" style="font-size: 10px;">나무</a> <a href="/blog/tags/%EB%85%B8%ED%8A%B8/" style="font-size: 10px;">노트</a> <a href="/blog/tags/%EB%85%B8%ED%95%98%EC%9A%B0/" style="font-size: 11px;">노하우</a> <a href="/blog/tags/%EB%8A%A5%EB%A0%A5/" style="font-size: 10px;">능력</a> <a href="/blog/tags/%EB%8B%A8%EC%B6%95%ED%82%A4/" style="font-size: 11px;">단축키</a> <a href="/blog/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0/" style="font-size: 10px;">데이터</a> <a href="/blog/tags/%EB%8F%84%EC%BF%A0%EC%9C%84%ED%82%A4/" style="font-size: 10px;">도쿠위키</a> <a href="/blog/tags/%EB%93%9C%EB%A1%9C%EC%9E%89/" style="font-size: 10px;">드로잉</a> <a href="/blog/tags/%EB%94%94%EB%A0%89%ED%86%A0%EB%A6%AC/" style="font-size: 10px;">디렉토리</a> <a href="/blog/tags/%EB%94%94%EC%9E%90%EC%9D%B8/" style="font-size: 11px;">디자인</a> <a href="/blog/tags/%EB%9D%BC%EC%9D%B4%EB%B8%8C/" style="font-size: 10px;">라이브</a> <a href="/blog/tags/%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4/" style="font-size: 10px;">마크다운</a> <a href="/blog/tags/%EB%A9%94%EB%AA%A8/" style="font-size: 10px;">메모</a> <a href="/blog/tags/%EB%AC%B8%EC%9E%90%EC%97%B4/" style="font-size: 10px;">문자열</a> <a href="/blog/tags/%EB%AC%B8%EC%A0%9C/" style="font-size: 10px;">문제</a> <a href="/blog/tags/%EB%B0%98%EC%9D%91%ED%98%95/" style="font-size: 11px;">반응형</a> <a href="/blog/tags/%EB%B0%B0%EA%B2%BD/" style="font-size: 10px;">배경</a> <a href="/blog/tags/%EB%B2%A0%EA%B0%80%EC%8A%A4/" style="font-size: 10px;">베가스</a> <a href="/blog/tags/%EB%B3%80%ED%99%98%EA%B8%B0/" style="font-size: 10px;">변환기</a> <a href="/blog/tags/%EB%B3%B4%EA%B8%B0/" style="font-size: 10px;">보기</a> <a href="/blog/tags/%EB%B6%84%ED%95%A0/" style="font-size: 10px;">분할</a> <a href="/blog/tags/%EC%82%AC%EB%9E%8C%EB%93%A4%EC%9D%98/" style="font-size: 10px;">사람들의</a> <a href="/blog/tags/%EC%82%AC%EC%9A%A9%EB%B2%95/" style="font-size: 10px;">사용법</a> <a href="/blog/tags/%EC%82%AC%EC%9D%B4%ED%8A%B8/" style="font-size: 10px;">사이트</a> <a href="/blog/tags/%EC%82%AC%EC%A7%84/" style="font-size: 10px;">사진</a> <a href="/blog/tags/%EC%82%AD%EC%A0%9C/" style="font-size: 10px;">삭제</a> <a href="/blog/tags/%EC%82%B0%EC%97%85%ED%98%81%EB%AA%85/" style="font-size: 10px;">산업혁명</a> <a href="/blog/tags/%EC%82%B6/" style="font-size: 10px;">삶</a> <a href="/blog/tags/%EC%84%A0%EC%88%A0%EC%A7%91/" style="font-size: 13px;">선술집</a> <a href="/blog/tags/%EC%84%AD%EC%94%A8/" style="font-size: 10px;">섭씨</a> <a href="/blog/tags/%EC%84%B1%EA%B3%B5%ED%95%98%EB%8A%94/" style="font-size: 10px;">성공하는</a> <a href="/blog/tags/%EC%88%AB%EC%9E%90%ED%82%A4/" style="font-size: 10px;">숫자키</a> <a href="/blog/tags/%EC%8A%A4%EB%A7%88%ED%8A%B8%EC%B1%84%ED%8C%85/" style="font-size: 16px;">스마트채팅</a> <a href="/blog/tags/%EC%8A%A4%ED%82%A8/" style="font-size: 10px;">스킨</a> <a href="/blog/tags/%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85/" style="font-size: 10px;">스타트업</a> <a href="/blog/tags/%EC%8B%9C%EA%B0%84/" style="font-size: 10px;">시간</a> <a href="/blog/tags/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/" style="font-size: 10px;">안드로이드</a> <a href="/blog/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" style="font-size: 10px;">알고리즘</a> <a href="/blog/tags/%EC%95%8C%EA%B3%A0%EC%8A%A4%ED%8C%9F/" style="font-size: 10px;">알고스팟</a> <a href="/blog/tags/%EC%96%B8%EB%8D%95/" style="font-size: 10px;">언덕</a> <a href="/blog/tags/%EC%97%91%EC%85%80/" style="font-size: 10px;">엑셀</a> <a href="/blog/tags/%EC%97%B0%EA%B5%AC/" style="font-size: 10px;">연구</a> <a href="/blog/tags/%EC%97%B0%EC%8A%B5/" style="font-size: 10px;">연습</a> <a href="/blog/tags/%EC%98%81%EC%83%81/" style="font-size: 10px;">영상</a> <a href="/blog/tags/%EC%98%81%EC%9B%85/" style="font-size: 10px;">영웅</a> <a href="/blog/tags/%EC%98%88%EC%95%BD/" style="font-size: 10px;">예약</a> <a href="/blog/tags/%EC%98%A4%EB%B8%8C%EC%A0%9D%ED%8A%B8/" style="font-size: 10px;">오브젝트</a> <a href="/blog/tags/%EC%98%A8%EB%8F%84/" style="font-size: 10px;">온도</a> <a href="/blog/tags/%EC%98%B5%EC%85%98/" style="font-size: 10px;">옵션</a> <a href="/blog/tags/%EC%9A%B0%EB%91%90%EB%A8%B8%EB%A6%AC/" style="font-size: 10px;">우두머리</a> <a href="/blog/tags/%EC%9B%B9/" style="font-size: 11px;">웹</a> <a href="/blog/tags/%EC%9D%98%EC%A7%80/" style="font-size: 10px;">의지</a> <a href="/blog/tags/%EC%9D%B4%EC%95%BC%EA%B8%B0/" style="font-size: 10px;">이야기</a> <a href="/blog/tags/%EC%9D%B8%EC%BD%94%EB%94%A9/" style="font-size: 10px;">인코딩</a> <a href="/blog/tags/%EC%9D%BC%EB%9F%AC%EC%8A%A4%ED%8A%B8%EB%A0%88%EC%9D%B4%ED%84%B0/" style="font-size: 17px;">일러스트레이터</a> <a href="/blog/tags/%EC%9E%84%EC%8B%A4/" style="font-size: 10px;">임실</a> <a href="/blog/tags/%EC%9E%90%EA%B8%B0/" style="font-size: 10px;">자기</a> <a href="/blog/tags/%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D/" style="font-size: 11px;">정규표현식</a> <a href="/blog/tags/%EC%A3%BC%EC%A0%9C/" style="font-size: 10px;">주제</a> <a href="/blog/tags/%EC%A4%91%EB%B3%B5/" style="font-size: 10px;">중복</a> <a href="/blog/tags/%EC%B0%B8%EA%B3%A0/" style="font-size: 11px;">참고</a> <a href="/blog/tags/%EC%B0%B8%EA%B4%80/" style="font-size: 10px;">참관</a> <a href="/blog/tags/%EC%B4%AC%EC%98%81/" style="font-size: 10px;">촬영</a> <a href="/blog/tags/%EC%B9%98%EC%A6%88/" style="font-size: 10px;">치즈</a> <a href="/blog/tags/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1/" style="font-size: 16px;">카카오톡</a> <a href="/blog/tags/%EC%BA%90%EB%A6%AD%ED%84%B0/" style="font-size: 10px;">캐릭터</a> <a href="/blog/tags/%EC%BB%A4%ED%94%BC/" style="font-size: 10px;">커피</a> <a href="/blog/tags/%EC%BB%A4%ED%94%BC%EB%B2%A0%EC%9D%B4/" style="font-size: 10px;">커피베이</a> <a href="/blog/tags/%ED%85%8C%EB%A7%88%ED%8C%8C%ED%81%AC/" style="font-size: 10px;">테마파크</a> <a href="/blog/tags/%ED%85%90%ED%8A%B8/" style="font-size: 10px;">텐트</a> <a href="/blog/tags/%ED%88%AC%EB%AA%85%EB%8F%84/" style="font-size: 10px;">투명도</a> <a href="/blog/tags/%ED%88%AC%EC%9E%90/" style="font-size: 10px;">투자</a> <a href="/blog/tags/%ED%88%B4/" style="font-size: 10px;">툴</a> <a href="/blog/tags/%ED%8A%B8%EB%A0%88%EC%9D%B4%EC%8B%B1/" style="font-size: 10px;">트레이싱</a> <a href="/blog/tags/%ED%8A%B9%EC%9D%B4%EC%A0%90/" style="font-size: 10px;">특이점</a> <a href="/blog/tags/%ED%8B%B0%EC%8A%A4%ED%86%A0%EB%A6%AC/" style="font-size: 10px;">티스토리</a> <a href="/blog/tags/%ED%8C%8C%EC%9D%BC/" style="font-size: 10px;">파일</a> <a href="/blog/tags/%ED%8C%8C%EC%9D%BC%EB%AA%85/" style="font-size: 10px;">파일명</a> <a href="/blog/tags/%ED%8C%A8%EC%8A%A4%ED%8C%8C%EC%9D%B8%EB%8D%94/" style="font-size: 10px;">패스파인더</a> <a href="/blog/tags/%ED%8D%BC%EC%A6%90/" style="font-size: 10px;">퍼즐</a> <a href="/blog/tags/%ED%8E%B8%EC%A7%91/" style="font-size: 10px;">편집</a> <a href="/blog/tags/%ED%94%8C%EB%9F%AC%EC%8A%A4%EC%B9%9C%EA%B5%AC/" style="font-size: 16px;">플러스친구</a> <a href="/blog/tags/%ED%95%98%EC%8A%A4%EC%8A%A4%ED%86%A4/" style="font-size: 13px;">하스스톤</a> <a href="/blog/tags/%ED%95%9C%EA%B8%80%ED%99%94/" style="font-size: 10px;">한글화</a> <a href="/blog/tags/%ED%99%94%EC%94%A8/" style="font-size: 10px;">화씨</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">링크</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">        
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>            
+            <div class="credit">
+                <!--<h1 class="logo-wrap">
+                    <a href="/blog/" class="logo"></a>
+                </h1>
+                <p>&copy; 2023 Jace</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>-->
+                <p>&copy; 2023 Jace. Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'jacegem';
+    
+    
+    var disqus_url = 'http://jacegem.github.io/blog/2018/Vworld-3D-Data%EB%A5%BC-Three.js%EB%A1%9C-%EC%B6%9C%EB%A0%A5%ED%95%98%EA%B8%B0/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        
+<script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/blog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/blog/js/main.js"></script>
+
+        
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9184373525576918",
+    enable_page_level_ads: true
+  });
+</script>
+    </div>
+</body>
+</html>
