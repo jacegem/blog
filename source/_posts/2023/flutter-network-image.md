@@ -7,6 +7,9 @@ categories:
   - Image
 ---
 
+![](https://i.stack.imgur.com/UHa1c.png)
+
+
 ## 네트워크 이미지 보여주기
 
 ```dart
@@ -66,3 +69,9 @@ CachedNetworkImage(
         errorWidget: (context, url, error) => Icon(Icons.error),
      ),
 ```
+
+
+## 출처
+
+- https://pub.dev/packages/cached_network_image
+- https://stackoverflow.com/questions/51513429/how-to-do-rounded-corners-image-in-flutter
