@@ -7,7 +7,7 @@ categories:
   - Image
 ---
 
-![](https://i.stack.imgur.com/UHa1c.png)
+![](https://picsum.photos/250?image=9)
 
 
 ## 네트워크 이미지 보여주기
