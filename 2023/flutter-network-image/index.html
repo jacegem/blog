@@ -9,19 +9,21 @@
     
         <meta name="keywords" content="flutter,image" />
     
-    <meta name="description" content="네트워크 이미지 보여주기 1Image.network(&amp;#x27;https:&#x2F;&#x2F;picsum.photos&#x2F;250?image&#x3D;9&amp;#x27;)  모서리 둥글게 만들기 12345678ClipRRect(    borderRadius: BorderRadius.circular(8.0),    child: Image.network(        &amp;#x27;https:&#x2F;&#x2F;">
+    <meta name="description" content="네트워크 이미지 보여주기 1Image.network(&amp;#x27;https:&#x2F;&#x2F;picsum.photos&#x2F;250?image&#x3D;9&amp;#x27;)  모서리 둥글게 만들기 12345678ClipRRect(    borderRadius: BorderRadius.circular(8.0),    child: Image.network(        &amp;#x27;https:&#x2F;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Flutter 이미지 보여주기">
 <meta property="og:url" content="http://jacegem.github.io/blog/2023/flutter-network-image/index.html">
 <meta property="og:site_name" content="Momentous for the future">
-<meta property="og:description" content="네트워크 이미지 보여주기 1Image.network(&amp;#x27;https:&#x2F;&#x2F;picsum.photos&#x2F;250?image&#x3D;9&amp;#x27;)  모서리 둥글게 만들기 12345678ClipRRect(    borderRadius: BorderRadius.circular(8.0),    child: Image.network(        &amp;#x27;https:&#x2F;&#x2F;">
+<meta property="og:description" content="네트워크 이미지 보여주기 1Image.network(&amp;#x27;https:&#x2F;&#x2F;picsum.photos&#x2F;250?image&#x3D;9&amp;#x27;)  모서리 둥글게 만들기 12345678ClipRRect(    borderRadius: BorderRadius.circular(8.0),    child: Image.network(        &amp;#x27;https:&#x2F;">
 <meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://i.stack.imgur.com/UHa1c.png">
 <meta property="article:published_time" content="2023-10-23T15:00:00.000Z">
-<meta property="article:modified_time" content="2023-10-24T11:22:42.681Z">
+<meta property="article:modified_time" content="2023-10-24T11:25:26.435Z">
 <meta property="article:author" content="Jace">
 <meta property="article:tag" content="flutter">
 <meta property="article:tag" content="image">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.stack.imgur.com/UHa1c.png">
     
 
     
@@ -191,7 +193,8 @@
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
         <div class="article-entry" itemprop="articleBody">            
-            <h2 id="네트워크-이미지-보여주기"><a class="markdownIt-Anchor" href="#네트워크-이미지-보여주기"></a> 네트워크 이미지 보여주기</h2>
+            <p><img src="https://i.stack.imgur.com/UHa1c.png" alt="" /></p>
+<h2 id="네트워크-이미지-보여주기"><a class="markdownIt-Anchor" href="#네트워크-이미지-보여주기"></a> 네트워크 이미지 보여주기</h2>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Image.network(<span class="string">&#x27;https://picsum.photos/250?image=9&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <h2 id="모서리-둥글게-만들기"><a class="markdownIt-Anchor" href="#모서리-둥글게-만들기"></a> 모서리 둥글게 만들기</h2>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ClipRRect(</span><br><span class="line">    borderRadius: BorderRadius.circular(<span class="number">8.0</span>),</span><br><span class="line">    child: Image.network(</span><br><span class="line">        <span class="string">&#x27;https://picsum.photos/250?image=9&#x27;</span>,</span><br><span class="line">        height: <span class="number">150.0</span>,</span><br><span class="line">        width: <span class="number">100.0</span>,</span><br><span class="line">    ),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
@@ -207,6 +210,11 @@
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dependencies:</span><br><span class="line">  cached_network_image: ^<span class="number">3.3</span><span class="number">.0</span></span><br></pre></td></tr></table></figure>
 <p>CachedNetworkImage 를 사용하여 이미지를 표출한다.</p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CachedNetworkImage(</span><br><span class="line">        imageUrl: <span class="string">&quot;http://via.placeholder.com/350x150&quot;</span>,</span><br><span class="line">        placeholder: (context, url) =&gt; CircularProgressIndicator(),</span><br><span class="line">        errorWidget: (context, url, error) =&gt; Icon(Icons.error),</span><br><span class="line">     ),</span><br></pre></td></tr></table></figure>
+<h2 id="출처"><a class="markdownIt-Anchor" href="#출처"></a> 출처</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://pub.dev/packages/cached_network_image">https://pub.dev/packages/cached_network_image</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/51513429/how-to-do-rounded-corners-image-in-flutter">https://stackoverflow.com/questions/51513429/how-to-do-rounded-corners-image-in-flutter</a></li>
+</ul>
             
         </div>
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -224,7 +232,7 @@
 
 
 
-    <a data-url="http://jacegem.github.io/blog/2023/flutter-network-image/" data-id="clo48mnw900gglbov1n8y8b16" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://jacegem.github.io/blog/2023/flutter-network-image/" data-id="clo48q6nj00ggmbov7c765gfq" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -386,7 +394,7 @@
                             <a href="/blog/2023/flutter-network-image/" class="thumbnail">
     
     
-        <span class="thumbnail-image thumbnail-none"></span>
+        <span style="background-image:url(https://i.stack.imgur.com/UHa1c.png)" alt="Flutter 이미지 보여주기" class="thumbnail-image"></span>
     
     
 </a>
