@@ -4,7 +4,7 @@ date: 2023-10-27
 tags: [flutter, getx, route]
 categories:
   - Flutter
-  - Getx
+  - GetX
 ---
 
 ![](https://raw.githubusercontent.com/jonataslaw/getx-community/master/get.png)
@@ -62,8 +62,8 @@ class MyApp extends StatelessWidget {
 
 ## route 이동
 
-toNamed를 사용하여 이동한다. 
-main 으로 이동하는 함수이며, 이때 전달인자로, "key" 키에, "val" 값을 넘기계 된다. 
+`toNamed`를 사용하여 이동한다. 
+main 으로 이동하는 함수이며, 이때 전달인자로, "key" 키에, "val" 값을 전달한다. 
 
 ```dart
 Get.toNamed(
