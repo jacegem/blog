@@ -3,8 +3,8 @@ title: "[Hammerspoon] 클립보드 링크를 마크다운 이미지 코드로 �
 date: 2023-10-25
 tags: [hammerspoon, clipboard, markdown, image]
 categories:
-  - Application
   - Hammerspoon
+  - Clipboard 
 ---
 
 ![](https://www.hammerspoon.org/images/hammerspoon.png)

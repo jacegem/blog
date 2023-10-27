@@ -3,8 +3,8 @@ title: "[Hammerspoon] hs.settings 사용하기"
 date: 2023-10-27
 tags: [hammerspoon, settings]
 categories:
-  - Application
   - Hammerspoon
+  - Settings 
 ---
 
 ![](https://www.hammerspoon.org/images/hammerspoon.png)
