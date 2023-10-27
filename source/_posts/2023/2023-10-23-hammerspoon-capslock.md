@@ -1,6 +1,6 @@
 ---
 title: "[Hammerspoon] capslock 키를 사용하자"
-date: 2023-10-26
+date: 2023-10-23
 tags: [hammerspoon, hotkey, capslock]
 categories:
   - Hammerspoon
