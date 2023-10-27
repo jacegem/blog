@@ -1,6 +1,6 @@
 ---
 title: "[Hammerspoon] hs.settings 사용하기"
-date: 2023-10-27
+date: 2023-10-26
 tags: [hammerspoon, settings]
 categories:
   - Hammerspoon
