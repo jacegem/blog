@@ -56,3 +56,47 @@ key:bindUp(capslock, "F6", function()
     print(hs.settings.get('key'))
 end)
 ```
+
+## key 값 정의
+
+키값을 정의해서 사용하자.
+그러면 사용하는 곳에서 오타가 발생할 우려가 없다.
+
+`modules/const.lua` 파일을 생성한다. 
+
+```lua
+local obj = {}
+
+obj.app = {}
+obj.settings.imgurClientId = 'imgurClientId'
+
+return obj
+```
+
+## secrets/settings.lua 수정
+
+```lua
+local const = require('modules.const')
+
+local obj = {}
+
+obj.config = { [const.settings.imgurClientId] = "YOUR-CLIENT-ID" }
+
+for key, val in pairs(obj.config) do
+  hs.settings.set(key, val)
+end
+
+return obj
+
+```
+
+## hotkey/function.lua 수정  
+
+
+```lua
+local const = require('modules.const')
+
+key:bindUp(capslock, "F6", function()
+    print(hs.settings.get(const.settings.imgurClientId))
+end)
+```

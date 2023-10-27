@@ -12,14 +12,14 @@ categories:
 
 ## Client ID 생성
 
-이미지 업로드에 사용하기 위하여 `Client ID` 를 생성한다.
+이미지 업로드에 사용하기 위하여 imgur 에서 `Client ID` 를 생성한다.
 
 ![](https://i.imgur.com/fJRiFGM.png)
 
 ## hs.settings 설정
 
 위에서 생성한 `Client ID` 값을 settings 에 설정한다.
-> 바로, 값을 사용해도 된다. 
+> 바로, 값을 사용해도 됩니다.
 
 ```lua
 local obj = {}
@@ -77,7 +77,7 @@ return obj;
 ## key binding
 
 `hs.hotkey.modal` 를 사용하여 키를 할당한다. 
-> 이 부분은 나중에 다시 다루겠습니다.
+> 이 부분은 나중에 다룰 예정입니다.
 
 
 `i`, `u` 키를 입력해서, `imgur:upload()`를 실행한다. 
@@ -102,4 +102,5 @@ return obj
 
 ## 출처
 
+- https://imgur.com/
 - https://github.com/heptal/stale-dotfiles/blob/master/roles/hammerspoon/files/imgur.lua
