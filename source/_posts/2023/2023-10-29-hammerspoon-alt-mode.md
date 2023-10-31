@@ -7,7 +7,7 @@ categories:
   - Hotkey 
 ---
 
-![](https://i.imgur.com/BqT4bCI.png)
+![](https://i.imgur.com/6o8cEVv.png)
 
 키입력을 하지 않고, 마우스만 이용하는 상황이라면, 
 키보드 배열을 변경해서 더 편리한 환경을 만들 수 있다. 
