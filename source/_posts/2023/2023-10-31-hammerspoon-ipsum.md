@@ -1,7 +1,7 @@
 ---
 title: "[Hammerspoon] 한글입숨 만들기"
-date: 2023-10-29
-tags: [hammerspoon, 한글, 입숨, lorem, ipsum]
+date: 2023-10-31
+tags: [hammerspoon, text, 한글, 입숨, lorem, ipsum]
 categories:
   - Hammerspoon
   - Text
