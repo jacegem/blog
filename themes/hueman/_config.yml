@@ -22,12 +22,12 @@ customize:
     thumbnail: true # enable posts thumbnail, options: true, false
     favicon: https://image.flaticon.com/icons/png/512/557/557050.png # path to favicon
     social_links: # for more icons, please see http://fontawesome.io/icons/#brand
-        twitter: /
-        facebook: /
-        google-plus: /
+        # twitter: /
+        # facebook: /
+        # google-plus: /
         github: https://github.com/jacegem/
-        linkedin: /
-        rss: /
+        # linkedin: /
+        # rss: /
 
 # Widgets
 widgets:
