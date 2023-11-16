@@ -1,7 +1,7 @@
 ---
 title: "[Clojure] HackerRank - equal"
 date: 2023-11-16
-tags: [clojure, hackerrank, equal]
+tags: [clojure, algorithm, hackerrank, equal]
 categories:
   - Clojure
   - Algorithm 
@@ -81,10 +81,10 @@ categories:
        (reduce +)))
 ```
 
-![](https://i.imgur.com/EjfpsbS.png)
-![](https://i.imgur.com/IyRqEDV.png)
-![](https://i.imgur.com/QPnnVrf.png)
-![](https://i.imgur.com/qaU9JSY.png)
+
+![](https://i.imgur.com/fa8Fhiw.png)
+![](https://i.imgur.com/j71RKGq.png)
+![](https://i.imgur.com/wsNZuNC.png)
 
 
 
