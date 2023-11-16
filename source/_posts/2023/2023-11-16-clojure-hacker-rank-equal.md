@@ -82,11 +82,37 @@ categories:
 ```
 
 
+## 실행
+
+`(equal [2 2 3 7])` 를 실행한 화면
+
 ![](https://i.imgur.com/fa8Fhiw.png)
 ![](https://i.imgur.com/j71RKGq.png)
 ![](https://i.imgur.com/wsNZuNC.png)
 
 
+## 수정
+
+```clojure
+(def count-map {0 0
+                1 1
+                2 1
+                3 2
+                4 2
+                5 1})
+
+(defn op-count [n]
+  (loop [cnt n
+         acc 0]
+    (if (> cnt 5)
+      (recur (- cnt 5) (inc acc))
+      (+ acc (count-map cnt)))))
+
+(defn equal [arr]
+  (->> (map #(- % (apply min arr)) arr)
+       (map op-count)
+       (reduce +)))
+```
 
 
 ## link
