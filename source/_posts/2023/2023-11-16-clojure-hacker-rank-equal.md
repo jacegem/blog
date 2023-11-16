@@ -62,6 +62,8 @@ categories:
 
 ## Solution 
 
+- https://github.com/jacegem/coding-challenge-clj/blob/main/src/hacker_rank/equal.clj
+
 ```clojure
 (def count-map {0 0
                 1 1
@@ -95,3 +97,4 @@ categories:
 ## link
 
 - https://www.hackerrank.com/challenges/equal/problem
+- https://github.com/jacegem/coding-challenge-clj/blob/main/src/hacker_rank/equal.clj
