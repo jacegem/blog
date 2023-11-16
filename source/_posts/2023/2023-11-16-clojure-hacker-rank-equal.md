@@ -50,7 +50,7 @@ categories:
 가장작은 수 ➡️ 2
 차이값 ➡️ [0 0 1 5]
 1, 2, or 5 개를 더할 수 있으므로, 각각의 횟수는 ➡️ [0 0 1 1] 
-따라서 각 횟수를 모두 더하면 2회가 된다.
+따라서 각 횟수를 모두 더하면 `2`회가 된다.
 
 ---
 
@@ -58,21 +58,23 @@ categories:
 가장 작은 수 ➡️ 7
 차이값 ➡️ [3 0 5]
 1, 2, or 5 개를 더할 수 있으므로, 각각의 횟수는 ➡️ [2 0 1] 
-따라서 각 횟수를 모두 더하면 3회가 된다.
+따라서 각 횟수를 모두 더하면 `3`회가 된다.
 
 ## Solution 
 
 ```clojure
+(def count-map {0 0
+                1 1
+                2 1
+                3 2
+                4 2
+                5 1})
+
 (defn op-count [n]
   (loop [cnt n
          acc 0]
-    (condp = cnt
-      0 (+ 0 acc)
-      1 (+ 1 acc)
-      2 (+ 1 acc)
-      3 (+ 2 acc)
-      4 (+ 2 acc)
-      5 (+ 1 acc)
+    (if (<= cnt 5)
+      (+ acc (count-map cnt))
       (recur (- cnt 5) (inc acc)))))
 
 (defn equal [arr]
@@ -89,31 +91,6 @@ categories:
 ![](https://i.imgur.com/fa8Fhiw.png)
 ![](https://i.imgur.com/j71RKGq.png)
 ![](https://i.imgur.com/wsNZuNC.png)
-
-
-## 수정
-
-```clojure
-(def count-map {0 0
-                1 1
-                2 1
-                3 2
-                4 2
-                5 1})
-
-(defn op-count [n]
-  (loop [cnt n
-         acc 0]
-    (if (> cnt 5)
-      (recur (- cnt 5) (inc acc))
-      (+ acc (count-map cnt)))))
-
-(defn equal [arr]
-  (->> (map #(- % (apply min arr)) arr)
-       (map op-count)
-       (reduce +)))
-```
-
 
 ## link
 
