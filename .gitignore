@@ -7,3 +7,6 @@ public/
 .deploy*/
 yarn.lock
 package-lock.json
+.joyride
+.lsp
+.clj-kondo
