@@ -14,92 +14,46 @@ categories:
 
 ## 흐름
 
-1. `finder` 에서 `enter` 키를 누른다. 
-2. 파일명을 복사한다. `cmd + c`
-3. 원하는 이름으로 변경한다. 
-4. 문자열을 입력한다. 
-5. `return` 키를 누른다.
+1. 선택된 파일을 찾는다.
+2. 구분자 `.` 를 찾는다. (`.` 로 설정한 경우입)
+3. 원하는 값을 앞에 넣는다.
+4. 파일명을 변경한다. 
+5. `esc` 를 누른다. (이름 변경 상태인 경우에, `esc`를 눌러서 빠져 나온다. ) 
 
-## 문제점
-
-### enter 키가 없다
-
-hammerspoon 키맵에 `enter`가 없고, `return`만 있다. 
-그래서, `applescript` 로 처리한다.
+## Applescript
 
 ```lua
-hs.osascript.applescript([[tell application "System Events" to key code 76]])
-```
+local renameFile = function(num)
+    local success, res, desc = hs.osascript.applescript(
+        [[  set num to "]] .. num .. [[" --
 
-### `cmd + c` 로 바로 복사되지 않는다
-
-콜백함수를 만들어서, 처리한다.
-
-```lua
-hs.pasteboard.callbackWhenChanged(function(state) 
-  ...
-end)
-```
-
-## 처리
-
-기존에 변경한 이름이 있는 경우, 원래 이름을 받기 위해서, 정규표현식을 사용한다. 
-
-```lua
-local original = string.gmatch(content, '%d*%.?(.-)$')()
-```
-
-## 원래 이름을 사용하고 싶은 경우
-
-특정값을 조건으로 처리한다. 
-
-```lua
-local after = num .. "." .. original
-if num == 10 then
-    after = original
+        tell application "Finder"
+            set theFiles to (get selection)
+            repeat with i from 1 to count of theFiles
+                set thisFile to item i of theFiles
+                set thisName to name of thisFile
+                set theOffset to my (offset of "." in thisName)
+                if theOffset < 4 then
+                    set orgName to text (theOffset + 1) thru -1 of thisName
+                    set newName to num & "." & orgName
+                    if num = "10" then
+                        set newName to orgName
+                    end if
+                    set name of thisFile to newName
+                end if
+            end repeat
+        end tell]])
+    -- print(success, res, desc)
+    hs.eventtap.keyStroke(nil, 'escape')
 end
 ```
 
-## 코드
+## key bind
 
-hotkey.bind 에 사용하기 위해서 function 으로 생성한다.
-
-
-```lua
-function rename(num)
-    return function()
-        hs.osascript.applescript([[tell application "System Events" to key code 76]])
-        hs.pasteboard.callbackWhenChanged(function(state)
-            if state then
-                local content = hs.pasteboard.getContents()
-                if content ~= nil then
-                    local original = string.gmatch(content, '%d*%.?(.-)$')()
-                    local after = num .. "." .. original
-                    if num == 10 then
-                        after = original
-                    end
-                    hs.eventtap.keyStrokes(after)
-                else
-                    hs.pasteboard.setContents(os.date('%H:%M'))
-                end
-                hs.eventtap.keyStroke(nil, 'return')
-            end
-        end)
-        hs.eventtap.keyStroke({ 'cmd' }, 'c')
-    end
-end
-```
-
-### hotkey bind
+F5 ~ F10 키를 바인딩 한다. `F10` 은 원래로 돌아오는 용도다. 
 
 ```lua
 for _, n in ipairs({ 5, 6, 7, 8, 9, 10 }) do
-    hs.hotkey.bind( nil, "F" .. n, nil, rename(n))
+    hs.hotkey.bind(nil, "F" .. n, rename(n)) 
 end
 ```
-
-
-## 참고 링크 
-
-- https://www.hammerspoon.org/docs/hs.keycodes.html#map
-- https://eastmanreference.com/complete-list-of-applescript-key-codes
