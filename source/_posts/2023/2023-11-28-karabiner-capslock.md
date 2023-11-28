@@ -1,5 +1,5 @@
 ---
-title: "[Karabiner] (1) capslock 키 변경하기"
+title: "[Karabiner] capslock 키 변경하기"
 date: 2023-11-28 
 tags: [karabiner, hammerspoon, modifiers, hotkey]
 categories:

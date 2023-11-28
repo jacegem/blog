@@ -1,5 +1,5 @@
 ---
-title: "[Karabiner] (2) Capslock 키에 ESC 키 추가하기"
+title: "[Karabiner] Capslock 키에 ESC 키 추가하기"
 date: 2023-11-29
 tags: [karabiner, hammerspoon, modifiers, hotkey]
 categories:
@@ -97,4 +97,3 @@ categories:
 ## link
 
 - https://karabiner-elements.pqrs.org/docs/json/complex-modifications-manipulator-definition/to-if-alone/
-

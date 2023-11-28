@@ -1,5 +1,5 @@
 ---
-title: "[Karabiner] (3) 동시에 누르기"
+title: "[Karabiner] 2개 키 동시에 누르기"
 date: 2023-11-30
 tags: [karabiner, hammerspoon, modifiers, hotkey]
 categories:
