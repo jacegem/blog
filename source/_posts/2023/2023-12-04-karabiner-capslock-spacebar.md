@@ -1,6 +1,6 @@
 ---
 title: "[karabiner] capslock 과 spacebar 설정하기"
-date: 2023-11-30
+date: 2023-12-04
 tags: [karabiner, capslock, spacebar]
 categories:
   - Application
