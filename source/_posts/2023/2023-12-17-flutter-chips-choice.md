@@ -1,6 +1,6 @@
 ---
 title: "[flutter] chips_choice 사용하기"
-date: 2023-12-04
+date: 2023-12-17
 tags: [flutter, chips, choice]
 categories:
   - Flutter
@@ -127,7 +127,6 @@ ChipsChoice<String>.single(
 
 
 ```dart
-@jsonSerializable
 class Choice {
   String id = '';
   String name = '';
