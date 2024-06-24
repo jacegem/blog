@@ -13,7 +13,7 @@ https://lightsail.aws.amazon.com/ls/webapp/home/instances 에서 `인스턴스 �
 Linux/Unix 에서 Ubuntu 선택
 [[듀얼 스택]] 선택 ➡️ 월별 $12 선택
 리소스 이름 입력 후 `인스턴스 생성` 버튼 누르기
-![](https://i.imgur.com/yrHhPia.png){:height 443, :width 590}
+![](https://i.imgur.com/yrHhPia.png)
 
 ## ssh 연결
 
@@ -90,7 +90,7 @@ sudo docker stack deploy -c portainer-agent-stack.yml portainer
 
 Lightsail > Network 에서 9443 포트 추가
 `https://<IP>:9443` 으로 연결
-![](https://i.imgur.com/Ql1PqYi.png){:height 398, :width 445}
+![](https://i.imgur.com/Ql1PqYi.png)
 username, password 생성
 
 ## Nginx Proxy Manager 스택 추가
