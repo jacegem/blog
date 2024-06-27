@@ -1147,7 +1147,6 @@ a.article-title:hover {
 .article-entry video {
   max-width: 100%;
   height: auto;
-  display: block;
   margin: auto;
 }
 .article-entry iframe {
