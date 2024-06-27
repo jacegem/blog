@@ -32,6 +32,17 @@ for _ in range(n):
 print(s)
 ```
 
+### eval 사용
+
+```python
+n = int(input())
+s = 0
+for _ in range(n):
+	s += int(eval(input()))
+
+print(s)
+```
+
 ## 해결 - clojure
 
 주어진 수 만큼 반복해서
