@@ -39,12 +39,14 @@ print(s)
 
 ```clojure
 (defn calc [line]
-  (let [[a op b] (clojure.string/split line #"\s+")
-        op       (resolve (symbol op))]
-    (int (op (Integer/parseInt a) (Integer/parseInt b)))))
+  (let [[a op b] (clojure.string/split line #"\s+")]
+    (int ((resolve (symbol op))
+          (Integer/parseInt a)
+          (Integer/parseInt b)))))
 
 (->> (repeatedly (Integer/parseInt (read-line))
                  #(calc (read-line)))
      (apply +)
      (print))
+
 ```
