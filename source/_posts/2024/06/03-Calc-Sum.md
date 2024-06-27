@@ -27,7 +27,7 @@ for _ in range(n):
 	elif (op == "*"):
 		r = a * b
 	elif (op == "/"):
-		r = int(a / b)
+		r = a //
 	s += r
 print(s)
 ```
@@ -35,7 +35,7 @@ print(s)
 ## 해결 - clojure
 
 주어진 수 만큼 반복해서
-계산하고 더하고 출력한다.
+읽고 계산하고 더하고 출력한다.
 
 ```clojure
 (defn calc [line]
@@ -44,9 +44,8 @@ print(s)
           (Integer/parseInt a)
           (Integer/parseInt b)))))
 
-(->> (repeatedly (Integer/parseInt (read-line))
-                 #(calc (read-line)))
-     (apply +)
-     (print))
-
+(->> (repeatedly (Integer/parseInt (read-line)) ;; 주어진 수 만큼 반복해서
+                 #(calc (read-line))) ;; 읽고 계산하고
+     (apply +) ;; 더하고
+     (print))  ;; 출력한다.
 ```
