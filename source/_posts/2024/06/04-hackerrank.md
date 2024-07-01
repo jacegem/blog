@@ -1,0 +1,85 @@
+---
+title: 'HackerRank Warmup'
+date: 2024-06-03
+tags: [Programming, Clojure, HackerRank]
+categories:
+  - Programming
+  - Clojure
+---
+
+![](https://i.imgur.com/AOqggTJ.png)
+
+## Solve Me First
+
+https://www.hackerrank.com/challenges/solve-me-first/problem?isFullScreen=true
+
+```clojure
+(defn solveMeFirst [x y]
+    (+ x y)
+)
+```
+
+## Simple Array Sum
+
+https://www.hackerrank.com/challenges/simple-array-sum/problem?isFullScreen=true
+
+```clojure
+(defn simpleArraySum [ar]
+    (apply + ar)
+)
+```
+
+## Compare the Triplets
+
+https://www.hackerrank.com/challenges/compare-the-triplets/problem?isFullScreen=true
+
+```clojure
+(defn compare [ax bx]
+  (map (fn [a b]
+         {:alice (if (> a b) 1 0)
+          :bob   (if (< a b) 1 0)})
+       ax bx))
+
+(defn calc-points [res]
+  (reduce (fn [acc v]
+            (let [a (:alice v)
+                  b (:bob v)]
+              (-> acc
+                  (update :alice #(+ % a))
+                  (update :bob #(+ % b)))))
+          {:alice 0
+           :bob   0}
+          res))
+
+(defn print-points [m]
+  [(:alice m) (:bob m)])
+
+(defn compareTriplets [ax bx]
+   (-> (compare ax bx)
+    (calc-points)
+    (print-points)))
+```
+
+## A Very Big Sum
+
+https://www.hackerrank.com/challenges/a-very-big-sum/problem?isFullScreen=true
+
+```clojure
+(defn aVeryBigSum [ar]
+ (apply + ar)
+)
+```
+
+## Birthday Cake Candles
+
+https://www.hackerrank.com/challenges/birthday-cake-candles/problem?isFullScreen=true
+
+```clojure
+(defn birthdayCakeCandles [candles]
+	(->> (frequencies candles)
+			(sort-by second)
+			(reverse)
+			first
+			second)
+	)
+```
