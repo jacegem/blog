@@ -1,10 +1,10 @@
 ---
-title: "AWS Community Day 참관 사진"
+title: 'AWS Community Day 참관 사진'
 date: 2019-01-25
 tags: [AWS, Community, Day, 참관]
 categories:
+  - ETC
   - Conference
-  - AWS
 ---
 
 # AWS Community Day 참관 사진
