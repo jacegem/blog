@@ -11,7 +11,7 @@ categories:
 
 ## Solve Me First
 
-https://www.hackerrank.com/challenges/solve-me-first/problem?isFullScreen=true
+https://www.hackerrank.com/challenges/solve-me-first/problem
 
 ```clojure
 (defn solveMeFirst [x y]
@@ -21,7 +21,7 @@ https://www.hackerrank.com/challenges/solve-me-first/problem?isFullScreen=true
 
 ## Simple Array Sum
 
-https://www.hackerrank.com/challenges/simple-array-sum/problem?isFullScreen=true
+https://www.hackerrank.com/challenges/simple-array-sum/problem
 
 ```clojure
 (defn simpleArraySum [ar]
@@ -31,7 +31,7 @@ https://www.hackerrank.com/challenges/simple-array-sum/problem?isFullScreen=true
 
 ## Compare the Triplets
 
-https://www.hackerrank.com/challenges/compare-the-triplets/problem?isFullScreen=true
+https://www.hackerrank.com/challenges/compare-the-triplets/problem
 
 ```clojure
 (defn compare [ax bx]
@@ -62,7 +62,7 @@ https://www.hackerrank.com/challenges/compare-the-triplets/problem?isFullScreen=
 
 ## A Very Big Sum
 
-https://www.hackerrank.com/challenges/a-very-big-sum/problem?isFullScreen=true
+https://www.hackerrank.com/challenges/a-very-big-sum/problem
 
 ```clojure
 (defn aVeryBigSum [ar]
@@ -72,7 +72,7 @@ https://www.hackerrank.com/challenges/a-very-big-sum/problem?isFullScreen=true
 
 ## Birthday Cake Candles
 
-https://www.hackerrank.com/challenges/birthday-cake-candles/problem?isFullScreen=true
+https://www.hackerrank.com/challenges/birthday-cake-candles/problem
 
 ```clojure
 (defn birthdayCakeCandles [candles]
