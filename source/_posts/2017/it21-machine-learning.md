@@ -3,8 +3,8 @@ title: it21-machine-learning
 date: 2017-02-12
 tags: [machine, learning]
 categories:
-- Conference
-- ETC
+  - ETC
+  - Conference
 ---
 
 # it21-machine-learning
@@ -41,7 +41,7 @@ Google Translation
 
 Big Data + Hardware + Machine Learning Algorithm
 
-real-world task  → `modeling` → formal task → `algoritms` → programs
+real-world task → `modeling` → formal task → `algoritms` → programs
 
 `가중치`를 구해주는것이 머신러닝
 가중치를 자동으로 학습.
@@ -52,6 +52,7 @@ real-world task  → `modeling` → formal task → `algoritms` → programs
 weight parameter 는 머신러닝을 통해 얻는다.
 
 what do we need to learn?
+
 - Type of models...
 - Art of Modeling...
 - Developing Algorithms...
@@ -96,11 +97,13 @@ High-level Intelligence
 모두 Optimization Problems 으로 바뀐다.
 
 Optimization
+
 - Models are optimization problems
 - Discrete optimization (dynamic programming)
 - Continuous optimization (gradient descent)
 
 ## Roadmap
+
 - loss minimization
 - Features & Neural Network
 - Generalization
@@ -129,6 +132,7 @@ Neural Network 는 피처를 learning 하는 것이다.
 데이터가 많이 필요한 것이 머신러닝의 단점이다.
 
 ### Generalization
+
 어떻게 Generalization을 할 수 있는가
 오버피팅을 피하려면
 데이터를 많이 모은다.
@@ -136,12 +140,15 @@ Neural Network 는 피처를 learning 하는 것이다.
 `Autoencoder`
 
 Loss minimization
+
 - Design lossw ell to reflect what you really want
 
 Features & neural Network
+
 - Design features well to reduce data..
 - Desing NN well to learn high-level features..
 
 Generalization
+
 - Regularize well to generalize
 - Think about generalization when you do all above

@@ -1,10 +1,10 @@
 ---
 title: Microsoft Tech Summit Seoul
 date: 2017-02-22
-tags: [Microsoft,Tech,Summit,Seoul]
+tags: [Microsoft, Tech, Summit, Seoul]
 categories:
-- Conference
-- Microsoft
+  - ETC
+  - Conference
 ---
 
 # Microsoft Tech Summit Seoul
@@ -15,9 +15,6 @@ categories:
   - Microsoft Windows 10 offered an enormous leap forward when it comes to threat resistance, but that was just the beginning. With Windows 10 Anniversary Edition we have an impressive...
 - (11:15 am - 12:30 pm) Discover what's new and what's coming to the SharePoint Mobile and Intelligent Intranet (Korean)
   - We are evolving your intranet - making it more mobile for users on the go and infusing it with intelligence so that information finds you, not you hunting and searching for information...
-
-
-
 
 ## 2017.04.28
 

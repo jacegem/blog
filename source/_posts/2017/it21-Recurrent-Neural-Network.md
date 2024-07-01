@@ -3,8 +3,8 @@ title: it21-Recurrent-Neural-Network
 date: 2017-02-13
 tags: [rnn]
 categories:
-- Conference
-- ETC
+  - ETC
+  - Conference
 ---
 
 # it21-Recurrent-Neural-Network
