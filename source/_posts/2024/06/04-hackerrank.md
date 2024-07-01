@@ -77,7 +77,7 @@ https://www.hackerrank.com/challenges/birthday-cake-candles/problem
 ```clojure
 (defn birthdayCakeCandles [candles]
 	(->> (frequencies candles)
-			(sort-by second)
+			(sort-by first)
 			(reverse)
 			first
 			second)
