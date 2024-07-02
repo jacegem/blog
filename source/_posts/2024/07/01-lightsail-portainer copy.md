@@ -1,6 +1,6 @@
 ---
 title: 'lightsail 에 portainer 설치하기'
-date: 2024-06-24
+date: 2024-07-01
 tags: [aws, lightsail, portainer]
 categories:
   - Service
