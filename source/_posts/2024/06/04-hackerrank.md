@@ -1,6 +1,6 @@
 ---
 title: 'HackerRank Warmup'
-date: 2024-06-03
+date: 2024-06-04
 tags: [Programming, Clojure, HackerRank]
 categories:
   - Programming
