@@ -65,14 +65,12 @@ const config = {
   ...,
 	theme: {
 		extend: {
-			flexBasis: {
-				'1/2': '50%',
-				'1/3': '33.33%',
-				'1/4': '25%',
-				'1/5': '20%',
-				'2/3': '66.66%',
-				'3/4': '75%',
-			},
+			 flex: {
+        '2': '2 2 0%',
+        '3': '3 3 0%',
+        '4': '4 4 0%',
+        '5': '5 5 0%',
+      },
       colors: {
         border: "var(--border)",
         input: "var(--input)",
@@ -104,8 +102,9 @@ export default config
 
 ```typescript
 bg-card text-card-on
-data-[state=active]:border-primary data-[state=active]:text-card-on
-basis-1/5
+data-[state=active]:border-primary
+data-[state=on]:text-card-on
+flex-1 flex-2
 ```
 
 이런 느낌의 테마가 됩니다.
