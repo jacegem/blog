@@ -1,6 +1,6 @@
 ---
 title: '[Next.js] tailwind css 테마 설정'
-date: 2024-07-02
+date: 2024-08-01
 tags: [next.js, tailwin, css]
 categories:
   - Framework
@@ -62,7 +62,7 @@ ThemeProvider는 `app/layout.tsx` 파일에서 import 합니다.
 ```typescript
 const config = {
   darkMode: ["class"],
-  ...
+  ...,
 	theme: {
 		extend: {
 			flexBasis: {
@@ -91,7 +91,7 @@ const config = {
           DEFAULT: "var(--secondary)",
           on: "var(--secondary-on)",
         },
-        ...
+        ...,
       }
 		},
 	},
