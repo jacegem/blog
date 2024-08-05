@@ -1,6 +1,6 @@
 ---
 title: '[Next.js] tailwind css 테마 설정'
-date: 2024-07-02
+date: 2024-08-01
 tags: [next.js, tailwin, css]
 categories:
   - Framework
@@ -62,17 +62,15 @@ ThemeProvider는 `app/layout.tsx` 파일에서 import 합니다.
 ```typescript
 const config = {
   darkMode: ["class"],
-  ...
+  ...,
 	theme: {
 		extend: {
-			flexBasis: {
-				'1/2': '50%',
-				'1/3': '33.33%',
-				'1/4': '25%',
-				'1/5': '20%',
-				'2/3': '66.66%',
-				'3/4': '75%',
-			},
+			 flex: {
+        '2': '2 2 0%',
+        '3': '3 3 0%',
+        '4': '4 4 0%',
+        '5': '5 5 0%',
+      },
       colors: {
         border: "var(--border)",
         input: "var(--input)",
@@ -91,7 +89,7 @@ const config = {
           DEFAULT: "var(--secondary)",
           on: "var(--secondary-on)",
         },
-        ...
+        ...,
       }
 		},
 	},
@@ -104,8 +102,9 @@ export default config
 
 ```typescript
 bg-card text-card-on
-data-[state=active]:border-primary data-[state=active]:text-card-on
-basis-1/5
+data-[state=active]:border-primary
+data-[state=on]:text-card-on
+flex-1 flex-2
 ```
 
 이런 느낌의 테마가 됩니다.
